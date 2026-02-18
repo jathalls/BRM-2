@@ -1,0 +1,309 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AppoMobi.Specials</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "M:AppoMobi.Specials.AttributesExtensions.GetAttributeProperty``1(System.Reflection.PropertyInfo,System.String)" -->
+        <member name="M:AppoMobi.Specials.DateTimeExtensions.ToStringSimple(System.DateTime)">
+            <summary>
+                Used to be named ApiTime
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppoMobi.Specials.Enums.GetName``1(``0)">
+            Get the name for the enum value
+        </member>
+        <member name="M:AppoMobi.Specials.RndExtensions.CreateRandom(System.Int32,System.Int32,System.Nullable{System.Int32})">
+            <summary>
+                Generate rnadom, try not to repeat. Use checksum
+            </summary>
+            <param name="from"></param>
+            <param name="max"></param>
+            <param name="lastRandomChecksum">from + max + lastRandom</param>
+            <returns></returns>
+        </member>
+        <member name="M:AppoMobi.Specials.StringExtensions.TagsToList(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+                Process every line in list with its divider..
+            </summary>
+            <param name="inputList"></param>
+            <param name="divider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppoMobi.Specials.UsefulExtensions.WordList(System.String)">
+            <summary>
+                Sweep over text
+            </summary>
+            <param name="Text"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AppoMobi.Specials.ObservableRangeCollection`1">
+            <summary> 
+            Represents a dynamic data collection that provides notifications when items get added, removed, or when the whole list is refreshed. 
+            </summary> 
+            <typeparam name="T"></typeparam> 
+        </member>
+        <member name="M:AppoMobi.Specials.ObservableRangeCollection`1.#ctor">
+            <summary> 
+            Initializes a new instance of the System.Collections.ObjectModel.ObservableCollection(Of T) class. 
+            </summary> 
+        </member>
+        <member name="M:AppoMobi.Specials.ObservableRangeCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary> 
+            Initializes a new instance of the System.Collections.ObjectModel.ObservableCollection(Of T) class that contains elements copied from the specified collection. 
+            </summary> 
+            <param name="collection">collection: The collection from which the elements are copied.</param> 
+            <exception cref="T:System.ArgumentNullException">The collection parameter cannot be null.</exception> 
+        </member>
+        <member name="M:AppoMobi.Specials.ObservableRangeCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0},System.Collections.Specialized.NotifyCollectionChangedAction)">
+            <summary> 
+            Adds the elements of the specified collection to the end of the ObservableCollection(Of T). 
+            </summary> 
+        </member>
+        <member name="M:AppoMobi.Specials.ObservableRangeCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0},System.Collections.Specialized.NotifyCollectionChangedAction)">
+            <summary> 
+            Removes the first occurence of each item in the specified collection from ObservableCollection(Of T). NOTE: with notificationMode = Remove, removed items starting index is not set because items are not guaranteed to be consecutive.
+            </summary> 
+        </member>
+        <member name="M:AppoMobi.Specials.ObservableRangeCollection`1.Replace(`0)">
+            <summary> 
+            Clears the current collection and replaces it with the specified item. 
+            </summary> 
+        </member>
+        <member name="M:AppoMobi.Specials.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary> 
+            Clears the current collection and replaces it with the specified collection. 
+            </summary> 
+        </member>
+        <member name="M:AppoMobi.Specials.Reflection.Populate(System.Object,System.Object)">
+            <summary>
+                JsonConvert.PopulateObject with ObjectCreationHandling.Replace. This is not raising OnPropertyChanged!!! Use
+                MapProps..
+            </summary>
+            <param name="source"></param>
+            <param name="target"></param>
+        </member>
+        <member name="M:AppoMobi.Specials.Reflection.MapProperties(System.Object,System.Object)">
+            <summary>
+                Set props values with reflection, if fails with sub props use Populate
+            </summary>
+            <param name="sourceItem"></param>
+            <param name="targetItem"></param>
+        </member>
+        <member name="M:AppoMobi.Specials.Tasks.SetTimer(System.Double)">
+            <summary>
+            In MS
+            </summary>
+            <param name="interval"></param>
+        </member>
+        <member name="M:AppoMobi.Specials.Tasks.StartDelayedAsync(System.TimeSpan,System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            
+            </summary>
+            <param name="delay"></param>
+            <param name="task"></param>
+        </member>
+        <member name="M:AppoMobi.Specials.Tasks.StartDelayedAsync(System.TimeSpan,System.Threading.CancellationToken,System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            
+            </summary>
+            <param name="delay"></param>
+            <param name="cancellationToken"></param>
+            <param name="task"></param>
+        </member>
+        <member name="M:AppoMobi.Specials.Tasks.StartDelayed(System.TimeSpan,System.Action)">
+            <summary>
+            Start action with delay. Beware this is not garanteed to run on background thread at all.
+            </summary>
+            <param name="delay"></param>
+            <param name="action"></param>
+        </member>
+        <member name="M:AppoMobi.Specials.Tasks.StartDelayed(System.TimeSpan,System.Threading.CancellationToken,System.Action)">
+            <summary>
+            Start action with delay. Beware this is not garanteed to run on background thread at all.
+            </summary>
+            <param name="delay"></param>
+            <param name="cancellationToken"></param>
+            <param name="action"></param>
+        </member>
+        <member name="T:AppoMobi.Specials.Localization.ILocalize">
+            <summary>
+                Implementations of this interface MUST convert iOS and Android
+                platform-specific locales to a value supported in .NET because
+                ONLY valid .NET cultures can have their RESX resources loaded and used.
+            </summary>
+            <remarks>
+                Lists of valid .NET cultures can be found here:
+                http://www.localeplanet.com/dotnet/
+                http://www.csharp-examples.net/culture-names/
+                You should always test all the locales implemented in your application.
+            </remarks>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ILocalize.GetCurrentCultureInfo">
+            <summary>
+                This method must evaluate platform-specific locale settings
+                and convert them (when necessary) to a valid .NET locale.
+            </summary>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ILocalize.SetLocale(System.Globalization.CultureInfo)">
+            <summary>
+                CurrentCulture and CurrentUICulture must be set in the platform project,
+                because the Thread object can't be accessed in a PCL.
+            </summary>
+        </member>
+        <member name="T:AppoMobi.Specials.Localization.PlatformCulture">
+            <summary>
+                Helper class for splitting locales like
+                iOS: ms_MY, gsw_CH
+                Android: in-ID
+                into parts so we can create a .NET culture (or fallback culture)
+            </summary>
+        </member>
+        <member name="T:AppoMobi.Specials.Localization.ResourceEnumConverter">
+            <summary>
+                Defines a type converter for enum values that converts enum values to
+                and from string representations using resources
+            </summary>
+            <remarks>
+                This class makes localization of display values for enums in a project easy.  Simply
+                derive a class from this class and pass the ResourceManagerin the constructor.
+                <code lang="C#" escaped="true">
+            class LocalizedEnumConverter : ResourceEnumConverter
+            {
+               public LocalizedEnumConverter(Type type)
+                   : base(type, Properties.Resources.ResourceManager)
+               {
+               }
+            }    
+            </code>
+                <code lang="Visual Basic" escaped="true">
+            Public Class LocalizedEnumConverter
+            
+               Inherits ResourceEnumConverter
+               Public Sub New(ByVal sType as Type)
+                   MyBase.New(sType, My.Resources.ResourceManager)
+               End Sub
+            End Class    
+            </code>
+                Then define the enum values in the resource editor.   The names of
+                the resources are simply the enum value prefixed by the enum type name with an
+                underscore separator eg MyEnum_MyValue.  You can then use the TypeConverter attribute
+                to make the LocalizedEnumConverter the default TypeConverter for the enums in your
+                project.
+            </remarks>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.#ctor(System.Type,System.Resources.ResourceManager)">
+            <summary>
+                Create a new instance of the converter using translations from the given resource manager
+            </summary>
+            <param name="type"></param>
+            <param name="resourceManager"></param>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.GetLookupTable(System.Globalization.CultureInfo)">
+            <summary>
+                Get the lookup table for the given culture (creating if necessary)
+            </summary>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.GetValueText(System.Globalization.CultureInfo,System.Object)">
+            <summary>
+                Return the text to display for a simple value in the given culture
+            </summary>
+            <param name="culture">The culture to get the text for</param>
+            <param name="value">The enum value to get the text for</param>
+            <returns>The localized text</returns>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.IsSingleBitValue(System.UInt64)">
+            <summary>
+                Return true if the given value is can be represented using a single bit
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.GetFlagValueText(System.Globalization.CultureInfo,System.Object)">
+            <summary>
+                Return the text to display for a flag value in the given culture
+            </summary>
+            <param name="culture">The culture to get the text for</param>
+            <param name="value">The flag enum value to get the text for</param>
+            <returns>The localized text</returns>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.GetValue(System.Globalization.CultureInfo,System.String)">
+            <summary>
+                Return the Enum value for a simple (non-flagged enum)
+            </summary>
+            <param name="culture">The culture to convert using</param>
+            <param name="text">The text to convert</param>
+            <returns>The enum value</returns>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.GetFlagValue(System.Globalization.CultureInfo,System.String)">
+            <summary>
+                Return the Enum value for a flagged enum
+            </summary>
+            <param name="culture">The culture to convert using</param>
+            <param name="text">The text to convert</param>
+            <returns>The enum value</returns>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <summary>
+                Convert string values to enum values
+            </summary>
+            <param name="context"></param>
+            <param name="culture"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)">
+            <summary>
+                Convert the enum value to a string
+            </summary>
+            <param name="context"></param>
+            <param name="culture"></param>
+            <param name="value"></param>
+            <param name="destinationType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.ConvertToString(System.Enum)">
+            <summary>
+                Convert the given enum value to string using the registered type converter
+            </summary>
+            <param name="value">The enum value to convert to string</param>
+            <returns>The localized string value for the enum</returns>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.GetValues(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+                Return a list of the enum values and their associated display text for the given enum type
+            </summary>
+            <param name="enumType">The enum type to get the values for</param>
+            <param name="culture">The culture to get the text for</param>
+            <returns>
+                A list of KeyValuePairs where the key is the enum value and the value is the text to display
+            </returns>
+            <remarks>
+                This method can be used to provide localized binding to enums in ASP.NET applications.   Unlike
+                windows forms the standard ASP.NET controls do not use TypeConverters to convert from enum values
+                to the displayed text.   You can bind an ASP.NET control to the list returned by this method by setting
+                the DataValueField to "Key" and theDataTextField to "Value".
+            </remarks>
+        </member>
+        <member name="M:AppoMobi.Specials.Localization.ResourceEnumConverter.GetValues(System.Type)">
+            <summary>
+                Return a list of the enum values and their associated display text for the given enum type in the current UI
+                Culture
+            </summary>
+            <param name="enumType">The enum type to get the values for</param>
+            <returns>
+                A list of KeyValuePairs where the key is the enum value and the value is the text to display
+            </returns>
+            <remarks>
+                This method can be used to provide localized binding to enums in ASP.NET applications.   Unlike
+                windows forms the standard ASP.NET controls do not use TypeConverters to convert from enum values
+                to the displayed text.   You can bind an ASP.NET control to the list returned by this method by setting
+                the DataValueField to "Key" and theDataTextField to "Value".
+            </remarks>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BRM_2.Controls.BatDetailsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:BRM_2.Controls"
+    xmlns:sf="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+    x:DataType="local:BatDetailsPage">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <local:ItemSourceSelector x:Key="converter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid RowDefinitions="50,*" VerticalOptions="Fill">
+        <Label
+            HorizontalOptions="Center"
+            Text="Bat Details"
+            Grid.Row="0"
+            VerticalOptions="Center" />
+        <ScrollView Grid.Row="1" VerticalOptions="Fill">
+            <sf:SfDataGrid
+                x:Name="dataGrid"
+                AllowEditing="True"
+                
+                AutoGenerateColumnsMode="None"
+                ItemsSource="{Binding Bats}"
+                SelectionMode="Single">
+                <sf:SfDataGrid.Columns>
+                    <sf:DataGridTextColumn
+                        Width="300"
+                        HeaderText="Common Name"
+                        MappingName="Name" />
+                    <sf:DataGridTextColumn
+                        Width="150"
+                        HeaderText="Genus"
+                        MappingName="Batgenus" />
+                    <sf:DataGridTextColumn
+                        Width="200"
+                        HeaderText="Species"
+                        MappingName="BatSpecies" />
+                    <sf:DataGridComboBoxColumn
+                        AllowEditing="True"
+                        ColumnWidthMode="Auto"
+                        DisplayMemberPath="Tag"
+                        HeaderText="Tags"
+                        ItemsSourceSelector="{StaticResource converter}"
+                        LoadUIView="True"
+                        MappingName="Tag"
+                        ToolTipProperties.Text="Double Click for List of Tags"
+                        Visible="True" />
+             <!--       <sf:DataGridComboBoxColumn
+                        AllowEditing="True"
+                        ColumnWidthMode="Auto"
+                        DisplayMemberPath="Label"
+                        HeaderText="Call Type"
+                        ItemsSource="{Binding Calls}"
+                        LoadUIView="True"
+                        MappingName="CallType"
+                        ToolTipProperties.Text="Double Click for List of Call Types"
+                        Visible="True" />
+                    <sf:DataGridTextColumn
+                        HeaderText="Fmin (kHz)"
+                        MappingName="FLow"
+                         />
+                    <sf:DataGridTextColumn
+                        HeaderText="Fmax (kHz)"
+                        MappingName="FHigh"
+                         />
+                    <sf:DataGridTextColumn
+                        HeaderText="Fpeak (kHz)"
+                        MappingName="FPeak" />
+                    <sf:DataGridTextColumn
+                        HeaderText="Interval"
+                        MappingName="Interval" />
+                    <sf:DataGridTextColumn
+                        HeaderText="Duration (ms)" 
+                        MappingName="Duration"/>-->
+
+                </sf:SfDataGrid.Columns>
+            </sf:SfDataGrid>
+
+        </ScrollView>
+    </Grid>
+</ContentView>
+

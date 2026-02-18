@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BPASpectrogramM.Views.PowerSpectrumPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    
+    xmlns:local="clr-namespace:BPASpectrogramM.Views"
+    xmlns:vm="clr-namespace:BPASpectrogramM.ViewModels"
+    
+    
+    x:DataType="vm:PowerSpectrumVM">
+    <Grid
+        Margin="10"
+        ColumnDefinitions="*"
+        RowDefinitions="20,*,40"
+        Shadow="true">
+
+        <local:PowerSpectrumChart
+            x:DataType="vm:PowerSpectrumVM" 
+            Grid.Column="0"
+            Grid.Row="1"
+            HorizontalOptions="Fill"
+            x:Name="powerSpectrumChart"/>
+<!--
+        <HorizontalStackLayout
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Spacing="20">
+            <Label
+                Text="Cursor Frequency:- " />
+            <Label
+                Text="{Binding CursorFrequency, StringFormat='{0:F2} kHz'}" />
+            <Label
+                Text="Peak Frequency:- " />
+            <Label
+                Text="{Binding PeakFrequency, StringFormat='{0:F2} kHz'}" />
+
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout
+            Grid.Row="3"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Spacing="20">
+            <Label
+                Text="Cursor Amplitude:- " />
+            <Label
+                Text="{Binding CursorAmplitude, StringFormat='{0:F2} dB'}" />
+            <Label
+                Text="Peak Amplitude:- " />
+            <Label
+                Text="{Binding PeakAmplitude, StringFormat='{0:F2} dB'}" />
+        </HorizontalStackLayout>-->
+
+        <Button
+            Grid.Row="2"
+            Text="Close"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Command="{Binding CloseCommand}" />
+
+    </Grid>
+</ContentPage>

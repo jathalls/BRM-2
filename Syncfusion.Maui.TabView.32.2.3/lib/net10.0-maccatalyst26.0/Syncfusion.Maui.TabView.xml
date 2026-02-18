@@ -1,0 +1,3278 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Syncfusion.Maui.TabView</name>
+    </assembly>
+    <members>
+        <member name="T:Syncfusion.Maui.TabView.ArrowIcon">
+            <summary>
+            ArrowIcon class.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.ArrowIcon.ScrollButtonColorProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.ArrowIcon.ScrollButtonColor"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.ArrowIcon.ScrollButtonColor"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.ArrowIcon.ScrollButtonBackgroundProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.ArrowIcon.ScrollButtonBackground"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.ArrowIcon.ScrollButtonBackground"/> bindable property.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.ArrowIcon.ScrollButtonColor">
+            <summary> 
+            Gets or sets a value that can be used to customize the scroll button’s color in SfTabView. 
+            </summary> 
+            <value> 
+            It accepts the Color values.  
+            </value> 
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.ArrowIcon.ScrollButtonBackground">
+            <summary> 
+            Gets or sets a value that can be used to customize the scroll button’s background color in SfTabView. 
+            </summary> 
+            <value> 
+            It accepts brush values.  
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.ArrowIcon.ButtonArrowType">
+            <summary>
+            Gets or sets the arrow type of the scroll buttons.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.ArrowIcon.EnableLiquidGlassEffect">
+            <summary>
+            Gets or sets a value indicating whether the Liquid Glass effect should be enabled for this arrow icon.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.Maui.TabView.ArrowIcon.ScrollButtonClicked">
+            <summary>
+            Scroll button clicked event.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.ArrowIcon.OnDraw(Microsoft.Maui.Graphics.ICanvas,Microsoft.Maui.Graphics.RectF)">
+            <summary>
+            This method is used to draw the forward and backward arrows.
+            </summary>
+            <param name="canvas">canvas.</param>
+            <param name="dirtyRect">dirtyRect.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.ArrowIcon.RaiseScrollButtonClickedEvent(System.EventArgs)">
+            <summary>
+            Invokes <see cref="E:Syncfusion.Maui.TabView.ArrowIcon.ScrollButtonClicked"/> event.
+            </summary>
+            <param name="args">args.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.ArrowIcon.FindParent``1(Microsoft.Maui.Controls.Element)">
+            <summary>
+            Finds the first parent of the given type by moving up the visual tree.
+            </summary>
+            <param name="element">The starting element for the search.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.ArrowIcon.ApplyTabBarScaleAnimation(System.Boolean)">
+            <summary>
+            Applies scale animation to the tab bar when pressed.
+            </summary>
+            <param name="isPressed">True if the arrow is pressed, false if released.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.ArrowIcon.OnTouch(Syncfusion.Maui.Core.Internals.PointerEventArgs)">
+            <summary>
+            Handles touch events to determine if a scroll button is clicked.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.SfHorizontalContent">
+            <summary>
+            Represents the SfHorizontalStackLayout class.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfHorizontalContent.ItemsProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfHorizontalContent.Items"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfHorizontalContent.Items"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfHorizontalContent.SelectedIndexProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfHorizontalContent.SelectedIndex"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfHorizontalContent.SelectedIndex"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfHorizontalContent.ContentItemTemplateProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfHorizontalContent.ContentItemTemplate"/> bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfHorizontalContent.ItemsSourceProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfHorizontalContent.ItemsSource"/> bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfHorizontalContent.ContentTransitionDurationProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfHorizontalContent.ContentTransitionDuration"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfHorizontalContent.ContentTransitionDuration"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfHorizontalContent.EnableVirtualizationProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfHorizontalContent.EnableVirtualization"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfHorizontalContent.EnableVirtualization"/> bindable property.
+            </value>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.#ctor(Syncfusion.Maui.TabView.SfTabView,Syncfusion.Maui.TabView.SfTabBar)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Maui.TabView.SfHorizontalContent"/> class.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.Maui.TabView.SfHorizontalContent.SelectionChanging">
+            <summary>
+            Selection Changing event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfHorizontalContent.ContentTransitionDuration">
+            <summary>
+            Gets or sets a value that can be used to modify the duration of content transition in Tab View.
+            </summary>
+            <value>
+            It accepts the double values and the default value is 100.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfHorizontalContent.Items">
+            <summary>
+            Gets or sets the value that defines the collection of items.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfHorizontalContent.SelectedIndex">
+            <summary>
+            Gets or sets the value that defines the selected index.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfHorizontalContent.ContentItemTemplate">
+            <summary>
+            Gets or sets the ContentItemTemplate. 
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfHorizontalContent.ItemsSource">
+            <summary>
+            Gets or sets the itemssource.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfHorizontalContent.ContentWidth">
+            <summary>
+            Gets or sets the value that defines the content width of each tab header item.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfHorizontalContent.IsTowardsRight">
+            <summary>
+            Gets or sets a value indicating whether the tab content moves toward the right or left.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfHorizontalContent.EnableVirtualization">
+            <summary>
+            Gets or sets a value indicating whether lazy loading is enabled during the initial load.
+            </summary>
+            <value>
+            It accepts the bool values and the default value is false.
+            </value>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.RaiseSelectionChangingEvent(Syncfusion.Maui.TabView.SelectionChangingEventArgs)">
+            <summary>
+            Invokes <see cref="E:Syncfusion.Maui.TabView.SfHorizontalContent.SelectionChanging"/> event.
+            </summary>
+            <param name="args">args.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.OnTouch(Syncfusion.Maui.Core.Internals.PointerEventArgs)">
+            <summary>
+            This method used for handle the touch.
+            </summary>
+            <param name="e">e.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.OnTap(Syncfusion.Maui.Core.Internals.TapEventArgs)">
+            <summary>
+            This method used for handle the tap.
+            </summary>
+            <param name="e">e.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.OnHandleTouchInteraction(Syncfusion.Maui.Core.Internals.PointerActions,Microsoft.Maui.Graphics.Point)">
+            <summary>
+            This method used for handle the touch.
+            </summary>
+            <param name="action">action.</param>
+            <param name="point">point.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.InitializeTouchData(Microsoft.Maui.Graphics.Point)">
+            <summary>
+            Initializes touch data based on the provided pointer event arguments.
+            </summary>
+            <param name="point">point.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.HandleTouchMovement(Microsoft.Maui.Graphics.Point)">
+            <summary>
+            This method is used to handle the touch movement.
+            </summary>
+            <param name="point">point.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.TranslateXPosition(System.Double)">
+            <summary>
+            This method is used to update the horizontal transition (X position) of the horizontal stack layout.
+            </summary>
+            <param name="difference"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.CompletedTabSwipe">
+            <summary>
+            This method is used to update the tab item position after swipe complete.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.MoveToNextTabItem">
+            <summary>
+            This method is used to update the swipe towards the right.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.MoveToPreviousTabItem">
+            <summary>
+            This method is used to update the swipe towards the left.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.MoveToCurrentTabItem">
+            <summary>
+            This method is used to update the current position.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.FindVelocity(Microsoft.Maui.Graphics.Point)">
+            <summary>
+            Methods to find the velocity of swiping.
+            </summary>
+            <param name="point">Touch point</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.RaiseSelectionChanging">
+            <summary>
+            Raises the event to notify that the tab selection is changing when navigating between tab contents by swiping.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.GetNextItemIndex">
+            <summary>
+            This method is used to get an index of next item from the selected index.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.GetNextVisibleItemIndex">
+            <summary>
+            This method is used to get an index of next visibile item from the selected index.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.UpdateItemVisibility">
+            <summary>
+            This method is used to check the visibility of nearby items of the selected item.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.LoadItemsContent(System.Int32)">
+            <summary>
+            This method is used to replace the placeholder view with a tab item when the EnableVirtualization is true.
+            </summary>
+            <param name="index">This index position of the child in the HorizontalStackLayout to replaced with a tab item.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.Syncfusion#Maui#Core#Internals#ITapGestureListener#OnTap(Syncfusion.Maui.Core.Internals.TapEventArgs)">
+            <summary>
+            This method used for handle the tap.
+            </summary>
+            <param name="e">e.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.Syncfusion#Maui#Core#Internals#ITapGestureListener#ShouldHandleTap(System.Object)">
+            <summary>
+            Handles the gesture based on which child view is tapped.
+            </summary>
+            <param name="view">view.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.FindSfTextInputLayout(UIKit.UIView)">
+            <summary>
+            Finds and returns the native <see cref="T:UIKit.UIView"/> that represents a <see cref="T:Syncfusion.Maui.Core.SfTextInputLayout"/>
+            </summary>
+            <param name="root">The root <see cref="T:UIKit.UIView"/> to start the search from.</param>
+            <returns>
+            The matching <see cref="T:UIKit.UIView"/> that wraps a <see cref="T:Syncfusion.Maui.Core.SfTextInputLayout"/> if found; otherwise, <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.OnHandlerChanging(Microsoft.Maui.Controls.HandlerChangingEventArgs)">
+            <summary>
+            Raises on handler changing.
+            </summary>
+            <param name="args">Relevant <see cref="T:Microsoft.Maui.Controls.HandlerChangingEventArgs"/>.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.InitializeGesture">
+            <summary>
+            This method is used to initialize the gesture.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.GestureShouldBegin(UIKit.UIGestureRecognizer)">
+            <summary>
+            Raises when <see cref="F:Syncfusion.Maui.TabView.SfHorizontalContent.panGesture"/> begins.
+            </summary>
+            <param name="uIGestureRecognizer">Instance of <see cref="F:Syncfusion.Maui.TabView.SfHorizontalContent.panGesture"/>.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.Dispose">
+            <summary>
+            Unwires wired events and disposes used objects.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfHorizontalContent.Syncfusion#Maui#Core#Internals#ITouchListener#OnTouch(Syncfusion.Maui.Core.Internals.PointerEventArgs)">
+            <summary>
+            This method triggers on any touch interaction on <see cref="T:Syncfusion.Maui.TabView.SfHorizontalContent"/>.
+            </summary>
+            <param name="e">e.</param>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.SfTabBar">
+            <summary>
+            SfTabBar class.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.IndicatorPlacementProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorPlacement"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorPlacement"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.TabWidthModeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.TabWidthMode"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.TabWidthMode"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.IndicatorWidthModeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorWidthMode"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorWidthMode"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.TabHeaderPaddingProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.TabHeaderPadding"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.TabHeaderPadding"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.IndicatorBackgroundProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorBackground"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorBackground"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.ItemsProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.Items"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.Items"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.ItemsSourceProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.ItemsSource"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.ItemsSource"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.SelectedIndexProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.SelectedIndex"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.SelectedIndex"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.IsScrollButtonEnabledProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IsScrollButtonEnabled"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IsScrollButtonEnabled"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.EnableLiquidGlassEffectProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.EnableLiquidGlassEffect"/> bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.HeaderHorizontalTextAlignmentProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.HeaderHorizontalTextAlignment"/> bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.HeaderItemTemplateProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.HeaderItemTemplate"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.HeaderItemTemplate"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.HeaderDisplayModeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.HeaderDisplayMode"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.HeaderDisplayMode"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.ContentTransitionDurationProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.ContentTransitionDuration"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.ContentTransitionDuration"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.IndicatorCornerRadiusProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorCornerRadius"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorCornerRadius"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.IndicatorStrokeThicknessProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorStrokeThickness"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorStrokeThickness"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.FontAutoScalingEnabledProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.FontAutoScalingEnabled"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.FontAutoScalingEnabled"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonColorProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonColor"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonColor"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonBackgroundProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonBackground"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonBackground"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonDisabledIconColorProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonDisabledIconColor"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonDisabledIconColor"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.EnableRippleAnimationProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.EnableRippleAnimation"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabBar.EnableRippleAnimation"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabBar.HoverBackgroundProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.HoverBackground"/> bindable property.
+            </summary>
+            <remarks>This bindable property is read-only.</remarks>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Maui.TabView.SfTabBar"/> class.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.Maui.TabView.SfTabBar.SelectionChanged">
+            <summary>
+            Selection Changed event.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.Maui.TabView.SfTabBar.TabItemTapped">
+            <summary>
+            Tab item tapped event.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.Maui.TabView.SfTabBar.SelectionChanging">
+            <summary>
+            Selection Changing event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorPlacement">
+            <summary>
+            Gets or sets the value that defines the indicator placement.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.HeaderHorizontalTextAlignment">
+            <summary> 
+            Gets or sets a value that can be used to customize the horizontal text alignment in tab header. 
+            </summary> 
+            <value> 
+            It accepts the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.HeaderHorizontalTextAlignment"/> values, and the default value is <see cref="F:Microsoft.Maui.TextAlignment.Center"/>.
+            </value> 
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorWidthMode">
+             <summary>
+             Gets or sets the value that can be used to customize the indicator width in the tab header.
+             </summary>
+             <value>
+             It accepts indicatorWidthMode values and the default value is IndicatorWidthMode.Fit.
+             </value>
+            <remark>
+             It's not applicable when the IndicatorPlacement is Fill.
+             </remark>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.TabWidthMode">
+            <summary>
+            Gets or sets the value that defines tab width mode.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.TabHeaderPadding">
+            <summary>
+            Gets or sets the value that can be used to customize the padding of the tab header. 
+            </summary>
+            <remarks>
+            <b>Note:</b> TabHeaderPadding is only applied to the SizeToContent type of TabWidthMode.
+            </remarks>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorBackground">
+            <summary>
+            Gets or sets the value that defines the background color of the indicator.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.Items">
+            <summary>
+            Gets or sets the value that defines the collection of items.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.SelectedIndex">
+            <summary>
+            Gets or sets the value that defines the selected index.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.IsScrollButtonEnabled">
+            <summary> 
+            Gets or sets a value indicating whether to enable the scroll buttons.
+            </summary> 
+            <value> 
+            The default value is false.
+            </value> 
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.ItemsSource">
+            <summary>
+            Gets or sets the value that defines the collection of items source.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.HeaderItemTemplate">
+            <summary>
+            Gets or sets the value that defines the header item template.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorCornerRadius">
+            <summary>
+            Gets or sets a value that can be used to customize the corner radius of selection indicator.
+            </summary>
+            <value>
+            It accepts the <see cref="T:Microsoft.Maui.CornerRadius"/> values and the default value is -1.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.HeaderDisplayMode">
+            <summary>
+            Gets or sets the display mode for the tab header, determining whether to show the image and text.
+            </summary>
+            <value>
+            It accepts the TabHeaderDisplayMode values, and the default value is TabHeaderDisplayMode.Default.
+            </value>
+            <remarks>
+            When the HeaderDisplayMode is set to TabHeaderDisplayMode.Default, the image and text will be displayed on the tab bar based on the Header and ImageSource properties of the tab item.
+            </remarks>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.ContentTransitionDuration">
+            <summary>
+            Gets or sets a value that can be used to modify the duration of content transition in Tab View.
+            </summary>
+            <value>
+            It accepts the double values and the default value is 100.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorStrokeThickness">
+            <summary>
+            Gets or sets a value that can be used to customize the indicator’s border height. 
+            </summary>
+            <value>
+            It accepts the double values and the default value is 3.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.FontAutoScalingEnabled">
+            <summary> 
+            Gets or sets a value that Determines whether or not the font of the control should scale automatically according to the operating system settings. 
+            </summary>
+            <value>
+            It accepts Boolean values, and the default value is false.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonBackground">
+            <summary> 
+            Gets or sets a value that can be used to customize the scroll button’s background color in SfTabView. 
+            </summary> 
+            <value> 
+            It accepts brush values.  
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonColor">
+            <summary> 
+            Gets or sets a value that can be used to customize the scroll button’s color in SfTabView. 
+            </summary> 
+            <value> 
+            It accepts the Color values.  
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.ScrollButtonDisabledIconColor">
+            <summary>
+            Gets or sets a value that can be used to customize the scroll button’s disabled foreground color in SfTabView.
+            </summary>
+            <value>
+            It accepts the Color values. 
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.EnableRippleAnimation">
+            <summary>
+            Gets or sets a value indicating whether the animation is enabled or not when tab is selected in SfTabView.
+            </summary>
+            <value>
+            It accepts the bool values. 
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.HoverBackground">
+            <summary>
+            Gets or sets the hover color for the tab items.
+            <remarks>The default color is Color.FromRgba("#1C1B1F").</remarks>
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabBar.EnableLiquidGlassEffect">
+            <summary>
+            Gets or sets a value indicating whether the Liquid Glass effect should be enabled for this tab bar.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.GetEffectsView(Syncfusion.Maui.TabView.SfTabItem)">
+            <summary>
+            To get the effects view for the tab item.
+            </summary>
+            <param name="tabItem">tabItem.</param>
+            <returns>It returns the effectsView.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.OnTap(Syncfusion.Maui.Core.Internals.TapEventArgs)">
+            <summary>
+            TapEvent
+            </summary>
+            <param name="e">TapEventArgs</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.OnTap(System.Object,Syncfusion.Maui.Core.Internals.TapEventArgs)">
+            <summary>
+            TapEvent
+            </summary>
+            <param name="sender">sender</param>
+            <param name="e">TapEventArgs</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.OnTouch(Syncfusion.Maui.Core.Internals.PointerEventArgs)">
+            <summary>
+            Handle touch events coming from template-created header views.
+            </summary>
+            <param name="e">Pointer event args.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.RaiseSelectionChangedEvent(Syncfusion.Maui.TabView.TabSelectionChangedEventArgs)">
+            <summary>
+            Invokes <see cref="E:Syncfusion.Maui.TabView.SfTabBar.SelectionChanged"/> event.
+            </summary>
+            <param name="args">args.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.RaiseTabItemTappedEvent(Syncfusion.Maui.TabView.TabItemTappedEventArgs)">
+            <summary>
+            Invokes <see cref="E:Syncfusion.Maui.TabView.SfTabBar.TabItemTapped"/> event.
+            </summary>
+            <param name="args">args.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.RaiseSelectionChangingEvent(Syncfusion.Maui.TabView.SelectionChangingEventArgs)">
+            <summary>
+            Invokes <see cref="E:Syncfusion.Maui.TabView.SfTabBar.SelectionChanging"/> event.
+            </summary>
+            <param name="args">args.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateTabIndicatorPosition(System.Double)">
+            <summary>
+            To update the position of the tab indicator.
+            </summary>
+            <param name="x">The x value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateCornerRadius(Microsoft.Maui.CornerRadius)">
+            <summary>
+            To update the corner radius for selection indicator.
+            </summary>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateIndicatorStrokeThickness(System.Double)">
+            <summary>
+            To update the border height for selection indicator.
+            </summary>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateIndicatorPlacement(Syncfusion.Maui.TabView.TabIndicatorPlacement)">
+            <summary>
+            To update the indicator placement.
+            </summary>
+            <param name="indicatorPlacement">indicatorPlacement.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.ClearHeaderItem(Syncfusion.Maui.TabView.SfTabItem,System.Int32)">
+            <summary>
+            To clear the tab header item.
+            </summary>
+            <param name="tabItem">tabItem.</param>
+            <param name="index">index.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateSelectedIndex(System.Double,System.Double)">
+            <summary>
+            To update the selected index.
+            </summary>
+            <param name="newIndex">newIndex.</param>
+            <param name="oldIndex">oldIndex.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateFontAutoScalingEnabled(System.Boolean)">
+            <summary>
+            To update the FontAutoScalingEnabled for Items.
+            </summary>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateScrollButtonEnabled(System.Boolean)">
+            <summary>
+            Updates the tab header parent container based on the specified value of IsScrollButtonEnabled.
+            </summary>
+            <param name="newValue">newValue.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateSelectedTabItemIsSelected(System.Int32,System.Int32)">
+            <summary>
+            To update the IsSelected for the selected tab item.
+            </summary>
+            <param name="newIndex">newIndex.</param>
+            <param name="oldIndex">oldIndex.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateItems">
+            <summary>
+            Method used to update the items.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateHeaderItemHeight">
+            <summary>
+            Method used to update the height of the tab header item.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.AddTabItemProperties(Syncfusion.Maui.TabView.SfTabItem,System.Int32)">
+            <summary>
+            To add the tab item properties.
+            </summary>
+            <param name="tabItem">tabItem.</param>
+            <param name="index">index.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.AddHeaderItems(Microsoft.Maui.Controls.View,System.Int32)">
+            <summary>
+            To add the tab header items.
+            </summary>
+            <param name="item">item.</param>
+            <param name="index">index.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.MeasureHeaderContentWidth(Syncfusion.Maui.TabView.SfTabItem)">
+            <summary>
+            This method is used to measure the header content width.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.CalculateTabItemWidth">
+            <summary>
+            Method used to calculate the tab item width.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateScrollViewPosition(System.Int32)">
+            <summary>
+            To update the scroll view position.
+            </summary>
+            <param name="position">position.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.MeasureOverride(System.Double,System.Double)">
+            <summary>
+            Measure Override method
+            </summary>
+            <param name="widthConstraint">Width</param>
+            <param name="heightConstraint">Height</param>
+            <returns>It returns the size</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.OnHandlerChanged">
+            <inheritdoc/>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateEnableLiquidGlassEffect(System.Boolean)">
+            <summary>
+            Enables or disables the liquid glass visual effect for the tab bar.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.GetSelectedTabItem">
+            <summary>
+            Returns the currently selected tab item.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateLiquidGlassIndicatorPlacement">
+            <summary>
+            Updates the positioning of the liquid glass indicator to match the current indicator placement.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateLiquidGlassEffectOnScrollButton">
+            <summary>
+            Enables or disables the liquid glass visual effect when scroll buttons are shown or hidden.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.ApplyLiquidGlassEffectView">
+            <summary>
+            Applies the liquid glass visual effect for the tab bar.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateLiquidGlassEffectViewFrame">
+            <summary>
+            Updates the frame and layout of the main liquid glass visual effect view.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.RemoveLiquidGlassEffectView">
+            <summary>
+            Removes and disposes the main liquid glass visual effect view.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.ApplyOverlayLiquidGlassEffectView(Microsoft.Maui.Controls.View)">
+            <summary>
+            Adds an overlay liquid glass visual view on top of the pressed tab header view.
+            </summary>
+            <param name="view">The tab header view to which the overlay should be attached.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateOverlayGlassFrame(Microsoft.Maui.Controls.View)">
+            <summary>
+            Updates the overlay glass view's frame to align with the specified tab header view's position and size.
+            </summary>
+            <param name="view">The tab header view that defines the desired overlay frame.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.RemoveOverlayLiquidGlassEffectView">
+            <summary>
+            Removes and disposes the overlay liquid glass view used during drag operations.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.ApplyLiquidGlassEffectViewToSelectedItem(Microsoft.Maui.Controls.View)">
+            <summary>
+            Applies a overlay liquid glass visual effect to the currently selected tab item. 
+            The liquid glass is applied for the selected tab item when the <see cref="P:Syncfusion.Maui.TabView.SfTabBar.IndicatorPlacement"/> is <see cref="F:Syncfusion.Maui.TabView.TabIndicatorPlacement.Fill"/>.
+            </summary>
+            <param name="view">The selected tab view to decorate with the effect.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateSelectedTabItemGlassFrame">
+            <summary>
+            Updates the frame and corner radius of the glass effect view applied to the selected tab item.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.RemoveLiquidGlassEffectViewFromSelectedItem">
+            <summary>
+            Removes and disposes the liquid glass visual view that was applied to the selected tab item indicator.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.ApplyTabBarScaleAnimation(System.Boolean)">
+            <summary>
+            Applies a scaling animation to the entire tab bar when pressed.
+            </summary>
+            <param name="isPressed">True when press begins; false when released.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateLiquidGlassPosition(System.Double)">
+            <summary>
+            Updates the overlay liquid glass view's position while the user drags it across the tab header area.
+            This keeps the overlay bounded within the header content and determines which tab the glass is currently above.
+            </summary>
+            <param name="currentX">Current horizontal drag position.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.HandleDragReleaseTabSelection">
+            <summary>
+            When a drag operation finishes, determines which tab needs to be selected <see cref="P:Syncfusion.Maui.TabView.SfTabBar.SelectedIndex"/>.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateScrollButtonBackground">
+            <summary>
+            Updates the background color of the scroll buttons.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateScrollButtonColor">
+            <summary>
+            Updates the color of the scroll buttons.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateHeaderDisplayMode">
+            <summary>
+            Update the HeaderDisplayMode value for each SfTabitem.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.AddTouchEffects(Syncfusion.Maui.TabView.Helper.SfGrid)">
+            <summary>
+            Add the effects layout to the grid.
+            </summary>
+            <param name="touchEffectGrid">Grid.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateTabIndicatorTemplateWidth">
+            <summary>
+            Update tabindicator width based on template.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.CalculateTabHeaderImageSize(System.Double)">
+            <summary>
+            Calculates the tab header image size based on the item's ImageSize.
+            </summary>
+            <param name="imageSize">The ImageSize of the tab item.</param>
+            <returns>The calculated tab header image size.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateTabIndicatorWidth">
+            <summary>
+            Update indicator width based on items.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateIndicatorPosition(System.Double,System.Double)">
+            <summary>
+            Updates the position of the tab indicator based on the selected tab's X position and width.
+            </summary>
+            <param name="selectedViewX">The X position of the selected tab item.</param>
+            <param name="tempIndicatorWidth">The width of the tab indicator.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.IndicatorAnimation">
+            <summary>
+            Method to animate the selection indicator in Tab View.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.ShouldPerformAction">
+            <summary>
+            Determines whether an action should be performed based on the change in selected index, running animations, indicator dimensions, and the position of the selected view.
+            </summary>
+            <returns>Returns true if the conditions for performing the action are met; otherwise, returns false.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateFillSelectedTabItem">
+            <summary>
+            This method is used to update the fill for the selected tab item.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.SecondWidthAnimatedMethod(System.Double)">
+            <summary>
+            This is update the tabselection indicator width
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.FirstWidthAnimatedMethod(System.Double)">
+            <summary>
+            This is update the tabselection indicator width
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.TranslateAnimatedMethod(System.Double)">
+            <summary>
+            This is update the tabselection indicator x position.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateIndicatorWidthMode">
+            <summary>
+            This method once the tabwidth mode property is changed.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabBar.UpdateFlowDirection">
+            <summary>
+             This method triggered once the flow direction property is changed.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.SfTabItem">
+            <summary>
+            Represents a selectable item inside a TabView.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.ImageTextSpacingProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.ImageTextSpacing"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.ImageTextSpacing"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.HeaderProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.Header"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.Header"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.FontFamilyProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.FontFamily"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.FontFamily"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.FontAttributesProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.FontAttributes"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.FontAttributes"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.FontSizeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.FontSize"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.FontSize"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.TextColorProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.TextColor"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.TextColor"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.ImageSourceProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.ImageSource"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.ImageSource"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.ImagePositionProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.ImagePosition"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.ImagePosition"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.BadgeTextProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.BadgeText"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.BadgeText"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.BadgeSettingsProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.BadgeSettings"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.BadgeSettings"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.FontAutoScalingEnabledProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.FontAutoScalingEnabled"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.FontAutoScalingEnabled"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.HeaderDisplayModeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.HeaderDisplayMode"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.HeaderDisplayMode"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.TabWidthModeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.TabWidthMode"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.TabWidthMode"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.IndicatorPlacementProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.IndicatorPlacement"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.IndicatorPlacement"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.ImageSizeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.ImageSize"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabItem.ImageSize"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.HeaderHorizontalTextAlignmentProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.HeaderHorizontalTextAlignment"/> bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabItem.EnableLiquidGlassEffectProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.EnableLiquidGlassEffect"/> bindable property.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Maui.TabView.SfTabItem"/> class.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.Maui.TabView.SfTabItem.Touched">
+            <summary>
+            Touched event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.Header">
+             <summary>
+             Gets or sets the text for the tab header.
+             </summary>
+             <value>
+             Specifies the header text of the tab item. The default value is an empty string.
+             </value>
+             <example>
+             The below example shows how to apply the header text for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.FontFamily">
+             <summary>
+             Gets or sets the value that defines the font family of the header.
+             </summary>
+             <value>
+             Specifies the font family of the tab item's header text. The default value is null.
+             </value>
+             <example>
+             The below example shows how to apply the font family for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+                 <tabView:SfTabItem Header="TAB 1" FontFamily="OpenSansRegular">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     FontFamily = "OpenSansRegular",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.FontAttributes">
+             <summary>
+             Gets or sets the value that defines the font attributes of the tab header.
+             </summary>
+             <value>
+             One of the <see cref="T:Microsoft.Maui.Controls.FontAttributes"/> enumeration that specifies the font attributes of the tab item's header text. The default mode is <see cref="F:Microsoft.Maui.Controls.FontAttributes.None"/>.
+             </value>
+             <example>
+             The below example shows how to apply the font attributes for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+                 <tabView:SfTabItem Header="TAB 1" FontAttributes="Bold">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     FontAttributes = FontAttributes.Bold,
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.FontAutoScalingEnabled">
+             <summary> 
+             Gets or sets a value that Determines whether or not the font of the control should scale automatically according to the operating system settings. 
+             </summary>
+             <value>
+             It accepts Boolean values, and the default value is false.
+             </value>
+             /// <example>
+             The below example shows how to apply the font auto scaling enabled for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+                 <tabView:SfTabItem Header="TAB 1" FontAutoScalingEnabled="True">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     FontAutoScalingEnabled = true,
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.FontSize">
+             <summary>
+             Gets or sets the value that defines the font size of the tab header.
+             </summary>
+             <value>
+             Specifies the font size of the tab item's header text. The default value is 14d.
+             </value>
+             <example>
+             The below examples shows, how to apply the font size for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+                 <tabView:SfTabItem Header="TAB 1" FontSize="32">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     FontSize = 32,
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.TextColor">
+             <summary>
+             Gets or sets the value that defines the text color of the tab header.
+             </summary>
+             <value>
+             Specifies the color of the tab item's header text. The default value is black.
+             </value>
+             <example>
+             The below example shows how to apply the text color for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+                 <tabView:SfTabItem Header="TAB 1" TextColor="Red">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     TextColor = Colors.Red,
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.ImageSource">
+             <summary>
+             Gets or sets the value that defines the header image of the tab header.
+             </summary>
+             <value>
+             Specifies the image of the tab item. The default value is null.
+             </value>
+             <example>
+             The below example shows how to the image for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+                 <tabView:SfTabItem Header="TAB 1" ImageSource="image_name">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     ImageSource = "image_name",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.ImagePosition">
+             <summary>
+             Gets or sets how the image aligns relative to the text.
+             </summary>
+             <value>
+             One of the <see cref="T:Syncfusion.Maui.TabView.TabImagePosition"/> enumeration that specifies the image position relative to the text. The default mode is <see cref="F:Syncfusion.Maui.TabView.TabImagePosition.Top"/>.
+             </value>
+             <example>
+             The below example shows how to set the image position for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+                 <tabView:SfTabItem Header="TAB 1" ImagePosition="Right">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     ImagePosition = TabImagePosition.Right,
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.BadgeText">
+             <summary>
+             Gets or sets the value that defines the badge text of the tab item.
+             </summary>
+             <value>
+             Specifies the badge text of the tab item. The default value is an empty string.
+             </value>
+             <example>
+             The below example shows how to badge text for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+                 <tabView:SfTabItem BadgeText="45">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     BadgeText = "45",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.BadgeSettings">
+             <summary>
+             Gets or sets the value that defines the badge settings of the tab item's badge text.
+             </summary>
+             <value>
+             Specifies the badge setting of the tab item's badge text. The default value is null.
+             </value>
+             <example>
+             The below example shows how to apply the badge settings for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+                 <tabView:SfTabItem BadgeText="45">
+                     <tabView:SfTabItem.BadgeSettings>
+                         <core:BadgeSettings TextColor="Red" Position="Left" />
+                     </tabView:SfTabItem.BadgeSettings>
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Content = new Label { Text = "Content" },
+                     BadgeText = "45",
+                     BadgeSettings = new BadgeSettings 
+                     {
+                         TextColor = Colors.Red,
+                         Position = BadgePosition.Left
+                     }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.ImageTextSpacing">
+             <summary>
+             Gets or sets the spacing between header and image 
+             </summary>
+             <value>
+             Specifies the spacing between the header and image. The default spacing value is 10d.
+             </value>
+             <example>
+             The below example shows how to apply the spacing between header and image for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+               <tabView:SfTabItem Header = "TAB 1" ImageTextSpacing="2"  ImageSource="avatar1.png"></tabView:SfTabItem>
+               <tabView:SfTabItem Header = "TAB 2" ImageTextSpacing="20" ImageSource="avatar1.png"></tabView:SfTabItem>
+             </tabView:SfTabView>
+                 
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     ImageTextSpacing="2"
+                     ImageSource="avatar1.png"
+                 }
+                 new SfTabItem
+                 {
+                     Header="TAB 2,
+                     ImageTextSpacing="20",
+                     ImageSource="avatar1.png"
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.IsSelected">
+            <summary>
+            Gets whether the tab item is selected or not.
+            </summary>
+            <value>
+            Returns whether the tabitem is selected or not.
+            </value> 
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.ImageSize">
+            <summary>
+             Gets or sets a value that can be used to customize the image size in tab header.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.IsDescriptionNotSetByUser">
+            <summary>
+            Gets a value indicating whether the SemanticProperties.Description is set or not by user.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.HeaderDisplayMode">
+            <summary>
+            Gets or sets the value that defines the header display mode.
+            </summary>
+            <value>
+            One of the <see cref="T:Syncfusion.Maui.TabView.TabBarDisplayMode"/> enumeration that specifies the header display mode of the respective tab item. The default mode is <see cref="F:Syncfusion.Maui.TabView.TabBarDisplayMode.Default"/>.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.TabWidthMode">
+            <summary>
+            Gets or sets the value that defines the tab width mode.
+            </summary>
+            <value>
+            One of the <see cref="T:Syncfusion.Maui.TabView.TabWidthMode"/> enumeration that specifies the tab width mode of the tab bar. The default mode is <see cref="F:Syncfusion.Maui.TabView.TabWidthMode.Default"/>.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.IndicatorPlacement">
+            <summary>
+            Gets or sets the value that defines the tab indicator placement.
+            </summary>
+            <value>
+            One of the <see cref="T:Syncfusion.Maui.TabView.TabIndicatorPlacement"/> enumeration that specifies the tab width mode of the tab bar. The default mode is <see cref="F:Syncfusion.Maui.TabView.TabIndicatorPlacement.Bottom"/>.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.HeaderHorizontalTextAlignment">
+            <summary> 
+            Gets or sets a value that can be used to customize the horizontal text alignment in tab header. 
+            </summary> 
+            <value> 
+            It accepts the <see cref="P:Syncfusion.Maui.TabView.SfTabItem.HeaderHorizontalTextAlignment"/> values, and the default value is <see cref="F:Microsoft.Maui.TextAlignment.Center"/>. 
+            </value> 
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.EnableLiquidGlassEffect">
+            <summary>
+            Gets or sets a value indicating whether the liquid glass effect is enabled for this tab item header.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.Font">
+            <summary>
+            Gets the font of the tab item.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabItem.IsMouseMoved">
+            <summary>
+            Gets or sets while the mouse is moved or not over the tab item.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabItem.OnTouch(Syncfusion.Maui.Core.Internals.PointerEventArgs)">
+            <summary>
+            Touch event.
+            </summary>
+            <param name="e">The TouchListenerEventArgs args.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabItem.ChangeSelectedState">
+            <summary>
+            Method used to change the selected state.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabItem.MeasureOverride(System.Double,System.Double)">
+            <summary>
+            MeasureOverride method.
+            </summary>
+            <param name="widthConstraint">The width.</param>
+            <param name="heightConstraint">The height.</param>
+            <returns>It returns the size.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabItem.OnFontFamilyChanged(System.String,System.String)">
+            <summary>
+            Property changed method for font.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabItem.OnFontSizeChanged(System.Double,System.Double)">
+            <summary>
+            Property changed method for font size.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabItem.Syncfusion#Maui#Graphics#Internals#ITextElement#OnFontAutoScalingEnabledChanged(System.Boolean,System.Boolean)">
+            <summary>
+            Invoked when the <see cref="F:Syncfusion.Maui.TabView.SfTabItem.FontAutoScalingEnabledProperty"/> changed.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabItem.FontSizeDefaultValueCreator">
+            <summary>
+            Returns the default font value.
+            </summary>
+            <returns></returns>
+            <returns>
+            Method returns the default font size value.
+            </returns>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabItem.OnFontAttributesChanged(Microsoft.Maui.Controls.FontAttributes,Microsoft.Maui.Controls.FontAttributes)">
+            <summary>
+            Method used to change the font attributes
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabItem.OnFontChanged(Microsoft.Maui.Font,Microsoft.Maui.Font)">
+            <summary>
+            Property changed method for font.
+            </summary>
+            <param name="oldValue"></param>
+            <param name="newValue"></param>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.SfTabView">
+             <summary>
+             Represents the <see cref="T:Syncfusion.Maui.TabView.SfTabView"/> control that contains multiple items that share the same space on the screen.
+             </summary>
+             <example>
+             The below example shows how to initialize the tab view.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView x:Name="tabView">
+                 <tabView:SfTabView.Items>
+            
+                     <tabView:SfTabItem Header="Item 1">
+                         <tabView:SfTabItem.Content>
+                             <Grid BackgroundColor="Red" />
+                         </tabView:SfTabItem.Content>
+                     </tabView:SfTabItem>
+            
+                     <tabView:SfTabItem Header="Item 2">
+                         <tabView:SfTabItem.Content>
+                             <Grid BackgroundColor="Green" />
+                         </tabView:SfTabItem.Content>
+                     </tabView:SfTabItem>
+            
+                     <tabView:SfTabItem Header="Item 3">
+                         <tabView:SfTabItem.Content>
+                             <Grid BackgroundColor="Blue" />
+                         </tabView:SfTabItem.Content>
+                     </tabView:SfTabItem>
+            
+                 </tabView:SfTabView.Items>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             Grid allContactsGrid = new Grid { BackgroundColor = Colors.Red };
+             Grid favoritesGrid = new Grid { BackgroundColor = Colors.Green };
+             Grid contactsGrid = new Grid { BackgroundColor = Colors.Blue };
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem()
+                 {
+                     Header = "Item 1",
+                     Content = allContactsGrid
+                 },
+                 new SfTabItem()
+                 {
+                     Header = "Item 2",
+                     Content = favoritesGrid
+                 },
+                 new SfTabItem()
+                 {
+                     Header = "Item 3",
+                     Content = contactsGrid
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             this.Content = tabView;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.TabBarBackgroundProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarBackground"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarBackground"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.HeaderDisplayModeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.HeaderDisplayMode"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.HeaderDisplayMode"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.TabBarPlacementProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarPlacement"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarPlacement"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.IndicatorPlacementProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.IndicatorPlacement"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.IndicatorPlacement"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.IndicatorWidthModeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.IndicatorWidthMode"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.IndicatorWidthMode"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.TabWidthModeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabWidthMode"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabWidthMode"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.IndicatorBackgroundProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.IndicatorBackground"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.IndicatorBackground"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.TabBarHeightProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarHeight"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarHeight"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.ItemsProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.Items"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.Items"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.SelectedIndexProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.SelectedIndex"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.SelectedIndex"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.ItemsSourceProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.ItemsSource"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.ItemsSource"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.HeaderItemTemplateProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.HeaderItemTemplate"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.HeaderItemTemplate"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.ContentItemTemplateProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.ContentItemTemplate"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.ContentItemTemplate"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.TabHeaderPaddingProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabHeaderPadding"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabHeaderPadding"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.IsScrollButtonEnabledProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.IsScrollButtonEnabled"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.IsScrollButtonEnabled"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.HeaderHorizontalTextAlignmentProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.HeaderHorizontalTextAlignment"/> bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.ContentTransitionDurationProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.ContentTransitionDuration"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.ContentTransitionDuration"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.IndicatorCornerRadiusProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.IndicatorCornerRadius"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.IndicatorCornerRadius"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.IndicatorStrokeThicknessProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.IndicatorStrokeThickness"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.IndicatorStrokeThickness"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.FontAutoScalingEnabledProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.FontAutoScalingEnabled"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.FontAutoScalingEnabled"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.EnableLiquidGlassEffectProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.EnableLiquidGlassEffect"/> bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.EnableSwipingProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.EnableSwiping"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.EnableSwiping"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.ScrollButtonBackgroundProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.ScrollButtonBackground"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.ScrollButtonBackground"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.ScrollButtonColorProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.ScrollButtonColor"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.ScrollButtonColor"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.EnableVirtualizationProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.EnableVirtualization"/> bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.EnableRippleAnimationProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.EnableRippleAnimation"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.EnableRippleAnimation"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.TabBarBorderColorProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarBorderColor"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarBorderColor"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.TabBarBorderThicknessProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarBorderThickness"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarBorderThickness"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.ShowTabBarBorderProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.ShowTabBarBorder"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.ShowTabBarBorder"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.TabBarCornerRadiusProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarCornerRadius"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarCornerRadius"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.ScrollButtonDisabledIconColorProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.ScrollButtonDisabledIconColor"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.SfTabView.ScrollButtonDisabledIconColor"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.SfTabView.HoverBackgroundProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.SfTabView.HoverBackground"/> bindable property.
+            </summary>
+            <remarks>This bindable property is read-only.</remarks>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Maui.TabView.SfTabView"/> class.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.Maui.TabView.SfTabView.SelectionChanged">
+            <summary>
+            Occurs when the current selection is changed.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.Maui.TabView.SfTabView.TabItemTapped">
+            <summary>
+            Occurs when the header of the tab item is tapped.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.Maui.TabView.SfTabView.SelectionChanging">
+            <summary>
+            Occurs when the selection is changing in SfTabView.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.EnableLiquidGlassEffect">
+             <summary>
+             Gets or sets a value indicating whether the liquid glass effect is enabled for the view.
+             </summary>
+             <value>
+             It accepts bool values, and the default value is False.
+             </value>
+             <remarks>
+             This effect is supported only on macOS and iOS platforms.
+             </remarks>
+             <example>
+             <code language="csharp"><![CDATA[
+            
+             var tabView = new SfTabView();
+            
+             // Enable only on supported Apple platforms
+             #if IOS || MACCATALYST
+             tabView.EnableLiquidGlassEffect = true;
+             #else
+             tabView.EnableLiquidGlassEffect = false;
+             #endif
+             ]]></code>
+            
+             <code language="xaml"><![CDATA[
+            
+                 <tabView:SfTabView
+                     EnableLiquidGlassEffect="{OnPlatform iOS=true, MacCatalyst=true, Default=false}">
+                     <!-- Tab items here -->
+                 </tabView:SfTabView>
+             ]]></code>
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.IndicatorWidthMode">
+             <summary>
+             Gets or sets the value that can be used to customize the indicator width in the tab header.
+             </summary>
+             <value>
+             It accepts indicatorWidthMode values and the default value is IndicatorWidthMode.Fit.
+             </value>
+            <remark>
+             It's not applicable when the IndicatorPlacement is Fill.
+             </remark>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.HeaderDisplayMode">
+            <summary>
+            Gets or sets the display mode for the tab header, determining whether to show the image and text.
+            </summary>
+            <value>
+            It accepts the TabHeaderDisplayMode values, and the default value is TabHeaderDisplayMode.Default.
+            </value>
+            <remarks>
+            When the HeaderDisplayMode is set to TabHeaderDisplayMode.Default, the image and text will be displayed on the tab bar based on the Header and ImageSource properties of the tab item.
+            </remarks>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.TabBarBackground">
+             <summary>
+             Gets or sets a brush that describes the tab header's background.
+             </summary>
+             <value>
+             Specifies the background of the tab bar. The default value is null.
+             </value>
+             <example>
+             The below example shows how to apply the font family for a tab item.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView TabBarBackground="Pink">
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             tabView.TabBarBackground = Colors.Pink;
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.TabBarPlacement">
+             <summary>
+             Gets or sets whether the tab header should be at the bottom or at the top of the tab content.
+             </summary>
+             <value>
+             One of the <see cref="T:Syncfusion.Maui.TabView.TabBarPlacement"/> enumeration that specifies the placement of the tab bar. The default mode is <see cref="F:Syncfusion.Maui.TabView.TabBarPlacement.Top"/>.
+             </value>
+             <example>
+             The below example shows how to place the header to the bottom.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView TabBarPlacement="Bottom">
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             tabView.TabBarPlacement = TabBarPlacement.Bottom;
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.IndicatorPlacement">
+             <summary>
+             Gets or sets the placement of the selection indication.
+             </summary>
+             <value>
+             One of the <see cref="T:Syncfusion.Maui.TabView.TabIndicatorPlacement"/> enumeration that specifies the placement of the selection indicator. The default mode is <see cref="F:Syncfusion.Maui.TabView.TabIndicatorPlacement.Bottom"/>.
+             </value>
+             <example>
+             The below example shows how to place the selection indicator to the bottom of the tab.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView IndicatorPlacement="Bottom">
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             tabView.IndicatorPlacement = TabIndicatorPlacement.Fill;
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.TabWidthMode">
+             <summary>
+             Gets or sets the method for determining the width of each tab.
+             </summary>
+             <value>
+             One of the <see cref="T:Syncfusion.Maui.TabView.TabWidthMode"/> enumeration that specifies the tab item's width. The default mode is <see cref="F:Syncfusion.Maui.TabView.TabWidthMode.Default"/>.
+             </value>
+             <example>
+             The below example shows how to set the tab width based on the text length.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView TabWidthMode="SizeToContent">
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             tabView.TabWidthMode = TabWidthMode.SizeToContent;
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.IndicatorBackground">
+             <summary>
+             Gets or sets a brush that describes the selection indicator's background.
+             </summary>
+             <value>
+             Specifies the background of the selection indicator. The default value is SolidColorBrush(Color.FromArgb("#6200EE"))".
+             </value>
+             <example>
+             The below example shows how to set the background of the indicator.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView IndicatorBackground="Red">
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             tabView.IndicatorBackground = Colors.Red; 
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.TabBarHeight">
+             <summary>
+             Gets or sets the height of the tab header.
+             </summary>
+             <value>
+             Specifies the height of the tab header. The default value is 48d.
+             </value>
+             <example>
+             The below example shows how to set the height of the tab header.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView TabBarHeight="80">
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             tabView.TabBarHeight = 80;
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.Items">
+             <summary>
+             Gets or sets the collection used to populate the content of the Tab View.
+             </summary>
+             <value>
+             The collection used to populate the content of the Tab View. The default is an empty collection.
+             </value>
+             <example>
+             The below example shows how to assign the collection to the Tab View.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView>
+                 <tabView:SfTabView.Items>
+                     <tabView:SfTabItem Header="TAB 1">
+                         <tabView:SfTabItem.Content>
+                             <Label Text="Content" />
+                         </tabView:SfTabItem.Content>
+                     </tabView:SfTabItem>
+                 </tabView:SfTabView.Items>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.HeaderHorizontalTextAlignment">
+            <summary> 
+            Gets or sets a value that can be used to customize the horizontal text alignment in tab header. 
+            </summary> 
+            <value> 
+            It accepts the <see cref="P:Syncfusion.Maui.TabView.SfTabView.HeaderHorizontalTextAlignment"/> values, and the default value is <see cref="F:Microsoft.Maui.TextAlignment.Center"/>. 
+            </value> 
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.SelectedIndex">
+             <summary>
+             Gets or sets the index specifying the currently selected item.
+             </summary>
+             <value>
+             A zero-based index of the currently selected item.
+             </value>
+             <example>
+             The below example shows how to set the selected index for the Tab View.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView SelectedIndex="2">
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content 1" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+                 
+                 <tabView:SfTabItem Header="TAB 2">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content 2" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+                 
+                 <tabView:SfTabItem Header="TAB 3">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content 3" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             tabView.SelectedIndex = 2;
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content 1" }
+                 },
+                 new SfTabItem
+                 {
+                     Header = "TAB 2",
+                     Content = new Label { Text = "Content 2" }
+                 },
+                 new SfTabItem
+                 {
+                     Header = "TAB 3",
+                     Content = new Label { Text = "Content 3" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.ItemsSource">
+            <summary>
+            Gets or sets the collection used to populate the content of the Tab View.
+            </summary>
+            <value>
+            The collection used to populate the content of the Tab View. The default is an empty collection.
+            </value>
+            <example>
+            The below example shows how to assign the collection to the Tab View.
+            # [XAML](#tab/tabid-1)
+            <code><![CDATA[
+            <tabView:SfTabView ItemsSource="{Binding TabItems}" />
+            ]]></code>
+            # [C#](#tab/tabid-2)
+            <code><![CDATA[
+            SfTabView tabView = new SfTabView();
+            tabView.ItemsSource = model.TabItems;
+            this.Content = tabView;
+            ]]></code>
+            ***
+            </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.HeaderItemTemplate">
+            <summary>
+            Gets or sets the template that is used to display the header.
+            </summary>
+            <value>
+            A DataTemplate object that is used to display the header. The default is null.
+            </value>
+            <example>
+            The below example shows how to set header template in Tab View.
+            # [XAML](#tab/tabid-1)
+            <code><![CDATA[
+            <tabView:SfTabView ItemsSource="{Binding TabItems}" >
+            <tabView:SfTabView.HeaderItemTemplate>
+                <DataTemplate >
+                   <Label Padding = "5,10,10,10"  Text="{Binding Name}"/>
+                </DataTemplate>
+            </tabView:SfTabView.HeaderItemTemplate>
+            </tabView:SfTabView>
+            ]]></code>
+            # [C#](#tab/tabid-2)
+            <code><![CDATA[
+            var tabView = new SfTabView();
+            tabView.ItemsSource = model.TabItems;
+            tabView.HeaderItemTemplate = new DataTemplate(() =>
+            {
+               var nameLabel = new Label { Padding = new Thickness("5,10,10,10") };
+               nameLabel.SetBinding(Label.TextProperty, "Name");
+               return nameLabel;
+            });
+            this.Content = tabView;
+            ]]></code>
+            ***
+            </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.ContentItemTemplate">
+            <summary>
+            Gets or sets the template that is used to display the content.
+            </summary>
+            <value>
+            A DataTemplate object that is used to display the content. The default is null.
+            </value>
+            <example>
+            The below example shows how to set content template in Tab View.
+            # [XAML](#tab/tabid-1)
+            <code><![CDATA[
+            <tabView:SfTabView ItemsSource="{Binding TabItems}" >
+             <tabView:SfTabView.ContentItemTemplate>
+                   <DataTemplate>
+                        <Label TextColor = "Black"  Text="{Binding Name}" />
+                  </DataTemplate>
+            </tabView:SfTabView.ContentItemTemplate>
+            </tabView:SfTabView>
+            ]]></code>
+            # [C#](#tab/tabid-2)
+            <code><![CDATA[
+            var tabView = new SfTabView();
+            tabView.ItemsSource = model.TabItems;
+            tabView.ContentItemTemplate = new DataTemplate(() =>
+            {
+              var nameLabel = new Label { TextColor = Colors.Black };
+              nameLabel.SetBinding(Label.TextProperty, "Name");
+              return nameLabel;
+            });
+            this.Content = tabView;
+            ]]></code>
+            ***
+            </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.TabHeaderPadding">
+             <summary>
+             Gets or sets the value that can be used to customize the padding of the tab header. 
+             </summary>
+             <remarks>
+             <b>Note:</b> TabHeaderPadding is only applied to the SizeToContent type of TabWidthMode.
+             </remarks>
+             <value>
+             Specifies the padding of the tab header. The default value is new Thickness(52,0,52,0).
+             </value>
+             <example>
+             The below example shows how to set the selected index for the Tab View.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView TabWidthMode="SizeToContent" TabHeaderPadding="5,10,5,10">
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content 1" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+                 
+                 <tabView:SfTabItem Header="TAB 2">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content 2" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+                 
+                 <tabView:SfTabItem Header="TAB 3">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content 3" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]></code>
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             tabView.TabWidthMode = TabWidthMode.SizeToContent;
+             tabView.TabHeaderPadding = new Thickness(5, 10, 5, 10);
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content 1" }
+                 },
+                 new SfTabItem
+                 {
+                     Header = "TAB 2",
+                     Content = new Label { Text = "Content 2" }
+                 },
+                 new SfTabItem
+                 {
+                     Header = "TAB 3",
+                     Content = new Label { Text = "Content 3" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.FontAutoScalingEnabled">
+            <summary> 
+            Gets or sets a value that Determines whether or not the font of the control should scale automatically according to the operating system settings. 
+            </summary>
+            <value>
+            It accepts Boolean values, and the default value is false.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.IndicatorCornerRadius">
+            <summary>
+            Gets or sets a value that can be used to customize the corner radius of selection indicator.
+            </summary>
+            <value>
+            It accepts the <see cref="T:Microsoft.Maui.CornerRadius"/> values and the default value is -1.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.IndicatorStrokeThickness">
+            <summary>
+            Gets or sets a value that can be used to customize the indicator’s border height. 
+            </summary>
+            <value>
+            It accepts the double values and the default value is 3.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.IsScrollButtonEnabled">
+            <summary> 
+            Gets or sets a value indicating whether to enable the scroll buttons.
+            </summary> 
+            <value> 
+            The default value is false.
+            </value> 
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.EnableSwiping">
+            <summary> 
+            Gets or sets a value indicating whether swiping is enabled in SfTabView. 
+            </summary> 
+            <value> 
+            The default value is false. 
+            </value> 
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.ContentTransitionDuration">
+            <summary>
+            Gets or sets a value that can be used to modify the duration of content transition in Tab View.
+            </summary>
+            <value>
+            It accepts the double values and the default value is 100.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.ScrollButtonBackground">
+            <summary> 
+            Gets or sets a value that can be used to customize the scroll button’s background color in SfTabView. 
+            </summary> 
+            <value> 
+            It accepts brush values.  
+            </value> 
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.ScrollButtonColor">
+            <summary> 
+            Gets or sets a value that can be used to customize the scroll button’s color in SfTabView. 
+            </summary> 
+            <value> 
+            It accepts the Color values.  
+            </value> 
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.EnableVirtualization">
+            <summary>
+            Gets or sets a value indicating whether lazy loading is enabled during the initial load.
+            </summary>
+            <value>
+            A boolean value indicating whether lazy loading is enabled. The default value is false.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.EnableRippleAnimation">
+             <summary>
+             Gets or sets a value indicating whether ripple animation should be enabled on the Tab View.
+             </summary>
+             <value>
+             It accepts the Boolean values, and the default value is <c>true</c>.
+             </value>
+             <example>
+             Here is an example of how to set the <see cref="P:Syncfusion.Maui.TabView.SfTabView.EnableRippleAnimation"/> property.
+             
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView EnableRippleAnimation="False">
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]>
+             </code>
+             
+             # [C#](#tab/tabid-2)
+             <code><![CDATA[
+             var tabView = new SfTabView();
+             tabView.EnableRippleAnimation = false;
+             var tabItems = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+            
+             tabView.Items = tabItems;
+             Content = tabView;
+             ]]>
+             </code>
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.TabBarBorderColor">
+             <summary>
+             Gets or sets the color used to paint the border around the TabBar in SfTabView.
+             </summary>
+             <value>
+             The color applied to the TabBar border. The default value is <c>null</c>
+             (no explicit border color).
+             </value>                                                                                      /// <remarks>
+             The border is rendered only when the thickness is greater than zero. You can specify a uniform thickness (e.g., "2")
+             or per-side values (e.g., "1,2,1,2") in XAML.
+             </remarks>
+             <example>
+             The below example shows how to set the border color for the TabBar.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView TabBarBorderColor="Red" TabBarBorderThickness="2">
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]>
+             </code>
+            
+             C#:
+             <code>
+             <![CDATA[
+             var tabView = new SfTabView
+             {
+                 TabBarBorderColor = Colors.Red,
+                 TabBarBorderThickness = new Thickness(2),
+             };
+            
+             tabView.Items = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.TabBarBorderThickness">
+             <summary>
+             Gets or sets the thickness of the border around the TabBar in SfTabView.
+             </summary>
+             <value>
+             A <see cref="T:Microsoft.Maui.Thickness"/> that specifies the border width for each side of the TabBar.
+             The default value is <c>new Thickness(0)</c>, which results in no visible border.
+             </value>
+             <remarks>
+             The border is rendered only when the thickness is greater than zero. You can specify a uniform thickness (e.g., "2")
+             or per-side values (e.g., "1,2,1,2") in XAML.
+             </remarks>
+             <example>
+             The below example shows how to set the border thickness for the TabBar.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView TabBarBorderThickness="2" >
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]>
+             </code>
+            
+             C#:
+             <code>
+             <![CDATA[
+             var tabView = new SfTabView
+             {
+                 TabBarBorderThickness = new Thickness(2),
+             };
+            
+             tabView.Items = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.ShowTabBarBorder">
+            <summary>
+            Gets or sets a value indicating whether the TabBar border is visible.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.TabBarCornerRadius">
+             <summary>
+             Gets or sets the corner radius of the TabBar border in SfTabView.
+             </summary>
+             <value>
+             A <see cref="T:Microsoft.Maui.CornerRadius"/> that specifies the radius of the TabBar border's corners.
+             The default value is <c>new CornerRadius(0)</c>.
+             </value>
+             <remarks>
+             The border is visible only when  
+               <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarBorderThickness"/> is greater than zero.
+             In XAML, you can specify a uniform radius (e.g., "10") or per-corner values
+               (e.g., "10,0,10,0") in the order: TopLeft, TopRight, BottomLeft, BottomRight.
+             You can also customize the color using <see cref="P:Syncfusion.Maui.TabView.SfTabView.TabBarBorderColor"/>.
+             </remarks>
+             <example>
+             The below example shows how to make the TabBar border visible.
+             # [XAML](#tab/tabid-1)
+             <code><![CDATA[
+             <tabView:SfTabView TabBarBorderThickness="2"
+                                TabBarBorderColor="Red"
+                                TabBarCornerRadius="10">
+                 <tabView:SfTabItem Header="TAB 1">
+                     <tabView:SfTabItem.Content>
+                         <Label Text="Content" />
+                     </tabView:SfTabItem.Content>
+                 </tabView:SfTabItem>
+             </tabView:SfTabView>
+             ]]>
+             </code>
+            
+             C#:
+             <code>
+             <![CDATA[
+             var tabView = new SfTabView
+             {
+                 TabBarBorderThickness = new Thickness(2),
+                 TabBarBorderColor = Colors.Red,
+                 TabBarCornerRadius = new CornerRadius(10)
+             };
+            
+             tabView.Items = new TabItemCollection
+             {
+                 new SfTabItem
+                 {
+                     Header = "TAB 1",
+                     Content = new Label { Text = "Content" }
+                 }
+             };
+             ]]></code>
+             ***
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.ScrollButtonDisabledIconColor">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SfTabView.HoverBackground">
+            <summary>
+            Gets or sets the hover color for the tab items.
+            <remarks>The default color is Color.FromRgba("#1C1B1F").</remarks>
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.OnPropertyChanged(System.String)">
+            <summary>
+            OnPropertyChanged method
+            </summary>
+            <param name="propertyName">Property Name</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.RaiseSelectionChangedEvent(Syncfusion.Maui.TabView.TabSelectionChangedEventArgs)">
+            <summary>
+            Invokes <see cref="E:Syncfusion.Maui.TabView.SfTabView.SelectionChanged"/> event.
+            </summary>
+            <param name="args">args.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.RaiseTabItemTappedEvent(Syncfusion.Maui.TabView.TabItemTappedEventArgs)">
+            <summary>
+            Invokes <see cref="E:Syncfusion.Maui.TabView.SfTabView.TabItemTapped"/> event.
+            </summary>
+            <param name="args">args.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.RaiseSelectionChangingEvent(Syncfusion.Maui.TabView.SelectionChangingEventArgs)">
+            <summary>
+            Invokes <see cref="E:Syncfusion.Maui.TabView.SfTabView.SelectionChanging"/> event.
+            </summary>
+            <param name="args">args.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.TabBarBorderColorChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            This method is called when the TabBarBorderColor property value changes. It updates the border color for the TabBar.
+            </summary>
+            <param name="bindable">The bindable object <see cref="T:Syncfusion.Maui.TabView.SfTabView"/> whose TabBarBorderColor property has changed.</param>
+            <param name="oldValue">The old value of the TabBarBorderColor property.</param>
+            <param name="newValue">The new value of the TabBarBorderColor property.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.TabBarBorderThicknessChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            This method is called when the TabBarBorderThickness property value changes. It updates the border thickness for the TabBar.
+            </summary>
+            <param name="bindable">The bindable object <see cref="T:Syncfusion.Maui.TabView.SfTabView"/> whose TabBarBorderThickness  property has changed.</param>
+            <param name="oldValue">The old value of the TabBarBorderThickness property.</param>
+            <param name="newValue">The new value of the TabBarBorderThickness property.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.ShowTabBarBorderChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            This method is called when the ShowTabBarBorder property value changes. It updates the visibility of the TabBar border.
+            </summary>
+            <param name="bindable">The bindable object <see cref="T:Syncfusion.Maui.TabView.SfTabView"/> whose ShowTabBarBorder property has changed.</param>
+            <param name="oldValue">The old value of the ShowTabBarBorder property.</param>
+            <param name="newValue">The new value of the ShowTabBarBorder property.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.TabBarCornerRadiusChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            This method is called when the TabBarCornerRadius property value changes. It updates the visibility of the TabBar border.
+            </summary>
+            <param name="bindable">The bindable object <see cref="T:Syncfusion.Maui.TabView.SfTabView"/> whose TabBarCornerRadius property has changed.</param>
+            <param name="oldValue">The old value of the TabBarCornerRadius property.</param>
+            <param name="newValue">The new value of the TabBarCornerRadius property.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.TabContentContainer_SeletionChanging(System.Object,Syncfusion.Maui.TabView.SelectionChangingEventArgs)">
+            <summary>
+            This method is triggered when the selection of tab contents is about to change.
+            </summary>
+            <param name="sender">The source of the event.</param>
+            <param name="e">Event data containing information about the selection changing.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.UpdateIndicatorWidthMode(Syncfusion.Maui.TabView.IndicatorWidthMode)">
+            <summary>
+            Update the indicator width when the indicator width mode property is changed.
+            </summary>
+            <param name="indicatorWidthMode"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.UpdateHeaderDisplayMode(Syncfusion.Maui.TabView.TabBarDisplayMode)">
+            <summary>
+            update the HeaderDisplayMode when the HeaderDisplayMode porperty is changed
+            </summary>
+            <param name="headerDisplayMode"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.Syncfusion#Maui#Themes#IParentThemeElement#GetThemeDictionary">
+            <summary>
+            Returns SfTabViewStyles class for assigning keys
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.Syncfusion#Maui#Themes#IThemeElement#OnControlThemeChanged(System.String,System.String)">
+            <summary>
+            This method will be called when a theme dictionary that contains the value for your control key is merged in application.
+            </summary>
+            <param name="oldTheme"></param>
+            <param name="newTheme"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.Syncfusion#Maui#Themes#IThemeElement#OnCommonThemeChanged(System.String,System.String)">
+            <summary>
+            This method will be called when users merge a theme dictionary that contains value for “SyncfusionTheme” dynamic resource key. 
+            </summary>
+            <param name="oldTheme"></param>
+            <param name="newTheme"></param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.OnScrollButtonBackgroundPropertyChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            This method is called when the ScrollButtonBackground property value changes.It updates the ScrollButtonBackground of the tabHeaderContainer accordingly.
+            </summary>
+            <param name="bindable">The bindable object <see cref="T:Syncfusion.Maui.TabView.SfTabView"/> whose ScrollButtonBackground property has changed.</param>
+            <param name="oldValue">The old value of the ScrollButtonBackground property.</param>
+            <param name="newValue">The new value of the ScrollButtonBackground property.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabView.OnScrollButtonColorChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            This method is called when the ScrollButtonColor property value changes.It updates the ScrollButtonColor of the tabHeaderContainer accordingly.
+            </summary>
+            <param name="bindable">The bindable object <see cref="T:Syncfusion.Maui.TabView.SfTabView"/> whose ScrollButtonColor property has changed.</param>
+            <param name="oldValue">The old value of the ScrollButtonColor property.</param>
+            <param name="newValue">The new value of the ScrollButtonColor property.</param>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabBarBorder.TabBarBorderColorProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.TabBarBorder.TabBarBorderColor"/> bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabBarBorder.TabBarBorderThicknessProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.TabBarBorder.TabBarBorderThickness"/> bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabBarBorder.ShowTabBarBorderProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.TabBarBorder.ShowTabBarBorder"/> bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabBarBorder.TabBarCornerRadiusProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.TabBarBorder.TabBarCornerRadius"/> bindable property.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.TabBarBorder.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Maui.TabView.TabBarBorder"/> class.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabBarBorder.TabBarBorderColor">
+            <summary>
+            Gets or sets a color that can be used to customize the border color.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabBarBorder.TabBarBorderThickness">
+            <summary>
+            Gets or sets the thickness of the border with individual values for each side.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabBarBorder.ShowTabBarBorder">
+            <summary>
+            Gets or sets a value indicating whether the border is visible.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabBarBorder.TabBarCornerRadius">
+            <summary>
+            Gets or sets the corner radius of the border.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.TabBarBorder.OnDraw(Microsoft.Maui.Graphics.ICanvas,Microsoft.Maui.Graphics.RectF)">
+            <summary>
+            Draws the border when requested
+            </summary>
+            <param name="canvas">The canvas to draw on</param>
+            <param name="dirtyRect">The rectangle that needs to be redrawn</param>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.TabBarBorder.DrawFlatBorders(Microsoft.Maui.Graphics.ICanvas,Microsoft.Maui.Graphics.RectF,Microsoft.Maui.Thickness)">
+            <summary>
+            Draws border lines around the TabBar
+            </summary>
+            <param name="canvas">The canvas to draw on</param>
+            <param name="rect">The rectangle defining the TabBar boundaries</param>
+            <param name="thickness">The rectangle defining the TabBar boundaries</param>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.TabBarPlacement">
+            <summary>
+            Describes the possible values for the position of header layout in SfTabView control.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabBarPlacement.Bottom">
+            <summary>
+            Specifies the location below the content region of SfTabView control.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabBarPlacement.Top">
+            <summary>
+            Specifies the location above the content region of SfTabView control.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.TabWidthMode">
+            <summary>
+            Describes the possible values for tab width mode.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabWidthMode.Default">
+            <summary>
+            Specifies that all tab header widths share the available header space.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabWidthMode.SizeToContent">
+            <summary>
+            Specifies that the tab header width will be set based on the text size and image of each tab.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.TabIndicatorPlacement">
+            <summary>
+            Describes the possible values for selection indicator placement.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabIndicatorPlacement.Bottom">
+            <summary>
+            Specifies the location below the content region of the tab item header.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabIndicatorPlacement.Fill">
+            <summary>
+            Specifies the full content region of the tab item header.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabIndicatorPlacement.Top">
+            <summary>
+            Specifies the location above the content region of the tab item header.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.TabImagePosition">
+            <summary>
+            Describes the possible values for the tab items’ image position in the header layout.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabImagePosition.Bottom">
+            <summary>
+            Specifies the location below the tab items’ header.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabImagePosition.Left">
+            <summary>
+            Specifies the location left to the tab items’ header.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabImagePosition.Right">
+            <summary>
+            Specifies the location right to the tab items’ header.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabImagePosition.Top">
+            <summary>
+            Specifies the location above the tab items’ header.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.TabBarDisplayMode">
+             <summary>
+            Describes the possible values for the display types in the header layout.
+             </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabBarDisplayMode.Image">
+            <summary>
+            Specifies the image type for header.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabBarDisplayMode.Text">
+            <summary>
+            Specifies the text type for header.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabBarDisplayMode.Default">
+            <summary>
+            Specifies both image and text type for header.
+            </summary>  
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.IndicatorWidthMode">
+            <summary>
+            Describes the possible values for tab indicator width.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.IndicatorWidthMode.Fit">
+            <summary> 
+            Specifies that the selection indicator width will be set based on the header’s content width of the tab view.
+            </summary>  
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.IndicatorWidthMode.Stretch">
+            <summary> 
+            Specifies that the selection indicator width will be set based on the header width value of the tab view.
+            </summary> 
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.ArrowType">
+            <summary>
+            Specifies the direction of arrows used, either backward or forward.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.SelectionChangingEventArgs">
+            <summary>
+            This class serves as an event data for the <see cref="E:Syncfusion.Maui.TabView.SfTabView.SelectionChanging"/> event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.SelectionChangingEventArgs.Index">
+            <summary>
+            Gets the index value of the item that is about to be selected. 
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.TabItemCollection">
+            <summary>
+            It represents a collection which holds the children for tab view control using the collection of SfTabItem.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.TabItemTappedEventArgs">
+            <summary>
+            This class serves as an event data for the <see cref="E:Syncfusion.Maui.TabView.SfTabView.TabItemTapped"/> event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabItemTappedEventArgs.TabItem">
+            <summary>
+            Gets the selected tab item.
+            </summary>
+            <value>
+            Returns the selected tab item.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabItemTappedEventArgs.Cancel">
+            <summary>
+            Gets or sets a value indicating whether the event should be canceled.
+            </summary>
+            <value>
+            Required boolean value
+            </value>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.TabSelectionChangedEventArgs">
+            <summary>
+            This class serves as an event data for the <see cref="E:Syncfusion.Maui.TabView.SfTabView.SelectionChanged"/> event.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabSelectionChangedEventArgs.OldIndex">
+            <summary>
+            Gets the index of previously selected tab item.
+            </summary>
+            <Value>
+            Returns the index of previously selected tab item.
+            </Value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabSelectionChangedEventArgs.NewIndex">
+            <summary>
+            Gets the index of currently selected tab item.
+            </summary>
+            <Value>
+            Returns the index of currently selected tab item.
+            </Value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabSelectionChangedEventArgs.Handled">
+            <summary>
+            Gets or sets a value indicating whether the SelectionChanged event is handled.
+            </summary>
+            <Value>
+            Required boolean Value
+            </Value>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle">
+            <summary>
+            TabViewMaterialVisualStyle class.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.HeaderDisplayModeProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.HeaderDisplayMode"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.HeaderDisplayMode"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.ImagePositionProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.ImagePosition"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.ImagePosition"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.BadgeSettingsProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.BadgeSettings"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.BadgeSettings"/> bindable property.
+            </value>
+        </member>
+        <member name="F:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.BadgeTextProperty">
+            <summary>
+            Identifies the <see cref="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.BadgeText"/> bindable property.
+            </summary>
+            <value>
+            The identifier for <see cref="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.BadgeText"/> bindable property.
+            </value>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle"/> class.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.HeaderDisplayMode">
+            <summary>
+            Gets or sets the value that defines the header display mode.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.ImagePosition">
+            <summary>
+            Gets or sets the value that defines the image position.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.BadgeSettings">
+            <summary>
+            Gets or sets the value that defines the badge settings of each tab item's badge text.
+            </summary>
+            <value>
+            Specifies the badge setting of the respective tab item's badge text. The default value is null.
+            </value>
+        </member>
+        <member name="P:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.BadgeText">
+            <summary>
+            Gets or sets the value that defines the badge text of each tab item.
+            </summary>
+            <value>
+            Specifies the badge text of the respective tab item. The default value is an empty string.
+            </value>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.TabViewMaterialVisualStyle.OnParentSet">
+            <summary>
+            Invoked whenever the Parent of an element is set.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.TabView.SfTabViewStyles">
+            <summary>
+            Initializing SfTabViewStyles class
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.TabView.SfTabViewStyles.#ctor">
+            <summary>
+            Initializing SfTabViewStyles class constructor
+            </summary>
+        </member>
+    </members>
+</doc>

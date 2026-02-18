@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BRM_2.Controls.SessionsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:sf="http://schemas.syncfusion.com/maui"
+    xmlns:vm="clr-namespace:BRM_2.ViewModels"
+    x:DataType="vm:SessionsPageVM">
+    <Border Stroke="#0A0909" StrokeThickness="1" HorizontalOptions="Fill">
+        <Grid
+            x:Name="MainGrid"
+            ColumnDefinitions="70*,50*"
+            HorizontalOptions="Fill"
+            RowDefinitions="30,*">
+            <ActivityIndicator IsRunning="{Binding BusyRunning}" Color="CadetBlue" />
+            <HorizontalStackLayout
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                HorizontalOptions="Fill">
+                <Button
+                    x:Name="ImportButton"
+                    Command="{Binding ImportCommand}"
+                    Text="Import" />
+            </HorizontalStackLayout>
+
+            <sf:SfDataGrid
+                x:Name="sfSessionDataGrid"
+                Grid.Row="1"
+                Grid.Column="0"
+                AutoGenerateColumnsMode="None"
+                HorizontalOptions="Fill"
+                ItemsSource="{Binding Sessions}"
+                
+                SelectionMode="SingleDeselect"
+                VerticalOptions="Start" 
+                GridLinesVisibility="Both" 
+                SelectionUnit="Row" 
+                HorizontalScrollBarVisibility="Always"
+                VerticalScrollBarVisibility="Always">
+                <sf:SfDataGrid.Columns>
+                    <sf:DataGridTextColumn
+                        Width="200"
+                        HeaderText="Tag"
+                        MappingName="SessionTag" />
+                    <sf:DataGridTextColumn
+                        Width="200"
+                        HeaderText="Location"
+                        MappingName="Location" />
+                    <sf:DataGridDateColumn
+                        Width="180"
+                        Format="yyyy-MM-dd hh:mm"
+                        HeaderText="Start"
+                        MappingName="SessionStart" />
+                    <sf:DataGridDateColumn
+                        Width="180"
+                        Format="yyyy-MM-dd hh:mm"
+                        HeaderText="End"
+                        MappingName="SessionEnd" />
+                    <sf:DataGridNumericColumn
+                        Width="80"
+                        Format="###0"
+                        HeaderText="# Recs"
+                        MappingName="NumberOfRecordings" />
+                </sf:SfDataGrid.Columns>
+
+                
+
+                <FlyoutBase.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Command="{Binding ViewRecordingsCommand}" Text="View Recordings" />
+                        <MenuFlyoutItem Command="{Binding ViewDetailsCommand}" Text="View Details" />
+                        <MenuFlyoutItem Text="------" />
+                        <MenuFlyoutItem Command="{Binding DeleteSessionCommand}" Text="Delete" />
+                        <MenuFlyoutItem Text="Edit" />
+
+                    </MenuFlyout>
+                </FlyoutBase.ContextFlyout>
+
+            </sf:SfDataGrid>
+
+            <sf:SfDataGrid
+                x:Name="BatSummaryDataGrid"
+                Grid.Column="1"
+                Grid.Row="1"
+                AutoGenerateColumnsMode="None"
+                HorizontalOptions="Fill"
+                SelectionUnit="Row"
+                ItemsSource="{Binding BatSummaryList}" 
+                VerticalScrollBarVisibility="Always"
+                HorizontalScrollBarVisibility="Always">
+                
+                <sf:SfDataGrid.Columns>
+                    
+                    <sf:DataGridTextColumn
+                        Width="150"
+                        HeaderText="Bat"
+                        MappingName="BatName" />
+                    <sf:DataGridNumericColumn
+                        Width="100"
+                        Format="###0"
+                        HeaderText="# Passes"
+                        MappingName="Passes" />
+                    <sf:DataGridNumericColumn
+                        Width="100"
+                        Format="###0"
+                        HeaderText="# Segs"
+                        MappingName="NumSegments" /> 
+                    <sf:DataGridNumericColumn
+                        Width="100"
+                        Format="###0.0"
+                        HeaderText="Tot. Durtn. (s)"
+                        MappingName="TotalDuration" />
+                    <sf:DataGridNumericColumn
+                        Width="100"
+                        Format="###0.0"
+                        HeaderText="Avg. Durtn. (s)"
+                        MappingName="AvgDuration" />
+                    <sf:DataGridCheckBoxColumn
+                        Width="80"
+                        HeaderText="AutoID"
+                        MappingName="ByAutoId" />
+
+                </sf:SfDataGrid.Columns>
+            </sf:SfDataGrid>
+
+        </Grid>
+    </Border>
+</ContentView>

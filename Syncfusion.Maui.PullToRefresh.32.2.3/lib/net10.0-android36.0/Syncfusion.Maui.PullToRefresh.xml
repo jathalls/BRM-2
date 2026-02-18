@@ -1,0 +1,966 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Syncfusion.Maui.PullToRefresh</name>
+    </assembly>
+    <members>
+        <member name="T:Syncfusion.Maui.PullToRefresh.PullToRefreshTransitionType">
+            <summary>
+            Describes the possible transition types available in the <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> control.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.PullToRefreshTransitionType.Push">
+            <summary>
+            Positions the <see cref="T:Syncfusion.Maui.PullToRefresh.SfProgressCircleView"/> over the pullable content.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.PullToRefreshTransitionType.SlideOnTop">
+            <summary>
+            Positions the <see cref="T:Syncfusion.Maui.PullToRefresh.SfProgressCircleView"/> above the pullable content, translating it based on the pulling progress.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.PullToRefresh.PullingEventArgs">
+            <summary>
+            Provides data for the <see cref="E:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Pulling"/> event.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.PullingEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Maui.PullToRefresh.PullingEventArgs"/> class.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.PullingEventArgs.Progress">
+            <summary>
+            Gets or sets the progress of pulling.
+            </summary>
+            <value>The progress of pulling.</value>
+        </member>
+        <member name="T:Syncfusion.Maui.PullToRefresh.PullToRefreshHelpers">
+            <summary>
+            Class that has various common methods useful for PullToRefresh control.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.PullToRefreshHelpers.CheckChildren(Microsoft.Maui.IView,System.Object,System.Boolean@,System.Boolean@)">
+            <summary>
+            Method that iterates the children inside the pullable content and returns whether the child is of type IPullToRefresh and whether the child should handle the gesture or not.
+            <param name="view">The view.</param>
+            <param name="pullToRefreshView">The pullToRefreshView.</param>
+            <param name="isPullToRefresh">Gets the <see cref="T:System.Boolean"/> value to PullToRefresh.</param>
+            <param name="isAction">Gets the <see cref="T:System.Boolean"/> value to handle or not.</param>
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.PullToRefreshHelpers.GetIPullToRefreshElement(Microsoft.Maui.IView,System.Object)">
+            <summary>
+            Method that iterates the children inside the pullable content and returns whether the Element is of type IPullToRefresh.
+            </summary>
+            <param name="isPullToRefreshElement">The PullToRefreshElement.</param>
+            <param name="pullToRefreshView">The pullToRefreshView.</param>
+            <returns>Returns whether is of type IPullToRefresh.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.PullToRefreshHelpers.CheckContentTemplate(Syncfusion.Maui.PullToRefresh.SfPullToRefresh)">
+            <summary>
+            Method that decides whether need to renderer  Progress Circle / Template view has to loaded into the <see cref="T:Syncfusion.Maui.PullToRefresh.SfProgressCircleView"/> view.
+            </summary>
+            <param name="pullToRefresh"><see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.</param>
+            <returns>Return bool value based on any DataTemplate loaded in view or else return false.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.PullToRefreshHelpers.CheckChildrenIsIPullToRefresh(Microsoft.Maui.IView,System.Object)">
+            <summary>
+            Method that iterates the children inside the pullable content and returns whether the child is of type IPullToRefresh and whether the child should handle the gesture or not.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.PullToRefresh.SfProgressCircleView">
+            <summary>
+            This is the refresh view of <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.CircleViewBounds">
+            <summary>
+            Indicates the circle view position.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.ProcessedBounds">
+            <summary>
+            Indicates the previous bounds in which the circle view position processed.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.oval">
+            <summary>
+            Indicates the arc bounds.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.fillRect">
+            <summary>
+            Indicates the circle fill area.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.minArcLength">
+            <summary>
+            Represents the minimum length that the arc can decrease while refreshing.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.maxArcLength">
+            <summary>
+            Represents the maximum length that the arc can increase while refreshing.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.arcMovementAngle">
+            <summary>
+            Represents the length that the arc moves forward while refreshing.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.arcIncrement">
+            <summary>
+            Represents the length that the arc expands and collapse while refreshing.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.angleMaintenanceCounter">
+            <summary>
+            Counter for number of calls the maxArcLength should be maintained.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.pullToRefresh">
+            <summary>
+            Gets or sets the reference of the <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> control.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.#ctor(Syncfusion.Maui.PullToRefresh.SfPullToRefresh)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Maui.PullToRefresh.SfProgressCircleView"/> class using the specified values.
+            </summary>
+            <param name="pullToRefresh">The reference of the associated <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> object.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.InitializePullingViewTemplate">
+            <summary>
+            This method initializes the pulling template view.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.InitializeRefreshViewViewTemplate">
+            <summary>
+            This method initializes the refreshing template view.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.CheckIfAndSetTemplate">
+            <summary>
+            Method checks for template and set its as content if template is assigned.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.UpdateContent(Microsoft.Maui.Controls.View)">
+            <summary>
+            Method updates the content of <see cref="T:Syncfusion.Maui.PullToRefresh.SfProgressCircleView"/>.
+            </summary>
+            <param name="content">Indicates the content to be added, if null <see cref="T:Syncfusion.Maui.PullToRefresh.SfProgressCircleView"/> Content will be set null.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.ResetArcAngle">
+            <summary>
+            Method resets the arc angle.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.ComputeArcAngle">
+            <summary>
+            This method computes the <see cref="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.startAngle"/> and <see cref="F:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.endAngle"/> based on counter value, circle quadrant based on clockwise direction.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.UpdateCircleViewBounds">
+            <summary>
+            Method updates the circle view computed position except Y value.
+            </summary>
+            <remarks>Do not consider Y updated in this method.</remarks>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.UpdateDrawProperties">
+            <summary>
+            Updates fields used in OnDraw for drawing arc and fill ellipse.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.OnHandlerChanged">
+            <summary>
+            Raises when <see cref="T:Syncfusion.Maui.PullToRefresh.SfProgressCircleView"/>'s handler gets changed.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.OnDraw(Microsoft.Maui.Graphics.ICanvas,Microsoft.Maui.Graphics.RectF)">
+            <summary>
+            This method used the shape the view to circle and draw arc based on <see cref="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressRate"/>.
+            </summary>
+            <param name="canvas">The canvas on which the background will be drawn.</param>
+            <param name="dirtyRect">Bounds of the <see cref="T:Syncfusion.Maui.PullToRefresh.SfProgressCircleView"/>.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.ThreshHoldToAngle(System.Double)">
+            <summary>
+            This method used to calculate the progress value based on the progress rate.
+            </summary>
+            <param name="progressRate">Indicates the progress rate.</param>
+            <returns>Progress value.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.ConvertAngleBasedOnQuadrant(System.Single)">
+            <summary>
+            Method converts angle relative to quadrant of circle.
+            </summary>
+            <param name="value">Calculated angle.</param>
+            <returns>Returns the angle relative to quadrant.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.GetArcLength">
+            <summary>
+            Method returns the length of arc between start and end angle.
+            </summary>
+            <returns>The length of arc between start and end angle.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfProgressCircleView.CreateTemplateContent(Microsoft.Maui.Controls.DataTemplate)">
+            <summary>
+            Method cast the template content as view which loaded inside the <see cref="T:Microsoft.Maui.Controls.DataTemplate"/>.
+            </summary>
+            <param name="dataTemplate">DateTemplate instance.</param>
+            <returns>Returns the <see cref="T:Microsoft.Maui.Controls.DataTemplate"/> content as view.</returns>
+        </member>
+        <member name="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh">
+            <summary>
+            <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> enables interaction to refresh the loaded view. This control allows users to trigger a refresh action by performing the pull-to-refresh gesture.
+            </summary>
+            <summary>
+            <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> enables interaction to refresh the loaded view. This control allows users to trigger a refresh action by performing the pull-to-refresh gesture.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Syncfusion#Maui#Core#Internals#ITouchListener#OnTouch(Syncfusion.Maui.Core.Internals.PointerEventArgs)">
+            <summary>
+            This method triggers on any touch interaction on <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.
+            </summary>
+            <param name="e">Event args.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnInterceptTouchEvent(Android.Views.MotionEvent)">
+            <summary>
+            This method will helps to intercept touch of <see cref="T:Syncfusion.Maui.Core.Platform.LayoutViewGroupExt"/>.
+            </summary>
+            <param name="ev">MotionEvent arguments.</param>
+            <returns>Returns true, if <see cref="T:Syncfusion.Maui.Core.Platform.LayoutViewGroupExt"/> will handle the touch.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ChildLocationToScreen(System.Object)">
+            <summary>
+            Gets the X and Y coordinates of the specified child based on the screen.
+            </summary>
+            <param name="native">The current child for which coordinates are requested.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.GetChildScrollOffset(System.Object)">
+            <summary>
+            Gets the scroll offset of the specified child within a scroll view.
+            </summary>
+            <param name="view">The current child for which the scroll offset is requested.</param>
+            <returns>Returns the current scroll offset of the specifies child.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ConfigTouch">
+            <summary>
+            Method configures all the touch related works.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshCommandProperty">
+            <summary>
+            Identifies the RefreshCommand bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshCommandParameterProperty">
+            <summary>
+            Identifies the RefreshCommandParameter bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullingThresholdProperty">
+            <summary>
+            Identifies the PullingThreshold bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.CanRestrictChildTouchProperty">
+            <summary>
+            Identifies the CanRestrictChildTouch bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContentProperty">
+            <summary>
+            Identifies the PullableContent bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.TransitionModeProperty">
+            <summary>
+            Identifies the TransitionModeProperty bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressBackgroundProperty">
+            <summary>
+            Identifies the ProgressBackground bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshViewThresholdProperty">
+            <summary>
+            Identifies the RefreshViewThreshold bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshViewHeightProperty">
+            <summary>
+            Identifies the RefreshViewHeight bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshViewWidthProperty">
+            <summary>
+            Identifies the RefreshViewWidth bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshingViewTemplateProperty">
+            <summary>
+            Identifies the RefreshingViewTemplate bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullingViewTemplateProperty">
+            <summary>
+            Identifies the PullingViewTemplate bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.IsRefreshingProperty">
+            <summary>
+            Identifies the IsRefreshing bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressThicknessProperty">
+            <summary>
+            Identifies the ProgressThickness bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressColorProperty">
+            <summary>
+            Identifies the ProgressColor bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.HasShadowProperty">
+            <summary>
+            Identifies the HasShadow bindable property.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressRate">
+            <summary>
+            Below field maintains the current pulling progress rate.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.CanCustomizeLayout">
+            <summary>
+            Gets or sets a value indicating whether to bounce SfDataGrid body region or SfDataGrid to bounce with HeaderRow also.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.IsSfDataGrid">
+            <summary>
+            Gets or sets a value indicating whether the PullableContent is SfDataGrid or not.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.YPosition">
+            <summary>
+            Below filed maintains the distance pulled value.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullingTemplateView">
+            <summary>
+            Below field maintains the view created from <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullingViewTemplate"/>.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshingTemplateView">
+            <summary>
+            Below field maintains the view created from <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshingViewTemplate"/>.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.IsIPullToRefresh">
+            <summary>
+            Indicates whether the child is IPullToRefresh or not.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.progressCircleView">
+            <summary>
+            Instance of refresh view.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.isPulling">
+            <summary>
+            Indicates whether the pulling action is in progress.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.actualIsRefreshing">
+            <summary>
+            Indicates whether the refreshing is in progress.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.downX">
+            <summary>
+            Indicates the touch X coordinate.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.downY">
+            <summary>
+            Indicates the touch Y coordinate.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.distancePulled">
+            <summary>
+            The distance that has been pulled during a user's interaction, typically used for tracking the pull-to-refresh progress.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.pullableContentMargin">
+            <summary>
+            Indicates the distance between the <see cref="T:Syncfusion.Maui.PullToRefresh.SfProgressCircleView"/> and <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> in push mode.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.isPressed">
+            <summary>
+            Indicates whether a touch is currently being pressed on the control.
+            </summary>
+            <remarks>
+            Since we are receiving move action for mouse movement across our control in WinUI and Mac,
+            we maintain this field to check whether the control is pressed and moved to detect whether it has been pulled.
+            </remarks>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.isCircleRotating">
+            <summary>
+            Indicates whether <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressCircleView"/> is currently rotating.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.previousBounds">
+            <summary>
+            Indicates the previous arrange bounds of the <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.previousMeasuredSize">
+            <summary>
+            Indicates the previous measured size of the <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.
+            </summary>
+        </member>
+        <member name="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.childLoopCount">
+            <summary>
+            Represents the number of attempts to loops through to retrieve the specified child of <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> based on touch points.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> class.
+            </summary>
+        </member>
+        <member name="E:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Pulling">
+            <summary>
+            Occurs when the pulling operation is performed.
+            </summary>
+            <seealso cref="E:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Refreshing"/>
+            <seealso cref="E:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Refreshed"/>
+        </member>
+        <member name="E:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Refreshing">
+            <summary>
+            Occurs when the refreshing operation starts.
+            </summary>
+            <seealso cref="E:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Pulling"/>
+            <seealso cref="E:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Refreshed"/>
+        </member>
+        <member name="E:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Refreshed">
+            <summary>
+            Occurs when the refreshing operation completes.
+            </summary>
+            <seealso cref="E:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Pulling"/>
+            <seealso cref="E:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Refreshing"/>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullingThreshold">
+            <summary>
+            Gets or sets the maximum pulling Y position of the progress circle view. The default value is 200d.
+            </summary>
+            <seealso cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshViewThreshold"/>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.TransitionMode">
+            <summary>
+            Gets or sets the transition mode of <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>. The default transition mode is <see cref="F:Syncfusion.Maui.PullToRefresh.PullToRefreshTransitionType.SlideOnTop"/>.
+            </summary>
+            <remarks>
+            In <see cref="F:Syncfusion.Maui.PullToRefresh.PullToRefreshTransitionType.SlideOnTop"/> mode, the progress circle view will be layout over the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> based on pulling progress.
+            In <see cref="F:Syncfusion.Maui.PullToRefresh.PullToRefreshTransitionType.Push"/> mode, the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> will layout below the progress circle view. Both the circle view and <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> will be moved based on pulling progress.
+            </remarks>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressColor">
+            <summary>
+            Gets or sets the color of the progress indicator.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressBackground">
+            <summary>
+            Gets or sets the background of the progress circle view.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressThickness">
+            <summary>
+            Gets or sets the thickness of the progress indicator. The default value is 3d.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.IsRefreshing">
+            <summary>
+            Gets or sets a value indicating whether <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> is in refreshing state.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.CanRestrictChildTouch">
+            <summary>
+            Gets or sets a value indicating whether <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> touch interactions should be allowed or not. The default value is false.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent">
+            <summary>
+            Gets or sets the pullable content of <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.
+            </summary>
+            <example>
+            <code lang="XAML">
+            <![CDATA[
+            <Syncfusion:SfPullToRefresh x:Name="pullToRefresh"
+                                 PullingThreshold="120"
+                                 RefreshViewHeight="30"
+                                 RefreshViewThreshold="30"
+                                 RefreshViewWidth="30">
+                <Syncfusion:SfPullToRefresh.PullableContent>
+                    <Label x:Name="month"
+                        TextColor="White"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Start" />
+                </Syncfusion:SfPullToRefresh.PullableContent>
+            </Syncfusion:SfPullToRefresh>
+            ]]>
+            </code>
+            </example>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshViewThreshold">
+            <summary>
+            Gets or sets the starting position of the progress circle view in <see cref="F:Syncfusion.Maui.PullToRefresh.PullToRefreshTransitionType.SlideOnTop"/>. The default value is 50d.
+            </summary>
+            <seealso cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullingThreshold"/>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshViewHeight">
+            <summary>
+            Gets or sets the height of the progress circle view. The default value is 48d.
+            </summary>
+            <seealso cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshViewWidth"/>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshViewWidth">
+            <summary>
+            Gets or sets the width of the progress circle view. The default value is 48d.
+            </summary>
+            <seealso cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshViewHeight"/>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullingViewTemplate">
+            <summary>
+            Gets or sets the template to be displayed as the refresh content when pulling.
+            </summary>
+            <seealso cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshingViewTemplate"/>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshingViewTemplate">
+            <summary>
+            Gets or sets the template to be displayed as the refresh content on refreshing.
+            </summary>
+            <seealso cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullingViewTemplate"/>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshCommand">
+             <summary>
+             Gets or sets the refresh command.
+             </summary>
+             <remarks>
+             The command's CanExecute() will be triggered when the pulling action is performed.
+             If `false` is returned from CanExecute(), the pulling will be canceled, and the command will not be executed, and refreshing does not happen.
+             If `true` is returned from CanExecute(), the command will be executed on refreshing.
+             </remarks>
+             <example>
+             <code lang="C#">
+             <![CDATA[
+             SfPullToRefresh pullToRefresh = new SfPullToRefresh();
+             CommandViewModel viewModel = new CommandViewModel();
+             pullToRefresh.RefreshCommand = viewModel.ViewRefreshCommand;
+             pullToRefresh.RefreshCommandParameter = pullToRefresh;
+            
+             public class CommandViewModel
+             {
+                 private Command<Object> viewRefreshCommand;
+                 public Command<object> ViewRefreshCommand
+                 {
+                    get { return viewRefreshCommand; }
+                    set { viewRefreshCommand = value; }
+                 }
+                 public CommandViewModel()
+                 {
+                     ViewRefreshCommand = new Command<object>(CanExecuteRefreshMethod,RefreshMethod);
+                 }
+                 private void CanExecuteRefreshMethod()
+                 {
+                     return true;
+                 }
+                 private void RefreshMethod(object obj)
+                 {
+                     (obj as SfPullToRefresh).IsRefreshing = true;
+                     await Task.Delay(1200);
+                     this.ItemsSourceRefresh();
+                     (obj as SfPullToRefresh).IsRefreshing = false;
+                 }
+             }
+             ]]>
+             </code>
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshCommandParameter">
+             <summary>
+             Gets or sets the parameter of the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshCommand"/>.
+             </summary>
+             <example>
+             <code lang="C#">
+             <![CDATA[
+             SfPullToRefresh pullToRefresh = new SfPullToRefresh();
+             CommandViewModel viewModel = new CommandViewModel();
+             pullToRefresh.RefreshCommand = viewModel.ViewRefreshCommand;
+             pullToRefresh.RefreshCommandParameter = pullToRefresh;
+            
+             public class CommandViewModel
+             {
+                 private Command<Object> viewRefreshCommand;
+                 public Command<object> ViewRefreshCommand
+                 {
+                    get { return viewRefreshCommand; }
+                    set { viewRefreshCommand = value; }
+                 }
+                 public CommandViewModel()
+                 {
+                     ViewRefreshCommand = new Command<object>(CanExecuteRefreshMethod,RefreshMethod);
+                 }
+                 private void CanExecuteRefreshMethod()
+                 {
+                     return true;
+                 }
+                 private void RefreshMethod(object obj)
+                 {
+                     (obj as SfPullToRefresh).IsRefreshing = true;
+                     await Task.Delay(1200);
+                     this.ItemsSourceRefresh();
+                     (obj as SfPullToRefresh).IsRefreshing = false;
+                 }
+             }
+             ]]>
+             </code>
+             </example>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.HasShadow">
+            <summary>
+            Gets or sets a value indicating whether the <see cref="F:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressRate"/> has shadow or not.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.IsPulling">
+            <summary>
+            Gets or sets a value indicating whether the pullable content is in pulling are not.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ActualIsRefreshing">
+            <summary>
+            Gets or sets a value indicating whether <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> is in refreshing state.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressCircleView">
+            <summary>
+            Gets or sets SfProgressCircleView of SfPullToRefresh.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.CircleViewWidth">
+            <summary>
+            Gets the width of <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressCircleView"/> with shadow size consideration.
+            </summary>
+        </member>
+        <member name="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.CircleViewHeight">
+            <summary>
+            Gets the height of the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressCircleView"/> with shadow size consideration.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.StartRefreshing">
+            <summary>
+            Starts refreshing the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> and displays the refreshing animation.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.EndRefreshing">
+            <summary>
+            Ends refreshing the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> and stops the refreshing animation.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Syncfusion#Maui#Themes#IParentThemeElement#GetThemeDictionary">
+            <summary>
+            Method invokes to Get initial set of color from Theme dictionary.
+            </summary>
+            <returns> Returns the <see cref ="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> theme dictionary.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Syncfusion#Maui#Themes#IThemeElement#OnControlThemeChanged(System.String,System.String)">
+            <summary>
+            Method invokes when control theme changes.
+            </summary>
+            <param name="oldTheme">Represents the  old theme.</param>
+            <param name="newTheme">Represents the  new theme.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Syncfusion#Maui#Themes#IThemeElement#OnCommonThemeChanged(System.String,System.String)">
+            <summary>
+            Method invokes at whenever common theme changes.
+            </summary>
+            <param name="oldTheme">Represents the  old theme.</param>
+            <param name="newTheme">Represents the  new theme.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.GetShadowSpace(System.Boolean)">
+            <summary>
+            Methods returns the shadow blur radius based on side.
+            </summary>
+            <param name="isTop">Indicates whether the top spacing is needed.</param>
+            <returns>Returns the shadow blur radius.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ManualArrangeContent(System.Boolean,Microsoft.Maui.Graphics.Rect)">
+            <summary>
+            Manually arranges the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> and <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressCircleView"/>.
+            </summary>
+            <param name="skipPullableContent">Indicates whether the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> should be arranged or not.</param>
+            <param name="bounds">Bounds of the <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.MeasureSfProgressCircleView(System.Double,System.Double)">
+            <summary>
+            Measures the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressCircleView"/>.
+            </summary>
+            <param name="widthConstraint">The available width for <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.</param>
+            <param name="heightConstraint">The available height for <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.GetAndUpdateWithPreviousBounds">
+            <summary>
+            Gets and Updates the previousBounds.
+            </summary>
+            <returns>Returns the rect based on Previous height passed in arrange pass to pull to refresh.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.GetSfDataGridLayoutOption">
+            <summary>
+            Gets SfDataGrid layout option, either to push only the body region or including Header.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.CanSkipDataGridContentArrange">
+            <summary>
+            Method used to check the content is SfDataGrid.
+            </summary>
+            <returns>true indicating that the content is SfDataGrid.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.GetPullableContentTopPosition">
+            <summary>
+            Method used to obtain the top start position of the customized pullable content.
+            </summary>
+            <returns>Returns the pullable content top position value.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.IsCustomizedContentLayout">
+            <summary>
+            Method used to check whether the content is customized pullable content.
+            </summary>
+            <returns>true indicating that the content is SfDataGrid.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.IsChildElementScrolled(Microsoft.Maui.IVisualTreeElement,Microsoft.Maui.Graphics.Point)">
+            <summary>
+            Gets the specific child view at the given touch point.
+            </summary>
+            <param name="element">The child view to be retrieved.</param>
+            <param name="touchPoint">The current touch point coordinates.</param>
+            <returns>The child view located at the specified touch point.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.CancelPulling">
+            <summary>
+            Calling this method cancels the pulling and refreshing process.
+            </summary>
+            <returns>true indicating that the pulling action has been cancelled.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnHandlerChanged">
+            <summary>
+            Raised when handler gets changed.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.MeasureContent(System.Double,System.Double)">
+            <summary>
+            Measures the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> and <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressCircleView"/>.
+            </summary>
+            <param name="widthConstraint">The available width for <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.</param>
+            <param name="heightConstraint">The available height for <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.</param>
+            <returns>Returns the required size.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ArrangeContent(Microsoft.Maui.Graphics.Rect)">
+            <summary>
+            Methods arranges the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> and <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressCircleView"/>.
+            </summary>
+            <param name="bounds">Bounds of the <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.</param>
+            <returns>Returns the bounds of the <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnIsRefreshingChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            Occurs when the IsRefreshing property is changed.
+            </summary>
+            <param name="bindable">The SfPullToRefresh as bindable object.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnCanRestrictChildTouchChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            Occurs when the CanRestrictChildTouch property is changed.
+            </summary>
+            <param name="bindable">The SfPullToRefresh as bindable object.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnPullableContentChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            Occurs when the PullableContent property is changed.
+            </summary>
+            <param name="bindable">The SfPullToRefresh as bindable object.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnTransitionModeChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            Occurs when the TransitionMode property is changed.
+            </summary>
+            <param name="bindable">The SfPullToRefresh as bindable object.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnPullingViewTemplatePropertyChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            Occurs when the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullingViewTemplate"/> gets changed.
+            </summary>
+            <param name="bindable">The SfPullToRefresh as bindable object.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnRefreshingViewTemplatePropertyChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            Occurs when the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RefreshingViewTemplate"/> gets changed.
+            </summary>
+            <param name="bindable">The SfPullToRefresh as bindable object.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnRefreshViewHeightChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            Occurs when the RefreshViewHeight property is changed.
+            </summary>
+            <param name="bindable">The <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> as <see cref="T:Microsoft.Maui.Controls.BindableObject"/>.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new Value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnRefreshViewWidthChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            Occurs when the RefreshViewWidth property is changed.
+            </summary>
+            <param name="bindable">The <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> as <see cref="T:Microsoft.Maui.Controls.BindableObject"/>.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnProgressThicknessChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            Occurs when the ProgressThickness property is changed.
+            </summary>
+            <param name="bindable">The <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> as <see cref="T:Microsoft.Maui.Controls.BindableObject"/>.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnProgressBackgroundChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            Occurs when the ProgressBackground property is changed.
+            </summary>
+            <param name="bindable">The <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> as <see cref="T:Microsoft.Maui.Controls.BindableObject"/>.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.OnProgressColorChanged(Microsoft.Maui.Controls.BindableObject,System.Object,System.Object)">
+            <summary>
+            Occurs when the ProgressColor property is changed.
+            </summary>
+            <param name="bindable">The <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/> as <see cref="T:Microsoft.Maui.Controls.BindableObject"/>.</param>
+            <param name="oldValue">The old value.</param>
+            <param name="newValue">The new value.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.GetDefaultProgressThickness">
+            <summary>
+            Gets the default value for <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressThickness"/> based on platform.
+            </summary>
+            <returns>Returns the default value for <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressThickness"/> based on platform.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ArrangeSfProgressCircleView">
+            <summary>
+            This method arranges the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ProgressCircleView"/> based on <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.TransitionMode"/> and current state of pulling operation.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ArrangePullableContent(Microsoft.Maui.Graphics.Rect,System.Boolean)">
+            <summary>
+            This method arranges the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> based on <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.TransitionMode"/> and current state of pulling operation.
+            </summary>
+            <param name="bounds">Bounds of the <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.</param>
+            <param name="animate">This flag indicates whether to animate the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/>.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContentLayoutAnimation(Microsoft.Maui.Controls.View)">
+            <summary>
+            Animates the <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/> Y to 0.
+            </summary>
+            <param name="element">Instance of <see cref="P:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.PullableContent"/>.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.CanProcessTouch">
+            <summary>
+            Methods to check whether the pullable content can be pulled or not.
+            </summary>
+            <returns>Return whether to process touch or not.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RaisePullingEvent(System.Double)">
+            <summary>
+            Raises the Pulling event.
+            </summary>
+            <param name="pulledDistance">Represents the progress of the pulling.</param>
+            <returns><b>true</b>, if the progress has reached hundred percent.</returns>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RaiseRefreshingEvent(System.Object)">
+            <summary>
+            Raises the refreshing event.
+            </summary>
+            <param name="sender">The instance of <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.BeginRefreshing(System.Boolean)">
+            <summary>
+            This methods begins the refreshing operation.
+            </summary>
+            <param name="isProgrammatic">Represents refreshing was programmatic or from <see cref="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RaiseRefreshingEvent(System.Object)"/>.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.HandleTouchInteraction(Syncfusion.Maui.Core.Internals.PointerActions,Microsoft.Maui.Graphics.Point)">
+            <summary>
+            Handles the touch interaction of <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.
+            </summary>
+            <param name="action">Represent the type of <see cref="T:Syncfusion.Maui.Core.Internals.PointerActions"/>.</param>
+            <param name="point">Represents the touch point.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ResetValues">
+            <summary>
+            This methods resets all the fields related to pulling and refreshing operation.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.ResetTouchFields">
+            <summary>
+            This methods resets all the helper fields related to touch.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.HideSfProgressCircleView">
+            <summary>
+            This methods hides the <see cref="T:Syncfusion.Maui.PullToRefresh.SfProgressCircleView"/>.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RaiseRefreshedEvent(System.Object)">
+            <summary>
+            Raises the Refreshed event.
+            </summary>
+            <param name="sender">Instance of <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefresh"/>.</param>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.RaisePullingCancelled">
+            <summary>
+            The method cancels the pulling operation.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefresh.Rotate">
+            <summary>
+            Rotates the progress animation when refreshing the pullable content.
+            </summary>
+        </member>
+        <member name="T:Syncfusion.Maui.PullToRefresh.SfPullToRefreshStyles">
+            <summary>
+            Dictionary for theming the pulltorefresh control.
+            </summary>
+        </member>
+        <member name="M:Syncfusion.Maui.PullToRefresh.SfPullToRefreshStyles.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Syncfusion.Maui.PullToRefresh.SfPullToRefreshStyles"/> class.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Version>2.0.3</Version>
+        <Description>A .NET Standard library for creating spectrograms</Description>
+        <Authors>Scott Harden</Authors>
+        <Company>Harden Technologies, LLC</Company>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/swharden/Spectrogram</PackageProjectUrl>
+        <PackageIcon>icon.png</PackageIcon>
+        <RepositoryUrl>https://github.com/swharden/Spectrogram</RepositoryUrl>
+        <PackageTags>spectrogram spectrum fft frequency audio microphone signal</PackageTags>
+        <PackageReleaseNotes>https://github.com/swharden/Spectrogram/releases</PackageReleaseNotes>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IncludeSymbols>true</IncludeSymbols>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <DebugType>portable</DebugType>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <Deterministic>true</Deterministic>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="icon.png" Pack="true" PackagePath="\" />
+        <None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="FftSharp" Version="2.2.0" />
+        <PackageReference Include="ScottPlot" Version="5.1.57" />
+        <PackageReference Include="SkiaSharp" Version="3.119.1" />
+    </ItemGroup>
+
+</Project>

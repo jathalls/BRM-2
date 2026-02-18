@@ -1,0 +1,92 @@
+
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    {
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET MAUI (MacCatalyst - Run with Logging)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-maccatalyst",
+            "program": "/usr/local/share/dotnet/dotnet",
+            "args": [
+                "run",
+                "--project",
+                "${workspaceFolder}/BRM-2/BRM-2.csproj",
+                "-f",
+                "net10.0-maccatalyst",
+                "-c",
+                "Debug"
+            ],
+            "cwd": "${workspaceFolder}/BRM-2",
+            "stopAtEntry": false,
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "openOnSessionStart",
+            "justMyCode": false,
+            "logging": {
+                "engineLogging": true
+            }
+        },
+        {
+            "name": ".NET MAUI (MacCatalyst - Attach to Running Process)",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${command:pickProcess}",
+            "justMyCode": false,
+            "stopAtEntry": false,
+            "console": "integratedTerminal"
+        },
+        {
+            "name": ".NET MAUI (MacCatalyst - MAUI Adapter)",
+            "type": "maui",
+            "request": "launch",
+            "project": "${workspaceFolder}/BRM-2/BRM-2.csproj",
+            "targetFramework": "net10.0-maccatalyst"
+        },
+        {
+            "type": "android",
+            "request": "attach",
+            "name": "Android Attach",
+            "appSrcRoot": "${workspaceFolder}/BRM-2/",
+            "adbPort": 5037,
+            "processId": "${command:PickAndroidProcess}"
+        }
+        ,
+        {
+            "name": ".NET MAUI (MacCatalyst - Attach to BRM-2 by PID)",
+            "type": "coreclr",
+            "request": "attach",
+            "processId": "${input:brmPid}",
+            "justMyCode": false,
+            "stopAtEntry": false,
+            "console": "integratedTerminal"
+        }
+        ,
+        {
+            "name": ".NET MAUI (MacCatalyst - Direct Binary Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-maccatalyst",
+            "program": "${workspaceFolder}/BRM-2/bin/Debug/net10.0-maccatalyst/maccatalyst-x64/BRM-2.app/Contents/MacOS/BRM-2",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "logging": {
+                "engineLogging": true
+            }
+        }
+    ]
+    ,
+    "inputs": [
+        {
+            "id": "brmPid",
+            "type": "promptString",
+            "description": "Enter BRM-2 PID (or run: cat /tmp/brm_pid.txt)",
+            "default": ""
+        }
+    ]
+}

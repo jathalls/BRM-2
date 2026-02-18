@@ -1,0 +1,432 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Maui.Controls.Compatibility</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ColorExtensions.ToNative(Microsoft.Maui.Graphics.Color)">
+            <summary>
+            Creates an instance of ElmSharp.Color class based on provided Microsoft.Maui.Controls.Compatibility.Color instance
+            </summary>
+            <returns>ElmSharp.Color instance representing a color which corresponds to the provided Microsoft.Maui.Controls.Compatibility.Color</returns>
+            <param name="c">The Microsoft.Maui.Controls.Compatibility.Color instance which will be converted to a ElmSharp.Color</param>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.DensityIndependentPixelExtensions">
+            <summary>
+            Extension class, provides DIP convert functionalities
+            </summary>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.LayoutExtensions">
+            <summary>
+            Extension class, provides native embedding functionalities.
+            </summary>
+            <remarks>
+            This code is not used in the Microsoft.Maui.Controls.Compatibility.Platform.Tizen implementation, however it should not
+            be removed as it allows developers to use native controls directly.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.LayoutExtensions.Add(System.Collections.Generic.IList{Microsoft.Maui.Controls.View},Tizen.NUI.BaseComponents.View,Microsoft.Maui.Controls.Compatibility.Platform.Tizen.MeasureDelegate)">
+            <summary>
+            Add the specified evas object to the list of children views.
+            </summary>
+            <param name="children">The extended class.</param>
+            <param name="obj">Object to be added.</param>
+            <param name="measureDelegate">Optional delegate which provides measurements for the added object.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.LayoutExtensions.ToView(Tizen.NUI.BaseComponents.View,Microsoft.Maui.Controls.Compatibility.Platform.Tizen.MeasureDelegate)">
+            <summary>
+            Wraps the evas object into a view which can be used by Xamarin.
+            </summary>
+            <returns>The Xamarin view which wraps the evas object.</returns>
+            <param name="obj">The extended class.</param>
+            <param name="measureDelegate">Optional delegate which provides measurements for the evas object.</param>
+        </member>
+        <member name="P:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.FormsApplication.MainWindow">
+            <summary>
+            Gets the main window or <c>null</c> if it's not set.
+            </summary>
+            <value>The main window or <c>null</c>.</value>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.FormsApplication.Exit">
+            <summary>
+            Exits the application's main loop, which initiates the process of its termination
+            </summary>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ConsoleLogger">
+            <summary>
+            Logs a message to the console.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ConsoleLogger.Print(System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Formats and prints the log information.
+            </summary>
+            <param name="level">Log level</param>
+            <param name="tag">Log tag</param>
+            <param name="message">Log message</param>
+            <param name="file">Full path to the file</param>
+            <param name="func">Function name</param>
+            <param name="line">Line number</param>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.DlogLogger">
+            <summary>
+            Logs a message to the dlog.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ILogger">
+            <summary>
+            Reports log messages with various log levels.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ILogger.Debug(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Reports a debug log message.
+            </summary>
+            <param name="tag">Log tag</param>
+            <param name="message">Log message</param>
+            <param name="file">Full path to the file</param>
+            <param name="func">Function name</param>
+            <param name="line">Line number</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ILogger.Verbose(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Reports a verbose log message.
+            </summary>
+            <param name="tag">Log tag</param>
+            <param name="message">Log message</param>
+            <param name="file">Full path to the file</param>
+            <param name="func">Function name</param>
+            <param name="line">Line number</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ILogger.Info(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Reports an information log message.
+            </summary>
+            <param name="tag">Log tag</param>
+            <param name="message">Log message</param>
+            <param name="file">Full path to the file</param>
+            <param name="func">Function name</param>
+            <param name="line">Line number</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ILogger.Warn(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Reports a warning log message.
+            </summary>
+            <param name="tag">Log tag</param>
+            <param name="message">Log message</param>
+            <param name="file">Full path to the file</param>
+            <param name="func">Function name</param>
+            <param name="line">Line number</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ILogger.Error(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Reports an error log message.
+            </summary>
+            <param name="tag">Log tag</param>
+            <param name="message">Log message</param>
+            <param name="file">Full path to the file</param>
+            <param name="func">Function name</param>
+            <param name="line">Line number</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ILogger.Fatal(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Reports a fatal error log message.
+            </summary>
+            <param name="tag">Log tag</param>
+            <param name="message">Log message</param>
+            <param name="file">Full path to the file</param>
+            <param name="func">Function name</param>
+            <param name="line">Line number</param>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.Log">
+            <summary>
+            Provides logging functionality.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.Log.Tag">
+            <summary>
+            Gets or sets the log tag.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.Log.Logger">
+            <summary>
+            Gets or sets the logger used to report messages.
+            It's DlogLogger on a Tizen platform, ConsoleLogger on any other.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.Log.IsTizen">
+            <summary>
+            Determines if Xamarin is running in a Tizen environment.
+            </summary>
+            <returns><c>true</c> if application is running on Tizen; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.Log.Guardian">
+            <summary>
+            A helper class, it allows to separate optional parameters from non-optional ones.
+            In case of any compilation errors, please make sure you're not using
+            explicit <c>null</c> value as one of the parameters.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.Platform.GetOrCreateRenderer(Microsoft.Maui.Controls.VisualElement)">
+            <summary>
+            Gets the renderer associated with the <c>view</c>. If it doesn't exist, creates a new one.
+            </summary>
+            <returns>Renderer associated with the <c>view</c>.</returns>
+            <param name="element">VisualElement for which the renderer is going to be returned.</param>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.IVisualElementRenderer">
+            <summary>
+            Base interface for VisualElement renderer.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.IVisualElementRenderer.Element">
+            <summary>
+            Gets the VisualElement associated with this renderer.
+            </summary>
+            <value>The VisualElement.</value>
+        </member>
+        <member name="P:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.IVisualElementRenderer.NativeView">
+            <summary>
+            Gets the native view associated with this renderer.
+            </summary>
+            <value>The native view.</value>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.IVisualElementRenderer.SetElement(Microsoft.Maui.Controls.VisualElement)">
+            <summary>
+            Sets the VisualElement associated with this renderer.
+            </summary>
+            <param name="element">New element.</param>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.LayoutRenderer">
+            <summary>
+            Renderer of a Layout.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.PageRenderer">
+            <summary>
+            Renderer of ContentPage.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ViewRenderer`2">
+            <summary>
+            Base class for view renderers.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.ViewRenderer`2.Control">
+            <summary>
+            Native control associated with this renderer.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1">
+            <summary>
+            Base class for rendering of a Xamarin element.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.Element">
+            <summary>
+            Gets the Xamarin element associated with this renderer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.Dispose">
+            <summary>
+            Releases all resource used by the <see cref="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1"/> object.
+            </summary>
+            <remarks>Call <see cref="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.Dispose"/> when you are finished using the
+            <see cref="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1"/>. The <see cref="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.Dispose"/> method
+            leaves the <see cref="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1"/> in an unusable state.
+            After calling <see cref="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.Dispose"/>, you must release all references to the
+            <see cref="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1"/> so the garbage collector can reclaim
+            the memory that the <see cref="T:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1"/> was occupying.</remarks>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.SetElement(`0)">
+            <summary>
+            Sets the element associated with this renderer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.Microsoft#Maui#Controls#IEffectControlProvider#RegisterEffect(Microsoft.Maui.Controls.Effect)">
+            <summary>
+            Registers the effect with the element by establishing the parent-child relations needed for rendering on the specific platform.
+            </summary>
+            <param name="effect">The effect to register.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.RegisterEffect(Microsoft.Maui.Controls.Effect)">
+            <summary>
+            Registers the effect with the element by establishing the parent-child relations needed for rendering on the specific platform.
+            </summary>
+            <param name="effect">The effect to register.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.Dispose(System.Boolean)">
+            <summary>
+            Disposes of underlying resources.
+            </summary>
+            <param name="disposing">True if the memory release was requested on demand.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.OnElementChanged(Microsoft.Maui.Controls.Platform.ElementChangedEventArgs{`0})">
+            <summary>
+            Notification that the associated element has changed.
+            </summary>
+            <param name="e">Event parameters.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.OnElementPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Notification that the property of the associated element has changed.
+            </summary>
+            <param name="sender">Object which sent the notification.</param>
+            <param name="e">Event parameters.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.SetNativeView(Tizen.NUI.BaseComponents.View)">
+            <summary>
+            Updates the attached event handlers, sets the native control.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.RegisterPropertyHandler(Microsoft.Maui.Controls.BindableProperty,System.Action{System.Boolean})">
+            <summary>
+            Registers a handler which is executed when specified property changes.
+            </summary>
+            <param name="property">Handled property.</param>
+            <param name="handler">Action to be executed when property changes.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.RegisterPropertyHandler(System.String,System.Action{System.Boolean})">
+            <summary>
+            Registers a handler which is executed when specified property changes.
+            </summary>
+            <param name="name">Name of the handled property.</param>
+            <param name="handler">Action to be executed when property changes.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.RegisterPropertyHandler(Microsoft.Maui.Controls.BindableProperty,System.Action)">
+            <summary>
+            Registers a handler which is executed when specified property changes.
+            </summary>
+            <param name="property">Handled property.</param>
+            <param name="handler">Action to be executed when property changes.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.RegisterPropertyHandler(System.String,System.Action)">
+            <summary>
+            Registers a handler which is executed when specified property changes.
+            </summary>
+            <param name="name">Name of the handled property.</param>
+            <param name="handler">Action to be executed when property changes.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.UpdateAllProperties(System.Boolean)">
+            <summary>
+            Updates all registered properties.
+            </summary>
+            <param name="initialization">If set to <c>true</c> the method is called for an uninitialized object.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.OnElementReady">
+            <summary>
+            Called when Element has been set and its native counterpart
+            is properly initialized.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.Measure(System.Double,System.Double)">
+            <summary>
+            Calculates how much space this element should take, given how much room there is.
+            </summary>
+            <returns>a desired dimensions of the element</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.OnFocused(System.Object,System.EventArgs)">
+            <summary>
+            Handles focus events.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.OnUnfocused(System.Object,System.EventArgs)">
+            <summary>
+            Handles unfocus events.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.AddChild(Microsoft.Maui.Controls.Element)">
+            <summary>
+            Adds a new child if it's derived from the VisualElement class. Otherwise this method does nothing.
+            </summary>
+            <param name="child">Child to be added.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.OnRegisterEffect(Microsoft.Maui.Controls.Platform.PlatformEffect)">
+            <summary>
+            On register the effect
+            </summary>
+            <param name="effect">The effect to register.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.UpdateIsEnabled(System.Boolean)">
+            <summary>
+            Updates the IsEnabled property.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Platform.Tizen.VisualElementRenderer`1.UpdateInputTransparent(System.Boolean)">
+            <summary>
+            Updates the InputTransparent property.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Maui.Controls.Compatibility.Platform.UAP.BootstrapHelper">
+            <summary>
+            Enables C++ code to simulate ICLRRuntimeHost2::ExecuteAssembly on top of ICLRRuntimeHost2::CreateDelegate in .net core 2.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Forms.ConvertToPixel(System.Double)">
+            <summary>
+            Converts the dp into pixel considering current DPI value.
+            </summary>
+            <remarks>
+            Use this API if you want to get pixel size without scaling factor.
+            </remarks>
+            <param name="dp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Forms.ConvertToScaledPixel(System.Double)">
+            <summary>
+            Converts the dp into pixel by using scaling factor.
+            </summary>
+            <remarks>
+            Use this API if you want to get pixel size from dp by using scaling factor.
+            If the scaling factor is 1.0 by user setting, the same value is returned. This is mean that user doesn't want to pixel independent metric.
+            </remarks>
+            <param name="dp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Forms.ConvertToScaledDP(System.Int32)">
+            <summary>
+            Converts the pixel into dp value by using scaling factor.
+            </summary>
+            <remarks>
+            If the scaling factor is 1.0 by user setting, the same value is returned. This is mean that user doesn't want to pixel independent metric.
+            </remarks>
+            <param name="pixel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Forms.ConvertToScaledDP(System.Double)">
+            <summary>
+            Converts the pixel into dp value by using scaling factor.
+            </summary>
+            <remarks>
+            If the scaling factor is 1.0 by user setting, the same value is returned. This is mean that user doesn't want to pixel independent metric.
+            </remarks>
+            <param name="pixel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Forms.ConvertToEflFontPoint(System.Double)">
+            <summary>
+            Converts the sp into EFL's font size metric (EFL point).
+            </summary>
+            <param name="sp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Forms.ConvertToDPFont(System.Int32)">
+            <summary>
+            Convert the EFL's point into sp.
+            </summary>
+            <param name="eflPt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Maui.Controls.Compatibility.Forms.GetProfile">
+            <summary>
+            Get the EFL's profile
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

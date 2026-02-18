@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BPASpectrogramM.Views.SpectrogramPageAsControl"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:core="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+    xmlns:local="clr-namespace:BPASpectrogramM.Views">
+    <Border Stroke="Black" StrokeThickness="1">
+        <Grid
+            ColumnDefinitions="30,*"
+            RowDefinitions="50,Auto,*,50,Auto,Auto"
+            VerticalOptions="Fill">
+
+
+            <local:SpectrogramToolbar
+                x:Name="SpToolbar"
+                Grid.Row="0"
+                IsVisible="true"
+                Grid.Column="1" />
+            <local:SpectrogramWaveform
+                x:Name="SpWaveform"
+                Grid.Row="1"
+                Grid.Column="1"
+                HeightRequest="{Binding WaveformHeight}"
+                IsVisible="{Binding WaveformVisibility}" />
+
+            <core:SfBusyIndicator
+                Title="Loading..."
+                Grid.Row="2"
+                Grid.Column="1"
+                IsRunning="{Binding IsBusy}"
+                OverlayFill="#88FFFFFF"
+                SizeFactor="0.9"
+                TextColor="Red">
+                <local:SpectrogramView
+                    x:Name="spectrogram"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill" />
+            </core:SfBusyIndicator>
+
+            <local:SpectrogramControls
+                x:Name="SpControls"
+                Grid.Row="3"
+                Grid.Column="1"
+                VerticalOptions="Fill" />
+            <local:SpectrogramButtons
+                x:Name="SpButtons"
+                Grid.Row="4"
+                Grid.Column="1"
+                IsVisible="{Binding ButtonVisibility}"
+                VerticalOptions="Fill" />
+            
+
+        </Grid>
+
+    </Border>
+
+</ContentView>

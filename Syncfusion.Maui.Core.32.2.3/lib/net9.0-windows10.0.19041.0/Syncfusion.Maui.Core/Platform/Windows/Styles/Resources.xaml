@@ -1,0 +1,10 @@
+﻿<ResourceDictionary x:Class="Syncfusion.Maui.Core.Platform.Windows.Styles.Resources"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="CarouselStyles.xaml"/>
+        <ResourceDictionary Source="RotatorStyles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <x:Boolean x:Key="SyncfusionCoreResourcesIncluded">true</x:Boolean>
+</ResourceDictionary>
+

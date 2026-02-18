@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BRM_2.Controls.SessionDetailsForm"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:BRM_2.Controls"
+    xmlns:sf="http://schemas.syncfusion.com/maui"
+    xmlns:sfc="clr-namespace:Syncfusion.Maui.Picker;assembly=Syncfusion.Maui.Picker"
+    xmlns:sfp="clr-namespace:Syncfusion.Maui.Popup;assembly=Syncfusion.Maui.Popup"
+    x:DataType="local:SessionDetailsForm">
+
+    <Grid RowDefinitions="10,*,50">
+
+
+        <Grid
+            x:Name="formGrid"
+            Grid.Row="1"
+            ColumnDefinitions=".3*,.7*"
+            HorizontalOptions="Center"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,*"
+            VerticalOptions="Center">
+
+
+
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalOptions="End"
+                Text="Session Tag:-"
+                VerticalOptions="Center" />
+            <Entry
+                x:Name="SessionTagEntry"
+                Grid.Row="0"
+                Grid.Column="1"
+                HorizontalOptions="Start"
+                Text="{Binding sessionTag, Mode=TwoWay}"
+                VerticalOptions="Center" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                HorizontalOptions="End"
+                Text="Start:-"
+                VerticalOptions="Center" />
+            <HorizontalStackLayout
+                Grid.Row="1"
+                Grid.Column="1"
+                HorizontalOptions="Start"
+                VerticalOptions="Center">
+                <sfc:SfDateTimePicker
+                    x:Name="sfStartDatePicker"
+                    HorizontalOptions="Start"
+                    IsOpen="False"
+                    Mode="RelativeDialog"
+                    RelativePosition="AlignBottom"
+                    SelectedDate="{Binding startDate, Mode=TwoWay}"
+                    TextDisplayMode="FadeAndShrink"
+                    VerticalOptions="Center" />
+                <Button
+                    x:Name="startDateButton"
+                    Margin="5,0,0,0"
+                    Background="White"
+                    Clicked="StartDateButton_Clicked"
+                    Text="{Binding startDate, StringFormat='{0:dd_MM_yyyy HH:mm}'}"
+                    TextColor="#000000" />
+
+            </HorizontalStackLayout>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                HorizontalOptions="End"
+                Text="End:-"
+                VerticalOptions="Center" />
+
+
+
+
+            <HorizontalStackLayout
+                Grid.Row="2"
+                Grid.Column="1"
+                HorizontalOptions="Start"
+                VerticalOptions="Center">
+                <sfc:SfDateTimePicker
+                    x:Name="sfEndDatePicker"
+                    DateFormat="dd_MM_yyyy"
+                    HorizontalOptions="Start"
+                    IsOpen="False"
+                    Mode="RelativeDialog"
+                    RelativePosition="AlignBottom"
+                    SelectedDate="{Binding endDate, Mode=TwoWay}"
+                    TimeFormat="HH_mm"
+                    VerticalOptions="Center" />
+
+                <Button
+                    x:Name="endDateButton"
+                    Margin="5,0,0,0"
+                    Background="White"
+                    Clicked="EndDateButton_Clicked"
+                    Text="{Binding endDate, StringFormat='{0:dd_MM_yyyy HH:mm}'}"
+                    TextColor="#000000" />
+            </HorizontalStackLayout>
+
+
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"
+                HorizontalOptions="End"
+                Text="Location:-"
+                VerticalOptions="Center" />
+            <sf:SfComboBox
+                x:Name="sfLocationCombo"
+                Grid.Row="3"
+                Grid.Column="1"
+                HorizontalOptions="Start"
+                IsEditable="True"
+                ShowDropdownHeaderView="False"
+                Text="{Binding Location, Mode=TwoWay}" />
+
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                HorizontalOptions="End"
+                Text="GPS Co-ordinates:-"
+                VerticalOptions="Center" />
+            <HorizontalStackLayout
+                Grid.Row="4"
+                Grid.Column="1"
+                HorizontalOptions="Start"
+                VerticalOptions="Center">
+                <Label Text="Lat:-" VerticalOptions="Center" />
+                <Entry
+                    Text="{Binding Latitude, Mode=TwoWay}"
+                    VerticalOptions="Center"
+                    WidthRequest="150" />
+                <Label Text="Longit:-" VerticalOptions="Center" />
+                <Entry
+                    Text="{Binding Longitude, Mode=TwoWay}"
+                    VerticalOptions="Center"
+                    WidthRequest="150" />
+                <VerticalStackLayout>
+                    <Button
+                        x:Name="MapButton"
+                        Clicked="MapButton_Clicked"
+                        HeightRequest="25"
+                        Text="MAP" />
+
+                </VerticalStackLayout>
+
+            </HorizontalStackLayout>
+
+            <Label
+                Grid.Row="5"
+                Grid.Column="0"
+                HorizontalOptions="End"
+                Text="Operator:-"
+                VerticalOptions="Center" />
+            <sf:SfComboBox
+                x:Name="sfOperatorCombo"
+                Grid.Row="5"
+                Grid.Column="1"
+                HorizontalOptions="Start"
+                IsEditable="True"
+                ShowDropdownFooterView="False"
+                ShowDropdownHeaderView="False"
+                Text="{Binding Operator, Mode=TwoWay}" />
+
+            <Label
+                Grid.Row="6"
+                Grid.Column="0"
+                HorizontalOptions="End"
+                Text="Equipment:-"
+                VerticalOptions="Center" />
+            <sf:SfComboBox
+                x:Name="sfEquipmentCombo"
+                Grid.Row="6"
+                Grid.Column="1"
+                HorizontalOptions="Start"
+                IsEditable="True"
+                ShowDropdownFooterView="False"
+                ShowDropdownHeaderView="False"
+                Text="{Binding Equipment, Mode=TwoWay}" />
+
+            <Label
+                Grid.Row="7"
+                Grid.Column="0"
+                HorizontalOptions="End"
+                Text="Microphone:-"
+                VerticalOptions="Center" />
+            <sf:SfComboBox
+                x:Name="sfMicrophoneCombo"
+                Grid.Row="7"
+                Grid.Column="1"
+                HorizontalOptions="Start"
+                IsEditable="true"
+                ShowDropdownFooterView="False"
+                ShowDropdownHeaderView="False"
+                Text="{Binding Microphone, Mode=TwoWay}" />
+
+            <Label
+                Grid.Row="8"
+                Grid.Column="0"
+                HorizontalOptions="End"
+                Text="Weather:-"
+                VerticalOptions="Center" />
+            <HorizontalStackLayout Grid.Row="8" Grid.Column="1">
+                <Entry
+                    x:Name="weatherEntry"
+                    Text="{Binding weatherText, Mode=TwoWay}"
+                    WidthRequest="800" />
+                <Button
+                    x:Name="GetWeatherButton"
+                    Clicked="GetWeatherButton_Clicked"
+                    Text="GET" />
+            </HorizontalStackLayout>
+
+
+            <sf:SfTextInputLayout
+                Grid.Row="9"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                ContainerType="Outlined"
+                Hint="Notes:- "
+                ToolTipProperties.Text="Enter additional observations and comments">
+                <Editor
+                    x:Name="notesEditor"
+                    AutoSize="TextChanges"
+                    Text="{Binding sessionNotes, Mode=TwoWay}" />
+            </sf:SfTextInputLayout>
+
+
+
+
+
+
+        </Grid>
+    </Grid>
+
+</ContentView>

@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET MAUI (MacCatalyst - Direct Binary Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-maccatalyst",
+            "program": "${workspaceFolder}/BRM-2/bin/Debug/net10.0-maccatalyst/maccatalyst-x64/BRM-2.app/Contents/MacOS/BRM-2",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "requireExactSource": false,
+            "logging": {
+                "engineLogging": true,
+                "diagnosticsLog": true
+            }
+        }
+    ]
+}

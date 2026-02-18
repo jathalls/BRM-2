@@ -1,0 +1,659 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Maui.Graphics.Skia</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Maui.Graphics.Skia.FontExtensions">
+            <summary>
+            Provides extension methods for converting between .NET MAUI Graphics font types and SkiaSharp font types.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.FontExtensions.ToSKTypeface(Microsoft.Maui.Graphics.IFont)">
+            <summary>
+            Converts a .NET MAUI Graphics font to a SkiaSharp typeface.
+            </summary>
+            <param name="font">The font to convert.</param>
+            <returns>A SkiaSharp typeface that corresponds to the specified font.</returns>
+            <remarks>
+            If the font name is not found as a family name, this method will attempt to load it as a file.
+            If the font is null or has an empty name, the default typeface will be returned.
+            </remarks>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SKColorExtensions">
+            <summary>
+            Provides extension methods for converting between .NET MAUI Graphics colors and SkiaSharp colors.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKColorExtensions.ToColor(Microsoft.Maui.Graphics.Color,System.Single)">
+            <summary>
+            Converts a .NET MAUI Graphics color to a SkiaSharp color.
+            </summary>
+            <param name="target">The color to convert.</param>
+            <param name="alpha">An optional alpha multiplier to apply to the resulting color (0-1).</param>
+            <returns>A SkiaSharp color that corresponds to the specified color.</returns>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SKFontExtensions">
+            <summary>
+            Provides extension methods for SkiaSharp font objects.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKFontExtensions.CreateCopy(SkiaSharp.SKFont)">
+            <summary>
+            Creates a deep copy of a SkiaSharp font object.
+            </summary>
+            <param name="font">The font object to copy.</param>
+            <returns>A new font object with the same properties as the original, or null if the input is null.</returns>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions">
+            <summary>
+            Provides extension methods for working with SkiaSharp graphics objects.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsSKColorMultiplyAlpha(Microsoft.Maui.Graphics.Color,System.Single)">
+            <summary>
+            Converts a .NET MAUI Graphics color to a SkiaSharp color with a multiplied alpha value.
+            </summary>
+            <param name="target">The color to convert.</param>
+            <param name="alpha">The alpha multiplier to apply (0-1).</param>
+            <returns>A SkiaSharp color with the alpha value multiplied by the specified factor.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.ToArgb(Microsoft.Maui.Graphics.Color)">
+            <summary>
+            Converts a .NET MAUI Graphics color to an ARGB integer representation.
+            </summary>
+            <param name="target">The color to convert.</param>
+            <returns>The color as a 32-bit ARGB integer.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.ToArgb(Microsoft.Maui.Graphics.Color,System.Single)">
+            <summary>
+            Converts a .NET MAUI Graphics color to an ARGB integer representation with a modified alpha value.
+            </summary>
+            <param name="target">The color to convert.</param>
+            <param name="alpha">The alpha multiplier to apply (0-1).</param>
+            <returns>The color as a 32-bit ARGB integer with the modified alpha value.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsSKColor(Microsoft.Maui.Graphics.Color)">
+            <summary>
+            Converts a .NET MAUI Graphics color to a SkiaSharp color.
+            </summary>
+            <param name="target">The color to convert.</param>
+            <returns>A SkiaSharp color that corresponds to the specified color.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsColor(SkiaSharp.SKColor)">
+            <summary>
+            Converts a SkiaSharp color to a .NET MAUI Graphics color.
+            </summary>
+            <param name="target">The SkiaSharp color to convert.</param>
+            <returns>A .NET MAUI Graphics color that corresponds to the specified SkiaSharp color.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsSKRect(Microsoft.Maui.Graphics.RectF)">
+            <summary>
+            Converts a RectF to a SkiaSharp SKRect.
+            </summary>
+            <param name="target">The RectF to convert.</param>
+            <returns>A SkiaSharp SKRect that corresponds to the specified RectF.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsRectangleF(SkiaSharp.SKRect)">
+            <summary>
+            Converts a SkiaSharp SKRect to a RectF.
+            </summary>
+            <param name="target">The SKRect to convert.</param>
+            <returns>A RectF that corresponds to the specified SKRect.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.ToSKPoint(Microsoft.Maui.Graphics.PointF)">
+            <summary>
+            Converts a PointF to a SkiaSharp SKPoint.
+            </summary>
+            <param name="target">The PointF to convert.</param>
+            <returns>A SkiaSharp SKPoint that corresponds to the specified PointF.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsMatrix(System.Numerics.Matrix3x2@)">
+            <summary>
+            Converts a Matrix3x2 to a SkiaSharp SKMatrix.
+            </summary>
+            <param name="transform">The Matrix3x2 to convert.</param>
+            <returns>A SkiaSharp SKMatrix that corresponds to the specified Matrix3x2.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsSkiaPath(Microsoft.Maui.Graphics.PathF)">
+            <summary>
+            Converts a PathF to a SkiaSharp SKPath.
+            </summary>
+            <param name="target">The PathF to convert.</param>
+            <returns>A SkiaSharp SKPath that corresponds to the specified PathF.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsSkiaPath(Microsoft.Maui.Graphics.PathF,System.Single)">
+            <summary>
+            Converts a PathF to a SkiaSharp SKPath with a specified pixels-per-unit value.
+            </summary>
+            <param name="path">The PathF to convert.</param>
+            <param name="ppu">The pixels-per-unit value.</param>
+            <returns>A SkiaSharp SKPath that corresponds to the specified PathF, scaled by the specified pixels-per-unit value.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsSkiaPath(Microsoft.Maui.Graphics.PathF,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Converts a PathF to a SkiaSharp SKPath with specified transformation parameters.
+            </summary>
+            <param name="path">The PathF to convert.</param>
+            <param name="ppu">The pixels-per-unit value.</param>
+            <param name="ox">The x-offset.</param>
+            <param name="oy">The y-offset.</param>
+            <param name="fx">The x-scale factor.</param>
+            <param name="fy">The y-scale factor.</param>
+            <returns>A SkiaSharp SKPath that corresponds to the specified PathF, transformed according to the specified parameters.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsSkiaPath(Microsoft.Maui.Graphics.PathF,System.Single,System.Single)">
+            <summary>
+            Converts a PathF to a SkiaSharp SKPath with a specified pixels-per-unit value and zoom level.
+            </summary>
+            <param name="path">The PathF to convert.</param>
+            <param name="ppu">The pixels-per-unit value.</param>
+            <param name="zoom">The zoom level.</param>
+            <returns>A SkiaSharp SKPath that corresponds to the specified PathF, scaled by the specified pixels-per-unit value and zoom level.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsSkiaPathFromSegment(Microsoft.Maui.Graphics.PathF,System.Int32,System.Single,System.Single)">
+            <summary>
+            Converts a segment of a PathF to a SkiaSharp SKPath with a specified pixels-per-unit value and zoom level.
+            </summary>
+            <param name="target">The PathF containing the segment to convert.</param>
+            <param name="segmentIndex">The index of the segment to convert.</param>
+            <param name="ppu">The pixels-per-unit value.</param>
+            <param name="zoom">The zoom level.</param>
+            <returns>A SkiaSharp SKPath that corresponds to the specified segment of the PathF, scaled by the specified pixels-per-unit value and zoom level.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsRotatedAndroidPath(Microsoft.Maui.Graphics.PathF,Microsoft.Maui.Graphics.PointF,System.Single,System.Single,System.Single)">
+            <summary>
+            Converts a PathF to a SkiaSharp SKPath with a specified pixels-per-unit value, zoom level, and rotation angle.
+            </summary>
+            <param name="target">The PathF to convert.</param>
+            <param name="center">The center point around which to rotate the path.</param>
+            <param name="ppu">The pixels-per-unit value.</param>
+            <param name="zoom">The zoom level.</param>
+            <param name="angle">The rotation angle in degrees.</param>
+            <returns>A SkiaSharp SKPath that corresponds to the specified PathF, scaled by the specified pixels-per-unit value and zoom level, and rotated around the specified center point.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsSize(SkiaSharp.SKSize)">
+            <summary>
+            Converts a SkiaSharp SKSize to a .NET MAUI Graphics SizeF.
+            </summary>
+            <param name="target">The SKSize to convert.</param>
+            <returns>A .NET MAUI Graphics SizeF that corresponds to the specified SKSize.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsSizeF(Microsoft.Maui.Graphics.SizeF)">
+            <summary>
+            Converts a .NET MAUI Graphics SizeF to a SkiaSharp SKSize.
+            </summary>
+            <param name="target">The SizeF to convert.</param>
+            <returns>A SkiaSharp SKSize that corresponds to the specified SizeF.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.AsPointF(SkiaSharp.SKPoint)">
+            <summary>
+            Converts a SkiaSharp SKPoint to a .NET MAUI Graphics PointF.
+            </summary>
+            <param name="target">The SKPoint to convert.</param>
+            <returns>A .NET MAUI Graphics PointF that corresponds to the specified SKPoint.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.GetPatternBitmap(Microsoft.Maui.Graphics.PatternPaint,System.Single)">
+            <summary>
+            Retrieves the bitmap pattern from a PatternPaint object.
+            </summary>
+            <param name="patternPaint">The PatternPaint object.</param>
+            <param name="scale">The scale factor for the bitmap.</param>
+            <returns>The bitmap pattern.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKGraphicsExtensions.GetPatternBitmap(Microsoft.Maui.Graphics.PatternPaint,System.Single,System.Single,System.Object)">
+            <summary>
+            Retrieves the bitmap pattern from a PatternPaint object with specified scale factors.
+            </summary>
+            <param name="patternPaint">The PatternPaint object.</param>
+            <param name="scaleX">The scale factor for the X dimension.</param>
+            <param name="scaleY">The scale factor for the Y dimension.</param>
+            <param name="currentFigure">The current figure (optional).</param>
+            <returns>The bitmap pattern.</returns>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SkiaBitmapExportContext">
+            <summary>
+            Provides a context for exporting bitmaps using SkiaSharp.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaBitmapExportContext.#ctor(System.Int32,System.Int32,System.Single,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaBitmapExportContext"/> class with the specified dimensions and properties.
+            </summary>
+            <param name="width">The width of the bitmap in pixels.</param>
+            <param name="height">The height of the bitmap in pixels.</param>
+            <param name="displayScale">The display scale factor to use.</param>
+            <param name="dpi">The dots per inch (DPI) of the bitmap. Default is 72.</param>
+            <param name="disposeBitmap">Whether to dispose the bitmap when this context is disposed.</param>
+            <param name="transparent">Whether the bitmap should have an alpha channel (transparency).</param>
+            <exception cref="T:System.InvalidOperationException">Thrown when unable to create a Skia surface.</exception>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaBitmapExportContext.Canvas">
+            <summary>
+            Gets the canvas that can be used to draw on this bitmap.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaBitmapExportContext.Image">
+            <summary>
+            Gets the resulting image after drawing operations have been performed.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaBitmapExportContext.SKImage">
+            <summary>
+            Gets the Skia image representation of this bitmap.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaBitmapExportContext.Bitmap">
+            <summary>
+            Gets the Skia bitmap representation of this context.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaBitmapExportContext.Dispose">
+            <summary>
+            Releases all resources used by this bitmap export context.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaBitmapExportContext.WriteToStream(System.IO.Stream)">
+            <summary>
+            Writes the bitmap to the specified stream in PNG format.
+            </summary>
+            <param name="stream">The stream to write the bitmap to.</param>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.PlatformBitmapExportService">
+            <summary>
+            Provides functionality for creating bitmap export contexts using SkiaSharp.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.PlatformBitmapExportService.CreateContext(System.Int32,System.Int32,System.Single)">
+            <summary>
+            Creates a new bitmap export context with the specified dimensions and display scale.
+            </summary>
+            <param name="width">The width of the bitmap in pixels.</param>
+            <param name="height">The height of the bitmap in pixels.</param>
+            <param name="displayScale">The display scale factor to use.</param>
+            <returns>A new <see cref="T:Microsoft.Maui.Graphics.BitmapExportContext"/> instance for creating bitmap images.</returns>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SkiaCanvas">
+            <summary>
+            Implements a canvas that uses SkiaSharp for rendering graphics.
+            </summary>
+            <remarks>
+            SkiaCanvas provides a implementation of the standard canvas drawing operations using the SkiaSharp graphics library.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvas.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaCanvas"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvas.Dispose">
+            <summary>
+            Releases all resources used by the <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaCanvas"/> instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaCanvas.DisplayScale">
+            <summary>
+            Gets the display scale factor used by the canvas.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaCanvas.Canvas">
+            <summary>
+            Gets or sets the underlying SkiaSharp canvas.
+            </summary>
+            <remarks>
+            Setting a new canvas will reset the current state.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaCanvas.Antialias">
+            <summary>
+            Gets or sets a value indicating whether anti-aliasing is enabled.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvas.SetDisplayScale(System.Single)">
+            <summary>
+            Sets the display scale factor for the canvas.
+            </summary>
+            <param name="value">The display scale factor to set.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvas.SetFillPaint(Microsoft.Maui.Graphics.Paint,Microsoft.Maui.Graphics.RectF)">
+            <summary>
+            Sets the fill paint for the canvas.
+            </summary>
+            <param name="paint">The paint to use for filling. If null, white color will be used.</param>
+            <param name="rectangle">The rectangle that defines the coordinate space for the paint.</param>
+            <remarks>
+            This method handles different types of paints including SolidPaint, LinearGradientPaint, 
+            RadialGradientPaint, PatternPaint, and ImagePaint.
+            </remarks>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvas.FillArc(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Boolean)">
+            <summary>
+            Fills an arc within the specified rectangle from the start angle to the end angle.
+            </summary>
+            <param name="x">The x-coordinate of the upper-left corner of the rectangle that contains the arc.</param>
+            <param name="y">The y-coordinate of the upper-left corner of the rectangle that contains the arc.</param>
+            <param name="width">The width of the rectangle that contains the arc.</param>
+            <param name="height">The height of the rectangle that contains the arc.</param>
+            <param name="startAngle">The starting angle in degrees.</param>
+            <param name="endAngle">The ending angle in degrees.</param>
+            <param name="clockwise">A value indicating whether the arc is drawn clockwise or counterclockwise.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvas.FillRectangle(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Fills a rectangle at the specified coordinates with the current fill paint.
+            </summary>
+            <param name="x">The x-coordinate of the upper-left corner of the rectangle.</param>
+            <param name="y">The y-coordinate of the upper-left corner of the rectangle.</param>
+            <param name="width">The width of the rectangle.</param>
+            <param name="height">The height of the rectangle.</param>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SkiaCanvasState">
+            <summary>
+            Represents the state of a <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaCanvas"/>, maintaining properties like colors, fonts, and transformations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvasState.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaCanvasState"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvasState.#ctor(Microsoft.Maui.Graphics.Skia.SkiaCanvasState)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaCanvasState"/> class with properties copied from another state.
+            </summary>
+            <param name="prototype">The state to copy from.</param>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaCanvasState.StrokeColor">
+            <summary>
+            Gets or sets the stroke color.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaCanvasState.FillColor">
+            <summary>
+            Gets or sets the fill color.
+            </summary>
+            <remarks>
+            Setting this property resets any shader that might have been set.
+            </remarks>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaCanvasState.FontColor">
+            <summary>
+            Gets or sets the font color.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaCanvasState.StrokeLineCap">
+            <summary>
+            Sets the stroke line cap style.
+            </summary>
+            <value>The line cap style to apply to the ends of stroked lines.</value>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaCanvasState.StrokeLineJoin">
+            <summary>
+            Sets the stroke line join style.
+            </summary>
+            <value>The line join style to apply at the corners of stroked lines.</value>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaCanvasState.MiterLimit">
+            <summary>
+            Sets the miter limit for stroked lines with miter joins.
+            </summary>
+            <value>The miter limit value.</value>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvasState.SetStrokeDashPattern(System.Single[],System.Single,System.Single)">
+            <summary>
+            Sets the stroke dash pattern.
+            </summary>
+            <param name="pattern">An array of values that specify the lengths of alternating dashes and gaps.</param>
+            <param name="strokeDashOffset">The distance into the dash pattern to start the dash.</param>
+            <param name="strokeSize">The stroke width to scale the pattern by.</param>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SkiaCanvasStateService">
+            <summary>
+            Provides services for creating and managing <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaCanvasState"/> instances.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvasStateService.CreateNew(System.Object)">
+            <summary>
+            Creates a new canvas state instance.
+            </summary>
+            <param name="context">An optional context object.</param>
+            <returns>A new <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaCanvasState"/> instance with default properties.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvasStateService.CreateCopy(Microsoft.Maui.Graphics.Skia.SkiaCanvasState)">
+            <summary>
+            Creates a copy of the specified canvas state.
+            </summary>
+            <param name="prototype">The canvas state to copy.</param>
+            <returns>A new <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaCanvasState"/> instance with properties copied from the prototype.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvasStateService.Reset(Microsoft.Maui.Graphics.Skia.SkiaCanvasState)">
+            <summary>
+            Resets the specified canvas state to default values.
+            </summary>
+            <param name="currentState">The canvas state to reset.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaCanvasStateService.Dispose">
+            <summary>
+            Releases all resources used by this canvas state service.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SkiaImage">
+            <summary>
+            Represents an image implementation using SkiaSharp.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaImage.#ctor(SkiaSharp.SKBitmap)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaImage"/> class with the specified SkiaSharp bitmap.
+            </summary>
+            <param name="image">The SkiaSharp bitmap to wrap.</param>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaImage.Width">
+            <summary>
+            Gets the width of the image in pixels.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaImage.Height">
+            <summary>
+            Gets the height of the image in pixels.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaImage.PlatformRepresentation">
+            <summary>
+            Gets the underlying SkiaSharp bitmap that this image wraps.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaImage.Downsize(System.Single,System.Boolean)">
+            <summary>
+            Creates a new image by downsizing this image to fit within the specified maximum dimension.
+            </summary>
+            <param name="maxWidthOrHeight">The maximum width or height the resulting image should have.</param>
+            <param name="disposeOriginal">Whether to dispose the original image after downsizing.</param>
+            <returns>A new image instance with the downsized dimensions.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaImage.Downsize(System.Single,System.Single,System.Boolean)">
+            <summary>
+            Creates a new image by downsizing this image to fit within the specified maximum dimensions.
+            </summary>
+            <param name="maxWidth">The maximum width the resulting image should have.</param>
+            <param name="maxHeight">The maximum height the resulting image should have.</param>
+            <param name="disposeOriginal">Whether to dispose the original image after downsizing.</param>
+            <returns>A new image instance with the downsized dimensions.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaImage.Resize(System.Single,System.Single,Microsoft.Maui.Graphics.ResizeMode,System.Boolean)">
+            <summary>
+            Creates a new image by resizing this image to the specified dimensions.
+            </summary>
+            <param name="width">The width of the resulting image.</param>
+            <param name="height">The height of the resulting image.</param>
+            <param name="resizeMode">The mode to use when resizing the image.</param>
+            <param name="disposeOriginal">Whether to dispose the original image after resizing.</param>
+            <returns>A new image instance with the specified dimensions.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaImage.Save(System.IO.Stream,Microsoft.Maui.Graphics.ImageFormat,System.Single)">
+            <summary>
+            Saves the image to a stream in the specified format.
+            </summary>
+            <param name="stream">The stream to save the image to.</param>
+            <param name="format">The format to save the image in.</param>
+            <param name="quality">The quality level to use when saving the image (0.0 to 1.0).</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when quality is outside the range of 0.0 to 1.0 or when format is not supported.</exception>
+            <exception cref="T:System.PlatformNotSupportedException">Thrown when the specified format is not supported by Skia.</exception>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaImage.SaveAsync(System.IO.Stream,Microsoft.Maui.Graphics.ImageFormat,System.Single)">
+            <summary>
+            Asynchronously saves the image to a stream in the specified format.
+            </summary>
+            <param name="stream">The stream to save the image to.</param>
+            <param name="format">The format to save the image in.</param>
+            <param name="quality">The quality level to use when saving the image (0.0 to 1.0).</param>
+            <returns>A task that represents the asynchronous save operation.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when quality is outside the range of 0.0 to 1.0 or when format is not supported.</exception>
+            <exception cref="T:System.PlatformNotSupportedException">Thrown when the specified format is not supported by Skia.</exception>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaImage.Dispose">
+            <summary>
+            Releases all resources used by this image.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaImage.Draw(Microsoft.Maui.Graphics.ICanvas,Microsoft.Maui.Graphics.RectF)">
+            <summary>
+            Draws this image on the specified canvas within the specified rectangle.
+            </summary>
+            <param name="canvas">The canvas to draw on.</param>
+            <param name="dirtyRect">The rectangle in which to draw the image.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaImage.ToPlatformImage">
+            <summary>
+            Creates a platform-specific image from this image.
+            </summary>
+            <returns>A platform-specific image representation.</returns>
+            <exception cref="T:System.NotSupportedException">This operation is not supported in the Skia implementation.</exception>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaImage.FromStream(System.IO.Stream,Microsoft.Maui.Graphics.ImageFormat)">
+            <summary>
+            Creates a new image from a stream.
+            </summary>
+            <param name="stream">The stream containing image data.</param>
+            <param name="formatHint">Optional hint about the image format.</param>
+            <returns>A new <see cref="T:Microsoft.Maui.Graphics.IImage"/> instance containing the image from the stream.</returns>
+            <exception cref="T:System.ArgumentException">Thrown when the stream cannot be decoded as an image.</exception>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SkiaImageLoadingService">
+            <summary>
+            Provides image loading functionality using SkiaSharp.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaImageLoadingService.FromStream(System.IO.Stream,Microsoft.Maui.Graphics.ImageFormat)">
+            <summary>
+            Creates a new image from a stream.
+            </summary>
+            <param name="stream">The stream containing the image data.</param>
+            <param name="formatHint">Optional hint about the image format.</param>
+            <returns>A new <see cref="T:Microsoft.Maui.Graphics.IImage"/> instance containing the image from the stream.</returns>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SkiaStringSizeService">
+            <summary>
+            Provides functionality for measuring string dimensions using SkiaSharp.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaStringSizeService.GetStringSize(System.String,Microsoft.Maui.Graphics.IFont,System.Single)">
+            <summary>
+            Gets the size of a string when rendered with the specified font and font size.
+            </summary>
+            <param name="value">The string to measure.</param>
+            <param name="font">The font to use when measuring the string.</param>
+            <param name="fontSize">The font size to use when measuring the string.</param>
+            <returns>The size of the string in device-independent units.</returns>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaStringSizeService.GetStringSize(System.String,Microsoft.Maui.Graphics.IFont,System.Single,Microsoft.Maui.Graphics.HorizontalAlignment,Microsoft.Maui.Graphics.VerticalAlignment)">
+            <summary>
+            Gets the size of a string when rendered with the specified font, font size, and alignment.
+            </summary>
+            <param name="value">The string to measure.</param>
+            <param name="font">The font to use when measuring the string.</param>
+            <param name="fontSize">The font size to use when measuring the string.</param>
+            <param name="horizontalAlignment">The horizontal alignment to use.</param>
+            <param name="verticalAlignment">The vertical alignment to use.</param>
+            <returns>The size of the string in device-independent units.</returns>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SkiaTextLayout">
+            <summary>
+            Provides functionality for laying out text using SkiaSharp.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.SkiaTextLayout.WordWrap">
+            <summary>
+            Gets or sets a value indicating whether text should wrap to the next line when it exceeds the layout width.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaTextLayout.#ctor(System.String,Microsoft.Maui.Graphics.RectF,Microsoft.Maui.Graphics.ITextAttributes,Microsoft.Maui.Graphics.LayoutLine,Microsoft.Maui.Graphics.TextFlow,SkiaSharp.SKPaint)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaTextLayout"/> class.
+            </summary>
+            <param name="value">The text to layout.</param>
+            <param name="rect">The rectangle in which to layout the text.</param>
+            <param name="textAttributes">The text attributes to apply.</param>
+            <param name="callback">The callback to invoke for each line of text.</param>
+            <param name="textFlow">The text flow behavior.</param>
+            <param name="paint">The SkiaSharp paint object to use. This method is obsolete.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaTextLayout.#ctor(System.String,Microsoft.Maui.Graphics.RectF,Microsoft.Maui.Graphics.ITextAttributes,Microsoft.Maui.Graphics.LayoutLine,Microsoft.Maui.Graphics.TextFlow,SkiaSharp.SKFont)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Maui.Graphics.Skia.SkiaTextLayout"/> class.
+            </summary>
+            <param name="value">The text to layout.</param>
+            <param name="rect">The rectangle in which to layout the text.</param>
+            <param name="textAttributes">The text attributes to apply.</param>
+            <param name="callback">The callback to invoke for each line of text.</param>
+            <param name="textFlow">The text flow behavior.</param>
+            <param name="font">The SkiaSharp font object to use.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaTextLayout.LayoutText">
+            <summary>
+            Performs layout of text within the specified rectangle.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SkiaTextLayout.Dispose">
+            <summary>
+            Releases all resources used by this text layout.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.TextLine">
+            <summary>
+            Represents a line of text with its measured width.
+            </summary>
+            <param name="value">The text content of the line.</param>
+            <param name="width">The measured width of the line.</param>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.TextLine.#ctor(System.String,System.Single)">
+            <summary>
+            Represents a line of text with its measured width.
+            </summary>
+            <param name="value">The text content of the line.</param>
+            <param name="width">The measured width of the line.</param>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.TextLine.Value">
+            <summary>
+            Gets the text content of the line.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Maui.Graphics.Skia.TextLine.Width">
+            <summary>
+            Gets the measured width of the line.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Maui.Graphics.Skia.SKPaintExtensions">
+            <summary>
+            Provides extension methods for SkiaSharp paint objects.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Maui.Graphics.Skia.SKPaintExtensions.CreateCopy(SkiaSharp.SKPaint)">
+            <summary>
+            Creates a deep copy of a SkiaSharp paint object.
+            </summary>
+            <param name="paint">The paint object to copy.</param>
+            <returns>A new paint object with the same properties as the original, or null if the input is null.</returns>
+        </member>
+    </members>
+</doc>

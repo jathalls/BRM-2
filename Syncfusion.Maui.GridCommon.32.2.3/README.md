@@ -1,0 +1,1 @@
+This project holds the files and codes related to GridCommon for the .NET MAUI platform.

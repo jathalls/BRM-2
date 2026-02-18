@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BPASpectrogramM.Views.SpectrogramToolbar"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:BPASpectrogramM.ViewModels"
+    x:DataType="vm:SpectrogramToolbarVM">
+    <HorizontalStackLayout>
+        <Button
+            Margin="5,0,0,0"
+            Background="White"
+            BorderColor="#000000"
+            BorderWidth="1"
+            Command="{Binding OpenFileCommand}"
+            Text="File"
+            TextColor="#000000"
+            ToolTipProperties.Text="Select a File to analyse" />
+        <Button
+            Margin="5,0,0,0"
+            Background="White"
+            BorderColor="#000000"
+            BorderWidth="1"
+            Command="{Binding OpenFolderCommand}"
+            Text="Folder"
+            TextColor="#000000"
+            ToolTipProperties.Text="Select a Folder of .WAV files" />
+        <RadioButton
+            Margin="20,0,0,0"
+            Content="Cont."
+            IsChecked="{Binding IsMultiMode}"
+            ToolTipProperties.Text="Opens first 5s of each file for long multi segment recordings" />
+        <RadioButton
+            Margin="5,0,0,0"
+            Content="Trig."
+            IsChecked="{Binding IsSegmentMode}"
+            ToolTipProperties.Text="Opens entire file for single segment recordings" />
+
+        <Button
+            x:Name="PrevButton"
+            Margin="20,0,0,0"
+            Background="{Binding PrevBackGround}"
+            BorderColor="#000000"
+            BorderWidth="1"
+            Command="{Binding PrevCommand}"
+            IsEnabled="{Binding PrevButtonEnabled}"
+            Text="&lt;&lt; Prev"
+            TextColor="#000000"
+            ToolTipProperties.Text="Previous file" />
+        <Button
+            Margin="5,0,0,0"
+            Background="{Binding NextBackGround}"
+            BorderColor="#000000"
+            BorderWidth="1"
+            Command="{Binding NextCommand}"
+            IsEnabled="{Binding NextButtonEnabled}"
+            Text="Next &gt;&gt;"
+            TextColor="#000000"
+            ToolTipProperties.Text="Next File" />
+        <Label
+            Margin="5,0,0,0"
+            Text="{Binding CurrentFile}"
+            VerticalOptions="Center" />
+
+    </HorizontalStackLayout>
+</ContentView>

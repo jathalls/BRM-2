@@ -1,0 +1,1 @@
+This project holds the files and codes related to DataSource for the .NET Maui platform.

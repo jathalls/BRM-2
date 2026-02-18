@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BRM_2.Pages.TabViewPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:bpa="clr-namespace:BPASpectrogramM.Views;assembly=BPASpectrogramM"
+    xmlns:controls="clr-namespace:BRM_2.Controls"
+    xmlns:pages="clr-namespace:BRM_2.Pages"
+    xmlns:tv="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+    xmlns:vm="clr-namespace:BRM_2.ViewModels"
+    Title="Bat Recording Manager"
+    x:DataType="vm:TabViewPageVM">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem
+            Command="{Binding OpenSettingsCommand}"
+            Order="Primary"
+            Priority="0"
+            Text="Settings" />
+        <ToolbarItem
+            Command="{Binding OpenHelpCommand}"
+            Order="Primary"
+            Text="Help" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+
+        <Grid ColumnDefinitions="40,40,*,40">
+
+            <Button
+                Command="{Binding GoBackCommand}"
+                HeightRequest="40"
+                Text="^"
+                VerticalOptions="Start" />
+
+            <Button
+                Grid.Column="1"
+                Command="{Binding GoLeftCommand}"
+                HeightRequest="40"
+                Text="&lt;"
+                VerticalOptions="Start" />
+
+            <tv:SfTabView
+                x:Name="tabView"
+                Grid.Column="2"
+                BackgroundColor="AliceBlue"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                SelectedIndex="{Binding SelectedTabIndex}">
+                <tv:SfTabItem Header="Sessions">
+                    <tv:SfTabItem.Content>
+                        <controls:SessionsPage />
+                    </tv:SfTabItem.Content>
+                </tv:SfTabItem>
+
+                <tv:SfTabItem Header="Details">
+                    <tv:SfTabItem.Content>
+                        <controls:SessionDetailsPage />
+                    </tv:SfTabItem.Content>
+                </tv:SfTabItem>
+
+                <tv:SfTabItem Header="Recordings">
+                    <tv:SfTabItem.Content>
+                        <controls:RecordingsPage />
+                    </tv:SfTabItem.Content>
+                </tv:SfTabItem>
+
+                <tv:SfTabItem Header="Bats">
+                    <tv:SfTabItem.Content>
+                        <controls:BatDetailsPage />
+                    </tv:SfTabItem.Content>
+                </tv:SfTabItem>
+
+                <tv:SfTabItem
+                    Header="Spectrogram">
+                    <tv:SfTabItem.Content>
+                        <bpa:SpectrogramPageAsControl
+                            x:Name="spectrogramTabControl"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="Fill" />
+                    </tv:SfTabItem.Content>
+                </tv:SfTabItem>
+
+            </tv:SfTabView>
+
+            <ActivityIndicator
+                x:Name="activityIndicator"
+                Grid.Column="2"
+                IsRunning="{Binding BusyRunning}" />
+            <Button
+                Grid.Column="3"
+                Command="{Binding GoRightCommand}"
+                HeightRequest="40"
+                Text="&gt;"
+                VerticalOptions="Start" />
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

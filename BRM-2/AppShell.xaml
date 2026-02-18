@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="BRM_2.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cont="clr-namespace:Microsoft.Maui.Controls"
+    xmlns:local="clr-namespace:BRM_2"
+    xmlns:pages="clr-namespace:BRM_2.Pages"
+    xmlns:sf="clr-namespace:Syncfusion.Maui.TabView;assembly=Syncfusion.Maui.TabView"
+    xmlns:vm="clr-namespace:BRM_2.ViewModels"
+    Title="BatRecordingMamager_2"
+    x:DataType="vm:TabViewPageVM"
+    FlyoutBehavior="Flyout">
+
+    <TabBar x:Name="RootTabBar">
+        <Tab>
+            <ShellContent
+                Title="Bat Recording Manager"
+                ContentTemplate="{DataTemplate pages:TabViewPage}"
+                IsVisible="True"
+                Route="TabViewPager" />
+        </Tab>
+    </TabBar>
+
+    <MenuItem
+        x:Name="miImport"
+        Command="{Binding ImportCommand}"
+        Text="Import" />
+
+    <MenuItem
+        x:Name="miExit"
+        Command="{Binding ExitCommand}"
+        Text="Exit" />
+
+</Shell>
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:core="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             
+             x:Class="BPASpectrogramM.Views.SpectrogramPage"
+             xmlns:local="clr-namespace:BPASpectrogramM.Views"
+             
+             Title="{Binding Title}">
+    <ContentPage.Content>
+
+        <core:SfBusyIndicator IsRunning="{Binding IsBusyRunning}" OverlayFill="#88FFFFFF"  SizeFactor="0.9" Title="Loading..." TextColor="Red">
+
+            <Grid
+                Grid.Column="0" Grid.Row="1"
+                VerticalOptions="Fill"
+                RowDefinitions="45,Auto,5,200*,50,200"
+                ColumnDefinitions="30,*">
+
+
+                <local:SpectrogramPageAsControl/>
+
+
+            </Grid>
+
+        </core:SfBusyIndicator>
+    </ContentPage.Content>
+</ContentPage>

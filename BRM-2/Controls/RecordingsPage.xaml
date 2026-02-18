@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BRM_2.Controls.RecordingsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:collections="clr-namespace:BRM_2.Collections"
+    xmlns:local="clr-namespace:BRM_2.Controls"
+    xmlns:sf="http://schemas.syncfusion.com/maui"
+    xmlns:viewModels="clr-namespace:BRM_2.ViewModels"
+    x:DataType="viewModels:RecordingsPageVM">
+    <ContentView.Resources>
+        <Style TargetType="Border">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="PaleTurquoise" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentView.Resources>
+
+    <Grid ColumnDefinitions="*" RowDefinitions="30,*">
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Recordings" />
+        <sf:SfBusyIndicator
+            Grid.Row="1"
+            Grid.Column="0"
+            IsRunning="{Binding IsBusyRunning}">
+            <sf:SfListView
+                x:Name="recordingsCollectionView"
+                Grid.Row="1"
+                Grid.Column="0"
+                AutoFitMode="DynamicHeight"
+                HorizontalOptions="Fill"
+                ItemsSource="{Binding Recordings}"
+                SelectedItem="{Binding SelectedRecording, Mode=TwoWay}"
+                SelectionMode="SingleDeselect"
+                VerticalOptions="Fill">
+                <sf:SfListView.ItemTemplate>
+                    <DataTemplate x:DataType="collections:RecordingEx">
+                        <Border Stroke="Blue" StrokeThickness="2">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding DisplayText}" TextColor="{Binding DisplayTextColor}" />
+                                <Label Text="{Binding BatSummary}" />
+                                <sf:SfListView
+                                    x:Name="segmentsCollectionView"
+                                    AutoFitMode="DynamicHeight"
+                                    Background="Beige"
+                                    HorizontalOptions="Fill"
+                                    ItemsSource="{Binding LabelledSegments}"
+                                    Orientation="Vertical"
+                                    SelectionBackground="LightCyan"
+                                    SelectionChanged="segmentsCollectionView_SelectionChanged"
+                                    SelectionMode="SingleDeselect">
+                                    <sf:SfListView.ItemTemplate>
+                                        <DataTemplate x:DataType="collections:LabelledSegmentEx">
+                                            <Border Stroke="DarkSlateGrey" StrokeThickness="1">
+                                                <Label x:Name="SegmentTextLabel" Text="{Binding SegmentTextForDisplay}">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Buttons="Secondary" Tapped="TapGestureRecognizer_Tapped" />
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+                                            </Border>
+                                        </DataTemplate>
+                                    </sf:SfListView.ItemTemplate>
+
+                                </sf:SfListView>
+
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </sf:SfListView.ItemTemplate>
+                <FlyoutBase.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem
+                            x:Name="miAudacityFlyout"
+                            Command="{Binding miAudacityClickedCommand}"
+                            Text="Open Spectrogram" />
+                        <MenuFlyoutItem
+                            x:Name="miSaveSegment"
+                            Command="{Binding miSaveSegmentClickedCommand}"
+                            Text="Save Segment" />
+                        <MenuFlyoutItem
+                            x:Name="miPlaySegmentFlyout"
+                            Command="{Binding PlaySegmentCommand}"
+                            IsEnabled="{Binding IsPlaySegmentAvailable}"
+                            Text="Play Segment" />
+                        <MenuFlyoutItem
+                            x:Name="miBatDetect2Flyout"
+                            Command="{Binding miBatDetect2ClickedCommand}"
+                            IsEnabled="{Binding IsBatDetect2Available}"
+                            Text="BatDetect2" />
+                        <MenuFlyoutItem
+                            x:Name="miBatCallAnalyser"
+                            Command="{Binding miBatCallAnalyserClickedCommand}"
+                            Text="Bat Call Analyser"
+                            ToolTipProperties.Text="Open Bat Call Analyser and use the PASTE button to load this segment" />
+
+                        <MenuFlyoutItem Text="Edit" />
+
+                    </MenuFlyout>
+                </FlyoutBase.ContextFlyout>
+
+            </sf:SfListView>
+        </sf:SfBusyIndicator>
+
+    </Grid>
+
+</ContentView>
+

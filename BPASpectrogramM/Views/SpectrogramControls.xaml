@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BPASpectrogramM.Views.SpectrogramControls"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <HorizontalStackLayout>
+        <Button
+            Background="Wheat"
+            BorderColor="#0715F2"
+            BorderWidth="1"
+            Command="{Binding ToggleWaveformCommand}"
+            Text="WF"
+            TextColor="#000000"
+            ToolTipProperties.Text="Toggle waveform view" />
+        <Button
+            Background="Wheat"
+            BorderColor="#0715F2"
+            BorderWidth="1"
+            Command="{Binding ToggleButtonViewCommand}"
+            Text="Btns"
+            TextColor="Black"
+            ToolTipProperties.Text="Toggle Button Panel View" />
+        <Button
+            Margin="10,0,0,0"
+            Background="Wheat"
+            BorderColor="#0715F2"
+            BorderWidth="1"
+            Command="{Binding GotoStartCommand}"
+            Text="&lt; Start"
+            TextColor="Black"
+            ToolTipProperties.Text="Pan to start">
+            <FlyoutBase.ContextFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem
+                        x:Name="mfiStart"
+                        Command="{Binding GotoStartCommand}"
+                        Text="">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="Home" Modifiers="None" />
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                </MenuFlyout>
+            </FlyoutBase.ContextFlyout>
+        </Button>
+        <Button
+            Background="Wheat"
+            BorderColor="#0715F2"
+            BorderWidth="1"
+            Command="{Binding GotoEndCommand}"
+            Text="End &gt;"
+            TextColor="Black"
+            ToolTipProperties.Text="Pan to End">
+            <FlyoutBase.ContextFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem
+                        x:Name="mfiEnd"
+                        Command="{Binding GotoEndCommand}"
+                        Text="">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="End" Modifiers="None" />
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+                </MenuFlyout>
+            </FlyoutBase.ContextFlyout>
+        </Button>
+        <Button
+            Margin="10,0,0,0"
+            Background="Wheat"
+            BorderColor="#0715F2"
+            BorderWidth="1"
+            Command="{Binding PageBackCommand}"
+            Text="&lt; Back"
+            TextColor="Black"
+            ToolTipProperties.Text="Go Back one Page">
+            <FlyoutBase.ContextFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem
+                        x:Name="mfiBack"
+                        Command="{Binding PageBackCommand}"
+                        Text="">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="PageUp" Modifiers="None" />
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+
+                </MenuFlyout>
+            </FlyoutBase.ContextFlyout>
+        </Button>
+        <Button
+            Background="Wheat"
+            BorderColor="#0715F2"
+            BorderWidth="1"
+            Command="{Binding PageForwardCommand}"
+            Text="Fwd &gt;"
+            TextColor="Black"
+            ToolTipProperties.Text="Advance one page">
+            <FlyoutBase.ContextFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem
+                        x:Name="mfiAdvance"
+                        Command="{Binding PageForwardCommand}"
+                        Text="">
+                        <MenuFlyoutItem.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="PageDown" Modifiers="None" />
+                        </MenuFlyoutItem.KeyboardAccelerators>
+                    </MenuFlyoutItem>
+
+                </MenuFlyout>
+            </FlyoutBase.ContextFlyout>
+
+        </Button>
+
+        <HorizontalStackLayout HorizontalOptions="End">
+            <Button
+                x:Name="AutoAdvanceButton"
+                Background="Wheat"
+                BorderColor="#0715F2"
+                BorderWidth="1"
+                Command="{Binding ToggleAutoAdvanceCommand}"
+                HorizontalOptions="End"
+                Text="Auto Adv."
+                TextColor="Black"
+                ToolTipProperties.Text="Toggles Automatic Advance to next File">
+                <FlyoutBase.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem
+                            x:Name="mfiAutoOff"
+                            Clicked="mfiAutoOff_Clicked"
+                            Text="AutoAdvance OFF" />
+                        <MenuFlyoutItem
+                            x:Name="mfiAutoButton"
+                            Clicked="mfiAutoButton_Clicked"
+                            Text="AutoAdvance After Button" />
+                        <MenuFlyoutItem
+                            x:Name="mfiAutoText"
+                            Clicked="mfiAutoText_Clicked"
+                            Text="AutoAdvance After &lt;ENTER&gt;" />
+                        <MenuFlyoutItem
+                            x:Name="mfiAutoBoth"
+                            Clicked="mfiAutoBoth_Clicked"
+                            Text="AutoAdvance After Either" />
+
+                    </MenuFlyout>
+                </FlyoutBase.ContextFlyout>
+            </Button>
+            <Label
+                Margin="10,0,0,0"
+                Text="Label:- "
+                VerticalOptions="Center" />
+            <Border
+                Margin="5,0,0,0"
+                Stroke="Black"
+                StrokeThickness="1"
+                VerticalOptions="Center">
+                <Entry
+                    x:Name="CommentEntry"
+                    HorizontalOptions="End"
+                    ReturnCommand="{Binding CommentReturnCommand}"
+                    Text="{Binding comment, Mode=TwoWay}"
+                    VerticalOptions="Center"
+                    WidthRequest="400" />
+
+            </Border>
+        </HorizontalStackLayout>
+
+
+    </HorizontalStackLayout>
+</ContentView>

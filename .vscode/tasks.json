@@ -1,0 +1,53 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-maccatalyst",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "${workspaceFolder}/BRM-2/BRM-2.csproj",
+                "-f",
+                "net10.0-maccatalyst",
+                "-c",
+                "Debug"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "silent",
+                "panel": "new"
+            },
+            "problemaatcher": "$msCompile"
+        },
+        {
+            "label": "maui: Build",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "build",
+                "${workspaceFolder}/BRM-2/BRM-2.csproj"
+            ],
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "find-brm2-process",
+            "command": "bash",
+            "type": "shell",
+            "args": [
+                "${workspaceFolder}/.vscode/find-brm2-pid.sh"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false
+            },
+            "problemMatcher": []
+        }
+    ]
+}

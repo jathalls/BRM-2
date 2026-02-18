@@ -1,0 +1,447 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AppoMobi.Maui.Gestures</name>
+    </assembly>
+    <members>
+        <member name="T:AppoMobi.Maui.Gestures.MouseButton">
+            <summary>
+            Represents individual mouse buttons
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.Left">
+            <summary>
+            Left mouse button (primary button)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.Right">
+            <summary>
+            Right mouse button (secondary button)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.Middle">
+            <summary>
+            Middle mouse button (wheel button)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.XButton1">
+            <summary>
+            Extended button 1 (typically Back button)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.XButton2">
+            <summary>
+            Extended button 2 (typically Forward button)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.XButton3">
+            <summary>
+            Extended button for gaming mice (button 6)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.XButton4">
+            <summary>
+            Extended button for gaming mice (button 7)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.XButton5">
+            <summary>
+            Extended button for gaming mice (button 8)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.XButton6">
+            <summary>
+            Extended button for gaming mice (button 9)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.XButton7">
+            <summary>
+            Extended button for gaming mice (button 10)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.XButton8">
+            <summary>
+            Extended button for gaming mice (button 11)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.XButton9">
+            <summary>
+            Extended button for gaming mice (button 12)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButton.Extended">
+            <summary>
+            For buttons beyond the predefined ones, use ButtonNumber property
+            </summary>
+        </member>
+        <member name="T:AppoMobi.Maui.Gestures.MouseButtons">
+            <summary>
+            Flags enumeration for tracking multiple pressed mouse buttons simultaneously
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.None">
+            <summary>
+            No buttons pressed
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.Left">
+            <summary>
+            Left mouse button (primary button)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.Right">
+            <summary>
+            Right mouse button (secondary button)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.Middle">
+            <summary>
+            Middle mouse button (wheel button)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.XButton1">
+            <summary>
+            Extended button 1 (typically Back button)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.XButton2">
+            <summary>
+            Extended button 2 (typically Forward button)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.XButton3">
+            <summary>
+            Extended button for gaming mice (button 6)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.XButton4">
+            <summary>
+            Extended button for gaming mice (button 7)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.XButton5">
+            <summary>
+            Extended button for gaming mice (button 8)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.XButton6">
+            <summary>
+            Extended button for gaming mice (button 9)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.XButton7">
+            <summary>
+            Extended button for gaming mice (button 10)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.XButton8">
+            <summary>
+            Extended button for gaming mice (button 11)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtons.XButton9">
+            <summary>
+            Extended button for gaming mice (button 12)
+            </summary>
+        </member>
+        <member name="T:AppoMobi.Maui.Gestures.MouseButtonState">
+            <summary>
+            Represents the state of a mouse button
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtonState.Pressed">
+            <summary>
+            Button was just pressed down
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.MouseButtonState.Released">
+            <summary>
+            Button was just released
+            </summary>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.MultitouchTracker.Restart(System.Int64,Microsoft.Maui.Graphics.PointF)">
+            <summary>
+            For on first Down
+            </summary>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.MultitouchTracker.Reset">
+            <summary>
+            For on last Up
+            </summary>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.MultitouchTracker.AddMovement(System.Int64,Microsoft.Maui.Graphics.PointF)">
+            <summary>
+            For Panning
+            </summary>
+            <param name="id"></param>
+            <param name="position"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.TouchEffect.GetFrom(Microsoft.Maui.Controls.View)">
+            <summary>
+            Gets the TouchEffect instance from a view's Effects collection
+            </summary>
+            <param name="view">The view to get the effect from</param>
+            <returns>The TouchEffect instance, or null if not found</returns>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchEffect.WheelEventArgs.Center">
+            <summary>
+            Pixels inside parent view
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchEffect.PointerData.Button">
+            <summary>
+            The specific button that triggered this event (for Press/Release events)
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchEffect.PointerData.ButtonNumber">
+            <summary>
+            Button number (1-based) - useful for gaming mice with many buttons
+            1=Left, 2=Right, 3=Middle, 4+=Extended buttons
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchEffect.PointerData.IsScrolling">
+            <summary>
+            This is a scrolling gesture, logic is "Scrolled" will not have start or end of scrolling.
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchEffect.PointerData.State">
+            <summary>
+            State of the button that triggered this event
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchEffect.PointerData.PressedButtons">
+            <summary>
+            All currently pressed buttons (flags)
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchEffect.PointerData.DeviceType">
+            <summary>
+            Type of pointer device (Mouse, Pen, Touch)
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchEffect.PointerData.Pressure">
+            <summary>
+            For pen: pressure (0.0 to 1.0), for mouse: always 1.0
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.TouchEffect.TappedCancelMoveThresholdPoints">
+            <summary>
+            How much finger can move for the gestured to be still considered as TAPPED. In points, not pixels, default is 5.
+            </summary>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.TouchEffect.CheckLockAndSet(System.String,System.Int32)">
+            <summary>
+            Returns TRUE if still locked
+            </summary>
+            <param name="uid"></param>
+            <param name="ms"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.TouchEffect.IsInsideView(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Relative to the view coordinates, not the entire screen
+            </summary>
+            <param name="hitPixelsX"></param>
+            <param name="hitPixelsY"></param>
+            <param name="viewWidthPixels"></param>
+            <param name="viewHeightPixels"></param>
+            <returns></returns>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchEffect.Draggable">
+            <summary>
+            Set this to true not to cancel Moving action when moved outside while pressing
+            </summary>
+        </member>
+        <member name="E:AppoMobi.Maui.Gestures.TouchEffect.TapUnlocked">
+            <summary>
+            Useful for removing tapped visual  effects from button etc
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.TouchEffect.Disposing">
+            <summary>
+            Used by the platform code to dispose itself if Xamarin bugs and fails to detach it properly
+            </summary>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.TouchEffect.OnLongPressTimerTick(System.Object,System.EventArgs)">
+            <summary>
+            Handler for the timer tick event
+            </summary>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.TouchEffect.EnsureLongPressTimer">
+            <summary>
+            Initializes the long press timer if not already created
+            </summary>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.TouchEffect.EnableLongPressingTimer">
+            <summary>
+            Starts the long press detection timer
+            </summary>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.TouchEffect.DisableLongPressingTimer">
+            <summary>
+            Disables the long press timer
+            </summary>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.TouchEffect.SendTappedCommand(AppoMobi.Maui.Gestures.TouchActionEventArgs)">
+            <summary>
+            We CANNOT invoke commands from background thread with Task.Run,
+            otherwise it bugs (checked on android) when quickly spammed taps
+            The UI thread just gets locked processing commands and bindings stop working
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="T:AppoMobi.Maui.Gestures.PointerDeviceType">
+            <summary>
+            Represents the type of pointer device
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.PointerDeviceType.Touch">
+            <summary>
+            Touch input (finger)
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.PointerDeviceType.Mouse">
+            <summary>
+            Mouse input
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.PointerDeviceType.Pen">
+            <summary>
+            Pen/Stylus input
+            </summary>
+        </member>
+        <member name="T:AppoMobi.Maui.Gestures.TouchActionEventArgs">
+            <summary>
+            Everything is in pixels!!! Convert to points if needed
+            </summary>
+        </member>
+        <member name="M:AppoMobi.Maui.Gestures.TouchActionEventArgs.CalculateVelocity(AppoMobi.Maui.Gestures.TouchActionEventArgs)">
+            <summary>
+            Using Distance.Delta and Time of previous args
+            </summary>
+            <param name="previous"></param>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.PreventDefault">
+            <summary>
+            This is used in some cases, ex: can set this to true inside LongPressing handler to avoid calling Tapped
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.Location">
+            <summary>
+            In pixels inside parent view,
+            0,0 is top-left corner of the view
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.StartingLocation">
+            <summary>
+            In pixels inside parent view,
+            0,0 is top-left corner of the view
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.IsInContact">
+            <summary>
+            Gesture started inside view
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.IsInsideView">
+            <summary>
+            Current hit is inside the view
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.Context">
+            <summary>
+            Parameter to pass to commands
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.Handled">
+            <summary>
+            To do, would be used in synchronous mode, not used yet
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.NumberOfTouches">
+            <summary>
+            How many fingers we have down actually
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.Pointer">
+            <summary>
+            Mouse/Pointer specific data. Only set for mouse/pen events, null for touch events.
+            Check if not null to determine if this is a mouse/pen event.
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.Distance">
+            <summary>
+            In pixels inside parent view,
+            0,0 is top-left corner of the view
+            </summary>
+        </member>
+        <member name="T:AppoMobi.Maui.Gestures.TouchActionEventArgs.DistanceInfo">
+            <summary>
+            In pixels inside parent view,
+            0,0 is top-left corner of the view
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.DistanceInfo.Delta">
+            <summary>
+            In pixels inside parent view,
+            0,0 is top-left corner of the view
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.DistanceInfo.Total">
+            <summary>
+            In pixels inside parent view,
+            0,0 is top-left corner of the view
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.DistanceInfo.TotalVelocity">
+            <summary>
+            Pixels per second
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.DistanceInfo.Velocity">
+            <summary>
+            Pixels per second
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.DistanceInfo.Start">
+            <summary>
+            In pixels inside parent view,
+            0,0 is top-left corner of the view
+            </summary>
+        </member>
+        <member name="P:AppoMobi.Maui.Gestures.TouchActionEventArgs.DistanceInfo.End">
+            <summary>
+            In pixels inside parent view,
+            0,0 is top-left corner of the view
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.TouchActionResult.Pointer">
+            <summary>
+            Mouse/pen pointer movement without press
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.TouchHandlingStyle.Lock">
+            <summary>
+            Locks totally input for self, useful inside scroll view, panning controls like slider etc
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.TouchHandlingStyle.Manual">
+            <summary>
+            You control how it works with with parent controls, if you set the effect `WillLock` property to Locked/Unlocked at runtime.
+            This allows to work simultaneously inside a ScrollView, you could set WillLock to locked when you consume panning, and unlock it for the panning is wrong direction..
+            </summary>
+        </member>
+        <member name="F:AppoMobi.Maui.Gestures.TouchHandlingStyle.Disabled">
+            <summary>
+            Same as InputTransparent=true
+            </summary>
+        </member>
+        <member name="T:AppoMobi.Maui.Gestures.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+    </members>
+</doc>

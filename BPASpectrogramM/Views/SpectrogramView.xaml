@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BPASpectrogramM.Views.SpectrogramView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:core="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+    xmlns:local="clr-namespace:BPASpectrogramM.Views"
+    xmlns:sfGauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
+    xmlns:sfSlider="clr-namespace:Syncfusion.Maui.Sliders;assembly=Syncfusion.Maui.Sliders"
+    xmlns:skia="clr-namespace:SkiaSharp.Views.Maui.Controls;assembly=SkiaSharp.Views.Maui.Controls"
+    x:DataType="local:SpectrogramView">
+    <Border
+        Stroke="Black"
+        StrokeThickness="1"
+        VerticalOptions="Fill">
+        <Grid
+            Margin="10"
+            ColumnDefinitions="50,*,50,50"
+            RowDefinitions="Auto,*,Auto,Auto"
+            VerticalOptions="Fill">
+            <!--
+                Top row allows for a time scale control to be inserted
+                Second row is the spectrogram itself
+                Third row allows for a range slider for zooming and panning
+                Fourth Row allows for display of labels
+            -->
+            <core:SfBusyIndicator
+                x:Name="busyIndicator"
+                Grid.Row="1"
+                Grid.Column="1"
+                IsRunning="{Binding IsBusyRunning}">
+                <!--  Main Spectrogram  -->
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Stroke="Blue"
+                    StrokeThickness="1"
+                    VerticalOptions="Fill">
+                    <Grid RowDefinitions="*">
+                        <skia:SKCanvasView
+                            x:Name="CanvasView"
+                            Margin="0,7"
+                            EnableTouchEvents="True"
+                            HorizontalOptions="Fill"
+                            PaintSurface="OnPaintSurface"
+                            
+                            SizeChanged="CanvasView_SizeChanged" >
+                            <skia:SKCanvasView.GestureRecognizers>
+
+
+                                <PinchGestureRecognizer PinchUpdated="OnPinchUpdated" />
+                            </skia:SKCanvasView.GestureRecognizers>
+                            
+
+                            <FlyoutBase.ContextFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Clicked="fmiZoomIn_Clicked" Text="Zoom In">
+                                        <MenuFlyoutItem.KeyboardAccelerators>
+                                            <KeyboardAccelerator Key="Add" Modifiers="None" />
+                                        </MenuFlyoutItem.KeyboardAccelerators>
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem
+                                        x:Name="fmiZoomOut"
+                                        Clicked="fmiZoomOut_Clicked"
+                                        Text="Zoom Out">
+                                        <MenuFlyoutItem.KeyboardAccelerators>
+                                            <KeyboardAccelerator Key="Subtract" Modifiers="None" />
+                                        </MenuFlyoutItem.KeyboardAccelerators>
+                                    </MenuFlyoutItem>
+                                    <MenuFlyoutItem
+                                        x:Name="fmiZoomAll"
+                                        Clicked="fmiZoomAll_Clicked"
+                                        Text="Zoom All" />
+                                    <MenuFlyoutItem
+                                        x:Name="fmiZoomSelection"
+                                        Clicked="fmiZoomSelection_Clicked"
+                                        Text="Zoom Selection" />
+                                    <MenuFlyoutItem
+                                        x:Name="fmiZoomDefault"
+                                        Clicked="fmiZoomDefault_Clicked"
+                                        Text="Zoom Default (5s)" />
+
+                                    <MenuFlyoutSeparator />
+                                    <MenuFlyoutItem
+                                        x:Name="mfiColorChoice"
+                                        Clicked="mfiColorChoice_Clicked"
+                                        Text="Choose Colorscheme" />
+                                    <MenuFlyoutSeparator />
+                                    <MenuFlyoutItem
+                                        x:Name="mfiPlaySelection"
+                                        Clicked="mfiPlaySelectionClicked"
+                                        Text="Play Selection"
+                                        ToolTipProperties.Text="Play the selected time range through the audio output device" />
+                                    <MenuFlyoutItem
+                                        x:Name="mfiPowerSpectrum"
+                                        Clicked="mfiPowerSpectrumClicked"
+                                        Text="Power Spectrum"
+                                        ToolTipProperties.Text="Display the Power Spectrum of the selection" />
+
+                                </MenuFlyout>
+                            </FlyoutBase.ContextFlyout>
+
+                        </skia:SKCanvasView>
+                    </Grid>
+                </Border>
+            </core:SfBusyIndicator>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="kHz"
+                VerticalOptions="End" />
+            <!--  Vertical frequency scale bar  -->
+            <sfGauge:SfLinearGauge
+                x:Name="FrequencyScale"
+                Grid.Row="1"
+                Grid.Column="0"
+                LabelPosition="Outside"
+                LabelFormat="F1"
+                Maximum="{Binding FrequencyRangeEnd}"
+                Minimum="{Binding FrequencyRangeStart}"
+                MinorTicksPerInterval="5"
+                Orientation="Vertical"
+                ShowTicks="True"
+                TickPosition="Outside">
+                <sfGauge:SfLinearGauge.MajorTickStyle>
+                    <sfGauge:LinearTickStyle
+                        Length="10"
+                        StrokeThickness="2" />
+                </sfGauge:SfLinearGauge.MajorTickStyle>
+                <sfGauge:SfLinearGauge.MinorTickStyle>
+                    <sfGauge:LinearTickStyle
+                        Length="5"
+                        StrokeThickness="1" />
+                </sfGauge:SfLinearGauge.MinorTickStyle>
+
+            </sfGauge:SfLinearGauge>
+
+            <!--  Horizontal Time Scale  -->
+            <VerticalStackLayout
+                x:Name="TimeStack"
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0">
+                <sfGauge:SfLinearGauge
+                    x:Name="TimeScale"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0"
+                    LabelFormat="F1"
+                    LabelPosition="Outside"
+                    Maximum="{Binding TimeScaleEnd}"
+                    Minimum="{Binding TimeScaleStart}"
+                    Orientation="Horizontal"
+                    TickPosition="Outside"
+                    VerticalOptions="End" />
+            </VerticalStackLayout>
+
+            <!--  Time adjustment and siplay slider  -->
+            <sfSlider:SfRangeSlider
+                x:Name="TimeRangeSlider"
+                Grid.Row="2"
+                Grid.Column="1"
+                DragBehavior="Both"
+                Maximum="{Binding TotalFFTs}"
+                Minimum="0"
+                Orientation="Horizontal"
+                RangeEnd="{Binding EndOfSpectrogramInFFTs, Mode=TwoWay}"
+                RangeStart="{Binding StartOfSpectrogramInFFTs, Mode=TwoWay}"
+                ValueChanged="TimeRangeSlider_ValueChanged" />
+
+            <!--  Frequency range adjustment and display slider  -->
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="2"
+                Text="kHz"
+                VerticalOptions="End" />
+            <sfSlider:SfRangeSlider
+                x:Name="FreqRangeSlider"
+                Grid.Row="1"
+                Grid.Column="2"
+                DragBehavior="Both"
+                Maximum="{Binding MaxFrequency}"
+                Minimum="0"
+                Orientation="Vertical"
+                RangeEnd="{Binding FrequencyRangeEnd, Mode=TwoWay}"
+                RangeStart="{Binding FrequencyRangeStart, Mode=TwoWay}"
+                ShowTicks="True"
+                ValueChanged="FreqRangeSlider_ValueChanged">
+                <sfSlider:SfRangeSlider.ThumbStyle>
+                    <sfSlider:SliderThumbStyle Radius="3" />
+                </sfSlider:SfRangeSlider.ThumbStyle>
+                <FlyoutBase.ContextFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Clicked="MenuFlyoutItem_Clicked" Text="Restore" />
+                        <MenuFlyoutItem Clicked="MenuFlyoutItem_Clicked_1" Text="All" />
+                    </MenuFlyout>
+                </FlyoutBase.ContextFlyout>
+
+            </sfSlider:SfRangeSlider>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="3"
+                Text="Int"
+                VerticalOptions="End" />
+            <sfSlider:SfSlider
+                x:Name="IntensitySlider"
+                Grid.Row="1"
+                Grid.Column="3"
+                Maximum="{Binding MaxIntensity}"
+                Minimum="{Binding MinIntensity}"
+                Orientation="Vertical"
+                ToolTipProperties.Text="Adjusts Contrast and brightness"
+                ValueChanged="IntensitySlider_ValueChanged"
+                Value="{Binding IntensityValue, Mode=TwoWay}">
+                <sfSlider:SfSlider.ThumbStyle>
+                    <sfSlider:SliderThumbStyle Radius="2" />
+                </sfSlider:SfSlider.ThumbStyle>
+            </sfSlider:SfSlider>
+
+            <local:AudioPlayer
+                x:Name="audioPlayer"
+                Grid.Row="3"
+                Grid.Column="1"
+                HorizontalOptions="Center"
+                IsVisible="False"
+                VerticalOptions="Center" />
+
+        </Grid>
+    </Border>
+</ContentView>

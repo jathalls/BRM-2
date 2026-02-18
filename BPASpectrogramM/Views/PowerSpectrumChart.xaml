@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class=" BPASpectrogramM.Views.PowerSpectrumChart"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:BPASpectrogramM.ViewModels"
+    xmlns:chart="clr-namespace:Syncfusion.Maui.Charts;assembly=Syncfusion.Maui.Charts"
+    xmlns:vm="clr-namespace:BPASpectrogramM.ViewModels"
+    x:DataType="vm:PowerSpectrumVM">
+    <Grid ColumnDefinitions="20,*,20" RowDefinitions="20,*,40">
+        <chart:SfCartesianChart Grid.Row="1" Grid.Column="1">
+            <chart:SfCartesianChart.Resources>
+                <DataTemplate x:Key="trackballLabelTemplate">
+                    <HorizontalStackLayout>
+                       
+
+                        <Label
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="{Binding x:DataType=local:DataPoint, Path=DataItem.Frequency, StringFormat=' {0:F1}kHz '}"
+                            TextColor="White" />
+                        <Label
+                            FontSize="12"
+                            HorizontalOptions="Center"
+                            Text="{Binding x:DataType=local:DataPoint, Path=DataItem.Amplitude, StringFormat=': {0:F2}dB'}"
+                            TextColor="White" />
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </chart:SfCartesianChart.Resources>
+
+            <chart:SfCartesianChart.XAxes>
+                <chart:NumericalAxis
+                    x:Name="ChartNumericalAxisX"
+                    Maximum="{Binding MaxFrequency}"
+                    Minimum="10" />
+            </chart:SfCartesianChart.XAxes>
+            <chart:SfCartesianChart.YAxes>
+                <chart:NumericalAxis
+                    x:Name="ChartNumericalAxisY"
+                    CrossesAt="0"
+                    LabelsPosition="Outside"
+                    Maximum="{Binding MaxDB}"
+                    Minimum="{Binding MinDB}">
+                    <chart:NumericalAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle LabelFormat="F2" />
+                    </chart:NumericalAxis.LabelStyle>
+                </chart:NumericalAxis>
+            </chart:SfCartesianChart.YAxes>
+
+
+
+            <chart:LineSeries
+                x:Name="ChartLineSeries"
+               
+                IsVisible="True"
+                ItemsSource="{Binding PowerSpectrumSeries}"
+                Label="Power Spectrum"
+                Fill="Blue"
+                TrackballLabelTemplate="{StaticResource Key=trackballLabelTemplate}"
+                XBindingPath="Frequency"
+                YBindingPath="Amplitude" />
+
+            <chart:SfCartesianChart.ZoomPanBehavior>
+                <chart:ChartZoomPanBehavior
+                    EnableDirectionalZooming="True"
+                    EnablePanning="True"
+                    EnablePinchZooming="true"
+                    EnableSelectionZooming="True" />
+            </chart:SfCartesianChart.ZoomPanBehavior>
+
+            <chart:SfCartesianChart.TrackballBehavior>
+                <chart:ChartTrackballBehavior DisplayMode="NearestPoint" ShowLabel="True" />
+            </chart:SfCartesianChart.TrackballBehavior>
+
+        </chart:SfCartesianChart>
+
+    </Grid>
+</ContentView>

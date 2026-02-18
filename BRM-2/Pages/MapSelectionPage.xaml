@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="BRM_2.Pages.MapSelectionPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:BRM_2.Controls"
+    xmlns:vm="clr-namespace:BRM_2.ViewModels"
+    Title="MapSelectionPage"
+    x:DataType="vm:MapSelectionVM">
+    <Grid ColumnDefinitions="*" RowDefinitions="30,*,30">
+        <Label
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Map" />
+        <local:MapControl
+            x:Name="mapControl"
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalOptions="Fill"
+            SelectedPosition="{Binding SelectedPagePosition, Mode=TwoWay}"
+            VerticalOptions="Fill" />
+        <HorizontalStackLayout
+            Grid.Row="2"
+            Grid.Column="0"
+            HeightRequest="30">
+            <Button
+                x:Name="OKButton"
+                Command="{Binding OKButtonCommand}"
+                Text="OK" />
+            <Button
+                x:Name="CancelButton"
+                Margin="5,0,0,0"
+                Command="{Binding CancelButtonCommand}"
+                Text="CANCEL" />
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

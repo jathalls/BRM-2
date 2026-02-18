@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="BRM_2.Controls.MapControl"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:map="clr-namespace:Syncfusion.Maui.Maps;assembly=Syncfusion.Maui.Maps">
+    <Border Stroke="Black" StrokeThickness="1">
+        <Grid ColumnDefinitions="*" RowDefinitions="*">
+            <!--  UrlTemplate="https://tile.openstreetmap.org/{z}/{x}/{y}.png">  -->
+            <map:SfMaps
+                x:Name="sfMap"
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
+                <map:SfMaps.Layer>
+                    <map:MapTileLayer
+                        x:Name="mapTile"
+                        DistanceType="Meter"
+                        Radius="1000">
+
+                        <map:MapTileLayer.ZoomPanBehavior>
+                            <map:MapZoomPanBehavior
+                                x:Name="zpBehaviour"
+                                EnablePanning="True"
+                                EnableZooming="True"
+                                MaxZoomLevel="80"
+                                ZoomLevel="1" />
+                        </map:MapTileLayer.ZoomPanBehavior>
+                    </map:MapTileLayer>
+
+                </map:SfMaps.Layer>
+            </map:SfMaps>
+        </Grid>
+    </Border>
+</ContentView>
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BPASpectrogramM.Views.FrequencyButtonBar">
+    <Grid
+        WidthRequest="30"
+        RowDefinitions="30,30,30,30">
+        <Button
+            x:Name="ZoomInButton"
+            Grid.Row="0"
+            Background="Wheat" TextColor="Black" BorderWidth="1" BorderColor="#0715F2"
+            Command="{Binding FrequencyZoomInCommand}"
+            HeightRequest="30" WidthRequest="30"
+            FontAttributes="Bold"
+            Text="+"/>
+        <Button
+            x:Name="ZoomOutButton"
+            Grid.Row="1"
+            Background="Wheat" TextColor="Black" BorderWidth="1" BorderColor="#0715F2"
+            Command="{Binding FrequencyZoomOutCommand}"
+            HeightRequest="30" WidthRequest="30"
+            FontAttributes="Bold"
+            Text="-"/>
+        <Button
+            x:Name="ZoomExtentsButton"
+            Grid.Row="2"
+            Background="Wheat" TextColor="Black" BorderWidth="1" BorderColor="#0715F2"
+            Command="{Binding FrequencyZoomExtentsCommand}"
+            HeightRequest="30" WidthRequest="30"
+            FontAttributes="Bold"
+            Text="#"/>
+        <Button
+            x:Name="ZoomDefaultButton"
+            Grid.Row="3"
+            Background="Wheat" TextColor="Black" BorderWidth="1" BorderColor="#0715F2"
+            Command="{Binding FrequencyZoomDefaultCommand}"
+            HeightRequest="30" WidthRequest="30"
+            FontAttributes="Bold"
+            Text="D"/>
+    </Grid>
+</ContentView>
