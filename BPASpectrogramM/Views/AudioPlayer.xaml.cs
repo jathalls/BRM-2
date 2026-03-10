@@ -1,3 +1,4 @@
+using BPASpectrogramM.Interfaces;
 using CommunityToolkit.Maui.Views;
 using System.ComponentModel;
 using System.Diagnostics;
