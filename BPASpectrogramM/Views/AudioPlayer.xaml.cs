@@ -38,10 +38,6 @@ public partial class AudioPlayer : ContentView, INotifyPropertyChanged, IDisposa
         set
         {
             _volume = Math.Clamp(value, 0.0, 1.0);
-            if (mediaElement != null)
-            {
-                mediaElement.Volume = _volume;
-            }
             OnPropertyChanged();
         }
     }
@@ -58,18 +54,68 @@ public partial class AudioPlayer : ContentView, INotifyPropertyChanged, IDisposa
         }
     }
 
-    private MediaElement? mediaElement;
+    private IAudioPlaybackService? audioPlaybackService;
+    private MediaElement? mediaElement;  // Kept for fallback/heterodyne mode
     private System.Timers.Timer? positionTimer;
     private float currentPosition = 0.0f;
     private float lastPosition = 0.0f;
     private bool isPlaying = false;
     private double speedFactor = 1.0;
+    private bool useNativeAudioEngine = true;
 
     public AudioPlayer()
     {
         InitializeComponent();
         BindingContext = this;
-        InitializeMediaElement();
+        InitializeAudioServices();
+    }
+
+    private partial IAudioPlaybackService? CreatePlatformAudioPlaybackService();
+
+    private void InitializeAudioServices()
+    {
+        try
+        {
+            // Resolve platform implementation via per-platform partial class.
+            audioPlaybackService = CreatePlatformAudioPlaybackService();
+            if (audioPlaybackService != null)
+            {
+                audioPlaybackService.PlaybackEnded += OnAudioPlaybackEnded;
+                Debug.WriteLine("[AudioPlayer] Platform-specific audio service initialized");
+            }
+            else
+            {
+                useNativeAudioEngine = false;
+                Debug.WriteLine("[AudioPlayer] No platform audio service; using MediaElement fallback");
+            }
+
+            // Also initialize MediaElement for heterodyne mode (fallback)
+            InitializeMediaElement();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[AudioPlayer] Error initializing audio services: {ex.Message}");
+            useNativeAudioEngine = false;
+            InitializeMediaElement();
+        }
+    }
+    
+    private void OnAudioPlaybackEnded(object? sender, EventArgs e)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            var selected = cmbSpeed.SelectedItem?.ToString() ?? "";
+            if (selected.Contains("heterodyne", StringComparison.CurrentCultureIgnoreCase))
+            {
+                Debug.WriteLine("[AudioPlayer] Looping playback");
+                // Restart for looping
+                PlayAudioAsync();
+            }
+            else
+            {
+                StopPlayback();
+            }
+        });
     }
 
     private void InitializeMediaElement()
@@ -132,7 +178,22 @@ public partial class AudioPlayer : ContentView, INotifyPropertyChanged, IDisposa
                 Debug.WriteLine($"[AudioPlayer] Audio Format - Sample Rate: {fileFormat.SampleRate}, Channels: {fileFormat.ChannelCount}, Bits: {fileFormat.BitsPerSample}");
             }
 
-            // Load into MediaElement
+            // Load into platform-specific audio service
+            if (audioPlaybackService != null && useNativeAudioEngine)
+            {
+                try
+                {
+                    audioPlaybackService.LoadSegment(file, startOffset, endOffset, fileFormat);
+                    Debug.WriteLine("[AudioPlayer] Audio loaded into platform-specific service");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[AudioPlayer] Error loading into platform service: {ex.Message}");
+                    useNativeAudioEngine = false;
+                }
+            }
+            
+            // Also load into MediaElement for heterodyne mode
             if (mediaElement != null)
             {
                 try
@@ -163,9 +224,9 @@ public partial class AudioPlayer : ContentView, INotifyPropertyChanged, IDisposa
 
     private async Task PlayAudioAsync()
     {
-        if (mediaElement == null || string.IsNullOrEmpty(currentFile))
+        if (string.IsNullOrEmpty(currentFile))
         {
-            Debug.WriteLine("[AudioPlayer] MediaElement or file is not available");
+            Debug.WriteLine("[AudioPlayer] File is not available");
             return;
         }
 
@@ -173,11 +234,87 @@ public partial class AudioPlayer : ContentView, INotifyPropertyChanged, IDisposa
         {
             isPlaying = true;
             speedFactor = GetSpeedFactor();
-            Debug.WriteLine($"[AudioPlayer] Playing with speed factor: {speedFactor}");
+            var selected = cmbSpeed.SelectedItem?.ToString() ?? "";
+            bool isHeterodyneMode = selected.Contains("heterodyne", StringComparison.CurrentCultureIgnoreCase);
+            
+            Debug.WriteLine($"[AudioPlayer] Playing with speed factor: {speedFactor}, Heterodyne: {isHeterodyneMode}");
 
+            // Use heterodyne mode with MediaElement
+            if (isHeterodyneMode)
+            {
+                await PlayWithMediaElement();
+            }
+            // Use platform-specific audio service for slow playback (sample rate manipulation)
+            else if (audioPlaybackService != null && useNativeAudioEngine)
+            {
+                PlayWithNativeAudioEngine();
+            }
+            // Fallback to MediaElement
+            else
+            {
+                await PlayWithMediaElement();
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[AudioPlayer] Playback error: {ex.Message}");
+            isPlaying = false;
+        }
+    }
+
+    private void PlayWithNativeAudioEngine()
+    {
+        try
+        {
+            Debug.WriteLine($"[AudioPlayer] Using native audio engine for speed: {speedFactor}");
+            
+            audioPlaybackService?.Play(speedFactor, Volume);
+            
+            // Start position tracking timer
+            positionTimer?.Stop();
+            positionTimer?.Dispose();
+            positionTimer = new System.Timers.Timer(100);
+            positionTimer.Elapsed += (sender, e) =>
+            {
+                try
+                {
+                    if (audioPlaybackService != null && audioPlaybackService.IsPlaying)
+                    {
+                        currentPosition = (float)audioPlaybackService.GetPosition();
+                        OnPlayBackUpdated(new FileEventArgs(currentFile));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"[AudioPlayer] Timer error: {ex.Message}");
+                }
+            };
+            positionTimer.Start();
+            
+            Debug.WriteLine("[AudioPlayer] Native audio playback started");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[AudioPlayer] Native audio error: {ex.Message}");
+            isPlaying = false;
+        }
+    }
+
+    private async Task PlayWithMediaElement()
+    {
+        if (mediaElement == null)
+        {
+            Debug.WriteLine("[AudioPlayer] MediaElement not available");
+            return;
+        }
+
+        try
+        {
+            Debug.WriteLine($"[AudioPlayer] Using MediaElement");
+            
             mediaElement.Volume = Volume;
 
-            // Try to set playback rate if supported
+            // Try to set playback rate if supported (won't work for very slow speeds)
             try
             {
                 if (speedFactor != 1.0)
@@ -253,11 +390,11 @@ public partial class AudioPlayer : ContentView, INotifyPropertyChanged, IDisposa
             };
             positionTimer.Start();
 
-            Debug.WriteLine("[AudioPlayer] Playback started");
+            Debug.WriteLine("[AudioPlayer] MediaElement playback started");
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"[AudioPlayer] Playback error: {ex.Message}");
+            Debug.WriteLine($"[AudioPlayer] MediaElement playback error: {ex.Message}");
             isPlaying = false;
         }
     }
@@ -283,7 +420,13 @@ public partial class AudioPlayer : ContentView, INotifyPropertyChanged, IDisposa
     private void btnPause_Clicked(object sender, EventArgs e)
     {
         Debug.WriteLine("[AudioPlayer] Pausing Playback");
+        
+        // Pause platform-specific audio service
+        audioPlaybackService?.Pause();
+        
+        // Pause MediaElement
         mediaElement?.Pause();
+        
         isPlaying = false;
         positionTimer?.Stop();
         btnPlay.IsEnabled = true;
@@ -298,7 +441,13 @@ public partial class AudioPlayer : ContentView, INotifyPropertyChanged, IDisposa
     private void StopPlayback()
     {
         isPlaying = false;
+
+        // Stop platform-specific audio service
+        audioPlaybackService?.Stop();
+        
+        // Stop MediaElement
         mediaElement?.Stop();
+        
         positionTimer?.Stop();
         currentPosition = (float)startOffset.TotalSeconds;
         lastPosition = currentPosition;
@@ -320,6 +469,12 @@ public partial class AudioPlayer : ContentView, INotifyPropertyChanged, IDisposa
 
     internal double GetPosition()
     {
+        // Try to get position from native audio service first
+        if (audioPlaybackService != null && audioPlaybackService.IsPlaying)
+        {
+            return audioPlaybackService.GetPosition();
+        }
+        
         return currentPosition;
     }
 
@@ -327,7 +482,11 @@ public partial class AudioPlayer : ContentView, INotifyPropertyChanged, IDisposa
     {
         Debug.WriteLine("[AudioPlayer] Disposing Audio Player Resources");
         isPlaying = false;
+        
+        // Stop both audio services
+        audioPlaybackService?.Stop();
         mediaElement?.Stop();
+        
         positionTimer?.Stop();
         positionTimer?.Dispose();
         positionTimer = null;
@@ -338,8 +497,15 @@ public partial class AudioPlayer : ContentView, INotifyPropertyChanged, IDisposa
     public void Dispose()
     {
         Stop();
+        
+        // Dispose platform-specific audio service
+        audioPlaybackService?.Dispose();
+        audioPlaybackService = null;
+        
+        // Dispose MediaElement
         mediaElement?.Dispose();
         mediaElement = null;
+        
         GC.SuppressFinalize(this);
     }
 }

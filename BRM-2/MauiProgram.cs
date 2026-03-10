@@ -23,12 +23,14 @@ public static class MauiProgram
 			
 			builder
 				.UseMauiApp<App>()
+				.UseMauiCommunityToolkitMediaElement(false)
+				.UseMauiCommunityToolkit()
 				.ConfigureFonts(fonts =>
 				{
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				})
-				.UseMauiCommunityToolkit()
+				
 				.ConfigureSyncfusionCore()
 				.UseScottPlot()
 				.ConfigureLifecycleEvents(events =>

@@ -14,6 +14,8 @@ namespace BPASpectrogramM
         public int BlockAlign { get; set; }
         public long AudioDataStartPosition { get; set; }
         public int AudioDataSize { get; set; }
+        
+        public TimeSpan Duration => TimeSpan.FromSeconds(AudioDataSize/ByteRate);
     }
 
     /// <summary>

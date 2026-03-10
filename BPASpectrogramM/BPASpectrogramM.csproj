@@ -39,6 +39,33 @@
         <Compile Remove="SpectrogramGenerator.cs" />
         <Compile Remove="Views\SpectrogramControl.xaml.cs" />
     </ItemGroup>
+    <ItemGroup>
+        <Compile Remove="Platforms\iOS\AppDelegate.cs" />
+        <Compile Remove="Platforms\iOS\Program.cs" />
+        <Compile Remove="Platforms\MacCatalyst\AppDelegate.cs" />
+        <Compile Remove="Platforms\MacCatalyst\Program.cs" />
+    </ItemGroup>
+
+    <!-- Explicitly exclude platform-specific files when building for wrong platforms -->
+    <ItemGroup Condition="'$(TargetFramework)' != 'net10.0-ios'">
+        <Compile Remove="Platforms\iOS\**\*.cs" />
+        <None Include="Platforms\iOS\**\*.cs" />
+    </ItemGroup>
+    
+    <ItemGroup Condition="'$(TargetFramework)' != 'net10.0-maccatalyst'">
+        <Compile Remove="Platforms\MacCatalyst\**\*.cs" />
+        <None Include="Platforms\MacCatalyst\**\*.cs" />
+    </ItemGroup>
+    
+    <ItemGroup Condition="'$(TargetFramework)' != 'net10.0-android'">
+        <Compile Remove="Platforms\Android\**\*.cs" />
+        <None Include="Platforms\Android\**\*.cs" />
+    </ItemGroup>
+    
+    <ItemGroup Condition="$(TargetFramework.Contains('windows')) == false">
+        <Compile Remove="Platforms\Windows\**\*.cs" />
+        <None Include="Platforms\Windows\**\*.cs" />
+    </ItemGroup>
 
     <ItemGroup>
         <MauiXaml Remove="Views\SpectrogramControl.xaml" />

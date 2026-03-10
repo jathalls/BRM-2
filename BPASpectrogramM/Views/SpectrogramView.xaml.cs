@@ -511,14 +511,12 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
         {
             try
             {
-
-                //var sg = new SpectrogramGenerator(data.sampleRate, fftSize: 1024, stepSize: 512, maxFreq: data.sampleRate / 2);
-                //sg.Add(data.audio);
-                var maps = Spectrogram.Colormap.GetColormapNames();
-                
-
                 sg.Colormap = Spectrogram.Colormap.GetColormap(CurrentColorMap);
+                Debug.WriteLine($"[GetSpectrogram] Calling GetBitmap for {sg.Width} x {sg.Height} frames…");
+                var sw = System.Diagnostics.Stopwatch.StartNew();
                 SDbmp = sg?.GetBitmap(dB: true, intensity: Intensity);
+                sw.Stop();
+                Debug.WriteLine($"[GetSpectrogram] GetBitmap completed in {sw.ElapsedMilliseconds} ms. Bitmap: {SDbmp?.Width}x{SDbmp?.Height}");
             }
             catch (Exception ex)
             {
@@ -527,10 +525,8 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
                 SDbmp?.Dispose();
                 SDbmp = new SKBitmap(1000, 512);
                 IsModified = false;
-
             }
         }
-
 
         return SDbmp;
     }
@@ -584,15 +580,25 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
         }
     }
 
+    /// <summary>
+    /// Maximum number of seconds of audio to process into FFT frames on initial load.
+    /// Prevents startup hang on very long files (e.g. 60-second reference files at 384 kHz
+    /// which would produce ~46,000 FFT columns and a ~94 MB bitmap that blocks the thread pool).
+    /// Full-file metadata (TotalFFTs, DurationSecs) is still calculated from the WAV header so
+    /// the time-axis navigation remains accurate.
+    /// </summary>
+    private const double MaxInitialLoadDurationSecs = 15.0;
+
     private Spectrogram.SpectrogramGenerator sg = null;
-    Spectrogram.SpectrogramGenerator? ReadMono(string filePath, double multiplier = 16000)
+
+    Spectrogram.SpectrogramGenerator? ReadMono(string filePath, double multiplier = 16000,
+        double maxLoadDurationSecs = MaxInitialLoadDurationSecs)
     {
         if(!File.Exists(filePath))
         {
             return null;
         }
         CurrentFile = filePath;
-        //Spectrogram.SpectrogramGenerator? sg = null;
         IsBusyRunning = true;
         try
         {
@@ -600,7 +606,8 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
             {
                 int sampleRate = afr.SampleRate;
                 int bytesPerSample = afr.FormatInfo.BitsPerSample / 8;
-                int sampleCount = (int)(afr.Provider.Length);
+                int bytesPerFrame = bytesPerSample * afr.Channels;
+                int sampleCount = afr.FormatInfo.AudioDataSize / bytesPerFrame;
                 SampleRate = sampleRate;
                 DurationSecs = sampleCount / SampleRate;
                 TotalFFTs = (int)(sampleCount / FFTStepSize); // at an advance of 512 samples per FFT
@@ -615,13 +622,33 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
                 FrequencyRangeEnd = Math.Max(100,MaxFrequency/2);
                 int channelCount = afr.FormatInfo.ChannelCount;
                 sg = new Spectrogram.SpectrogramGenerator(sampleRate, fftSize: FFTSize, stepSize: FFTStepSize, maxFreq: sampleRate / 2);
-                //var audio = new List<double>(FFTSize);
+
                 if (sg != null)
                 {
+                    // Limit how many samples we feed into the spectrogram generator on first load.
+                    // For a 384 kHz file, every second produces 750 FFT columns (384000/512).
+                    // Loading the entire 61-second reference file upfront creates ~46 k columns,
+                    // a ~94 MB bitmap, and causes the thread pool to hang.
+                    long maxSamplesToLoad = maxLoadDurationSecs > 0
+                        ? (long)(maxLoadDurationSecs * sampleRate * channelCount)
+                        : long.MaxValue;
+
+                    if (DurationSecs > maxLoadDurationSecs && maxLoadDurationSecs > 0)
+                        Debug.WriteLine($"[ReadMono] File is {DurationSecs:F1}s — loading first {maxLoadDurationSecs:F0}s to avoid startup hang.");
+
                     var buffer = new float[sampleRate * channelCount];
                     int samplesRead = 0;
+                    long totalSamplesAdded = 0;
                     while ((samplesRead = afr.Read(buffer)) > 0)
-                        sg.Add(buffer.Take(samplesRead).Select(x => x * multiplier));
+                    {
+                        int samplesToAdd = (int)Math.Min(samplesRead, maxSamplesToLoad - totalSamplesAdded);
+                        if (samplesToAdd <= 0) break;
+                        sg.Add(buffer.Take(samplesToAdd).Select(x => (double)(x * multiplier)));
+                        totalSamplesAdded += samplesToAdd;
+                        if (totalSamplesAdded >= maxSamplesToLoad) break;
+                    }
+
+                    Debug.WriteLine($"[ReadMono] Loaded {sg.Width} FFT frames ({sg.Width / FFTsPerSec:F1}s of audio).");
                 }
             }
         }

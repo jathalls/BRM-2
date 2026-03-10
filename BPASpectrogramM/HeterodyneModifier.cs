@@ -50,7 +50,7 @@ namespace BPASpectrogramM
 
         }
 
-        public override float ProcessSample(float sample, int channel)
+        public float ProcessSample(float sample, int channel)
         {
             sample = sample * HeterodyneOscillator.GenerateSample();
             var dt = 1/_format.SampleRate;
