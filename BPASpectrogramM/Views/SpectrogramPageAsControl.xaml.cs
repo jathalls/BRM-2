@@ -16,6 +16,8 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
 
     public event EventHandler<FileEventArgs> AnalysisCompletedEvent;
 
+    private bool LoadDefaults = false;
+
     protected virtual void OnAnalysisCompleted(FileEventArgs e)
     {
         AnalysisCompletedEvent?.Invoke(this, e);
@@ -31,7 +33,7 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
             OnPropertyChanged();
         }
     }
-    public SpectrogramPageAsControl()
+    public SpectrogramPageAsControl(bool loadDefaults=false)
     {
         Debug.WriteLine("[SpectrogramPageAsControl] Constructor: Starting");
         InitializeComponent();
@@ -46,7 +48,7 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
         ButtonVisibility = false;
         SpToolbar.SetParentPage(this);
         Debug.WriteLine("[SpectrogramPageAsControl] About to ReadDefaults");
-        ReadDefaults().ConfigureAwait(false);
+        //ReadDefaults().ConfigureAwait(false);
         Debug.WriteLine("[SpectrogramPageAsControl] Defaults read");
         Unfocused += SpectrogramPageAsControl_Unfocused;
         Debug.WriteLine("[SpectrogramPageAsControl] Unfocused; Constructor Completed");
@@ -58,7 +60,7 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
         spectrogram.Stop();
     }
 
-    private async Task ReadDefaults()
+    public async Task ReadDefaults()
     {
         try
         {

@@ -43,6 +43,7 @@ public partial class TabViewPage : ContentPage
             tabView.SelectionChanging += TabView_SelectionChanging;
             System.Diagnostics.Debug.WriteLine("[TabViewPage] OnAppearing: Event handler attached");
         }
+        
         //spectrogramTab.AnalysisCompletedEvent += spectrogramTabControl_AnalysisCompletedEvent;  
     }
 
@@ -55,9 +56,36 @@ public partial class TabViewPage : ContentPage
         base.OnDisappearing();
     }
 
-    private void TabView_SelectionChanging(object sender, EventArgs e)
+
+    private async void TabView_SelectionChanging(object sender, SelectionChangingEventArgs e)
     {
-        // Existing implementation
+        if (e.Index == 4)
+        {
+            ViewModel.BusyRunning = true;
+            try
+            {
+                System.Diagnostics.Debug.WriteLine("[TabViewPage] TabView_SelectionChanging: Spectrogram tab selected");
+                if (ViewModel.spectrogramPage == null)
+                {
+                    Debug.WriteLine("[TabViewPage] TabView_SelectionChanging: Creating SpectrogramPage");
+                    await ViewModel.CreateSpectrogramPage();
+                    Debug.WriteLine("[TabViewPage] TabView_SelectionChanging: SpectrogramPage created");
+                    
+                    if (ViewModel.spectrogramPage != null)
+                    {
+                        spectrogramGrid.Children.Add(ViewModel.spectrogramPage);
+                        await ViewModel.spectrogramPage.ReadDefaults();
+                        Debug.WriteLine("[TabViewPage] TabView_SelectionChanging: SpectrogramPage defaults read");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally { ViewModel.BusyRunning = false; }
+        }
+        
     }
 
 

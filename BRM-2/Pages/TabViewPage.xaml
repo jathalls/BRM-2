@@ -73,10 +73,12 @@
                 <tv:SfTabItem
                     Header="Spectrogram">
                     <tv:SfTabItem.Content>
-                        <bpa:SpectrogramPageAsControl
-                            x:Name="spectrogramTabControl"
+                        <Grid
+                            x:Name="spectrogramGrid"
                             HorizontalOptions="Fill"
-                            VerticalOptions="Fill" />
+                            VerticalOptions="Fill">
+                        </Grid>
+
                     </tv:SfTabItem.Content>
                 </tv:SfTabItem>
 

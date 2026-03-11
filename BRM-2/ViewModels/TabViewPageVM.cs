@@ -8,7 +8,8 @@ public partial class TabViewPageVM:ObservableObject
     private SessionDetailsPage sessDetailsPage;
     private RecordingsPage recordingsPage;
     private BatDetailsPage batDetailsPage;
-    private BPASpectrogramM.Views.SpectrogramPageAsControl spectrogramPage;
+    internal BPASpectrogramM.Views.SpectrogramPageAsControl? spectrogramPage = null;
+    private TabViewPage parentPage;
 
     [ObservableProperty]
     private List<SfTabItem> _tabContentsList = new List<SfTabItem>();
@@ -19,8 +20,9 @@ public partial class TabViewPageVM:ObservableObject
     [ObservableProperty]
     public int _selectedTabIndex = 0;
 
-    public TabViewPageVM()
+    public TabViewPageVM(TabViewPage parent = null)
     {
+        parentPage = parent;
     }
     
 
@@ -193,6 +195,10 @@ public partial class TabViewPageVM:ObservableObject
         {
             try
             {
+                if(tab== AppShell.TABS.Spectrogram) 
+                {
+                    
+                }
                 lastTab = SelectedTabIndex;
                 SelectedTabIndex = (int)tab;
                 
@@ -203,6 +209,22 @@ public partial class TabViewPageVM:ObservableObject
             }
         });
     }
+
+    internal async Task CreateSpectrogramPage()
+    {
+        if (spectrogramPage == null)
+        {
+            {
+                spectrogramPage = new BPASpectrogramM.Views.SpectrogramPageAsControl(true);
+                
+
+                spectrogramPage.AnalysisCompletedEvent += SpectrogramPage_AnalysisCompletedEvent;
+
+                
+            }
+        }
+    }
+
 
     private int tabCount = 5;
 
@@ -279,21 +301,37 @@ public partial class TabViewPageVM:ObservableObject
                 string file = await seg.GetFile();
                 //var spectrogramPageAsControl = BRMLiteM.Navigation.ServiceProvider.GetService<BPASpectrogramM.Views.SpectrogramPageAsControl>();
                 var page = BRM_2.Navigation.ServiceProvider.GetService<TabViewPage>();
-                /*var spectrogramPageAsControl = page.spectrogramTab;
-                if (spectrogramPageAsControl != null)
-                {
-                    var rec=await DBAccess.GetRecordingAsync(seg.RecordingID);
-                    List<LabelItem> LabelList = await rec.GetLabelList();
-                    await spectrogramPageAsControl.LoadSegment(file, seg.StartOffsetTimeSpan, seg.EndOffsetTimeSpan,LabelList);
-                }*/
+
+                if (spectrogramPage == null)
+                { spectrogramPage = new BPASpectrogramM.Views.SpectrogramPageAsControl();
+                    SfTabItem spectrogramTabItem = new SfTabItem();
+                    spectrogramTabItem.Header = "Spectrogram";
+                    spectrogramTabItem.Content = spectrogramPage;
+                    spectrogramPage.AnalysisCompletedEvent += SpectrogramPage_AnalysisCompletedEvent;
+                    TabContentsList.Add(spectrogramTabItem);
+                    OnPropertyChanged(nameof(TabContentsList));
+                }
+
+                if (spectrogramPage != null) {
+                    {
+                        var rec = await DBAccess.GetRecordingAsync(seg.RecordingID);
+                        List<LabelItem> LabelList = await rec.GetLabelList();
+                        List<BPASpectrogramM.LabelItem> spectroLabelList = LabelList.Select(li => new BPASpectrogramM.LabelItem(
+                            li.idedBats, li.startOffset, li.endOffset)).ToList();
+                        await spectrogramPage.LoadSegment(file, seg.StartOffsetTimeSpan, seg.EndOffsetTimeSpan, spectroLabelList ?? new List<BPASpectrogramM.LabelItem>());
+                    }
+
+
+
+                    SwitchToTab(tab);
+                }
             }
-                SwitchToTab(tab);
         }
         catch (Exception ex)
         {
             Debug.WriteLine(ex);
         }
-        finally {  BusyRunning = false; }
+        finally { BusyRunning = false; }
     }
 
     public void Appearing()

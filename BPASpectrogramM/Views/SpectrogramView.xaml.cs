@@ -587,7 +587,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
     /// Full-file metadata (TotalFFTs, DurationSecs) is still calculated from the WAV header so
     /// the time-axis navigation remains accurate.
     /// </summary>
-    private const double MaxInitialLoadDurationSecs = 15.0;
+    private const double MaxInitialLoadDurationSecs = 300.0;
 
     private Spectrogram.SpectrogramGenerator sg = null;
 
@@ -719,7 +719,10 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
             var sampling=new SKSamplingOptions(SKFilterMode.Linear,SKMipmapMode.Linear);
 
             //canvas.DrawBitmap(_bitmap, src, dst);
-            canvas.DrawImage(_skSurface.Snapshot(), src, dst,sampling);
+            if (_skSurface != null)
+            {
+                canvas.DrawImage(_skSurface.Snapshot(), src, dst, sampling);
+            }
             //canvas.DrawBitmap(_bitmap, x, y);
             //Debug.WriteLine($"Origin is {x}, {y}");
             if (selection != null)

@@ -60,12 +60,11 @@ public static class MauiProgram
 			builder.Services.AddTransient<MapSelectionPage>();
 			builder.Services.AddTransient<MapSelectionVM>();
 			builder.Services.AddSingleton<SessionsPageVM>();
-			builder.Services.AddSingleton<TabViewPage>();
-			builder.Services.AddSingleton<TabViewPageVM>();
-			builder.Services.AddSingleton(sp => 
+			builder.Services.AddSingleton<TabViewPageVM>(sp => new ViewModels.TabViewPageVM());
+			builder.Services.AddSingleton<TabViewPage>(sp => 
 {
-    var vm = sp.GetRequiredService<TabViewPageVM>();
-    return new Pages.TabViewPage(vm);
+	var vm = sp.GetRequiredService<TabViewPageVM>();
+	return new Pages.TabViewPage(vm);
 });
 
 #if WINDOWS
