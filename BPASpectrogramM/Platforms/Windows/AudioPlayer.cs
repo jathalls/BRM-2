@@ -6,6 +6,8 @@ public partial class AudioPlayer
 {
     private partial IAudioPlaybackService? CreatePlatformAudioPlaybackService()
     {
-        return new Platforms.Windows.AudioPlaybackService();
+        // Windows uses MediaElement with WAV header speed adjustment.
+        // Return null to fallback to MediaElement, which will use the speed-adjusted segment file.
+        return null;
     }
 }

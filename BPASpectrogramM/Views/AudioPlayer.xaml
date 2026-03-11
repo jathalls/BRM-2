@@ -10,6 +10,10 @@
     xmlns:sfsl="clr-namespace:Syncfusion.Maui.Sliders;assembly=Syncfusion.Maui.Sliders"
     x:DataType="local:AudioPlayer">
     <Grid ColumnDefinitions="50,50,50,50,50,150,200,40,200,50" RowDefinitions="*,Auto">
+
+        <toolkit:MediaElement
+            x:Name="mediaElement"
+            IsVisible="False" />
         
         <Button
             x:Name="btnPlay"
@@ -76,8 +80,8 @@
             Grid.Row="1"
             HeightRequest="40"
             Maximum="120"
-            Minimum="15"
-            Value="{Binding HeterodyneFrequencykHz, Mode=TwoWay}"
+            Minimum="0"
+            Value="{Binding CurrentPosition, Mode=OneWay}"
              />
         <Label
             Text="{Binding CurrentFrequency}"

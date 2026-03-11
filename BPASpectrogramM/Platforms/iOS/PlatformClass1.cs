@@ -17,6 +17,7 @@ public class AudioPlaybackService : IAudioPlaybackService
     private AVAudioEngine? audioEngine;
     private AVAudioPlayerNode? playerNode;
     private AVAudioFile? audioFile;
+    private AVAudioPcmBuffer? audioBuffer;
     private AVAudioUnitTimePitch? timePitchUnit;
     private AVAudioFormat? segmentFormat;
 #endif
@@ -65,16 +66,18 @@ public class AudioPlaybackService : IAudioPlaybackService
 #endif
     }
 
-    public void LoadSegment(string filePath, TimeSpan startOffset, TimeSpan endOffset, WavFormatInfo format)
+    public void LoadSegment(string filePath, TimeSpan startOffset, TimeSpan endOffset, WavFormatInfo format, double speedFactor = 1.0)
     {
 #if __MACCATALYST__ || __IOS__
         try
         {
             Debug.WriteLine($"[AudioPlaybackService-Mac] Loading segment: {filePath}");
             Debug.WriteLine($"[AudioPlaybackService-Mac] Range: {startOffset} to {endOffset}");
+            Debug.WriteLine($"[AudioPlaybackService-Mac] Speed factor: {speedFactor}");
 
             Stop();
 
+            this.speedFactor = speedFactor;
             startOffsetSeconds = startOffset.TotalSeconds;
             endOffsetSeconds = endOffset.TotalSeconds;
             currentPositionSeconds = startOffsetSeconds;
@@ -100,26 +103,59 @@ public class AudioPlaybackService : IAudioPlaybackService
                 return;
             }
 
-            segmentFrameCount = (uint)frameDelta;
-            segmentFormat = audioFile.ProcessingFormat;
+            // Create format with adjusted sample rate for speed control
+            var originalFormat = audioFile.ProcessingFormat;
+            var adjustedSampleRate = (double)originalFormat.SampleRate * speedFactor;
 
-            Debug.WriteLine($"[AudioPlaybackService-Mac] Segment prepared - StartFrame: {segmentStartFrame}, FrameCount: {segmentFrameCount}");
+            // Create a new format with adjusted sample rate
+            var adjustedFormat = new AVAudioFormat(
+                originalFormat.CommonFormat,
+                (uint)adjustedSampleRate,
+                (uint)originalFormat.ChannelCount,
+                false
+            );
+
+            Debug.WriteLine($"[AudioPlaybackService-Mac] Original sample rate: {originalFormat.SampleRate}, Adjusted: {adjustedSampleRate:F0}");
+
+            // Read audio data from original file
+            audioFile.FramePosition = segmentStartFrame;
+            audioBuffer = new AVAudioPcmBuffer(originalFormat, (uint)frameDelta);
+
+            if (audioBuffer == null)
+            {
+                Debug.WriteLine("[AudioPlaybackService-Mac] Failed to create audio buffer");
+                return;
+            }
+
+            NSError? readError = null;
+            if (!audioFile.ReadIntoBuffer(audioBuffer, out readError))
+            {
+                Debug.WriteLine($"[AudioPlaybackService-Mac] Error reading audio data: {readError?.LocalizedDescription}");
+                audioBuffer = null;
+                return;
+            }
+
+            segmentFrameCount = (uint)frameDelta;
+            segmentFormat = adjustedFormat;
+
+            Debug.WriteLine($"[AudioPlaybackService-Mac] Segment prepared - frames: {segmentFrameCount}, adjusted sample rate for speed control: {adjustedSampleRate:F0} Hz");
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"[AudioPlaybackService-Mac] Error in LoadSegment: {ex.Message}");
+            audioBuffer = null;
         }
 #else
         Debug.WriteLine("[AudioPlaybackService-Mac] LoadSegment not available on this platform");
 #endif
     }
 
-    public void Play(double speedFactorParam, double volume)
+    public void Play(double volume)
     {
 #if __MACCATALYST__ || __IOS__
         try
         {
-            if (audioFile == null || playerNode == null || audioEngine == null || timePitchUnit == null)
+            if (audioBuffer == null || playerNode == null || audioEngine == null)
             {
                 Debug.WriteLine("[AudioPlaybackService-Mac] Audio not loaded or engine not initialized");
                 return;
@@ -133,17 +169,11 @@ public class AudioPlaybackService : IAudioPlaybackService
 
             Stop();
 
-            speedFactor = speedFactorParam;
             Debug.WriteLine($"[AudioPlaybackService-Mac] Playing with speed factor: {speedFactor}");
 
-            // Configure time/pitch
-            timePitchUnit.Rate = (float)Math.Max(0.03125, Math.Min(32.0, speedFactor));
-            timePitchUnit.Pitch = 0;
-
-            // Connect nodes
-            var formatToUse = segmentFormat ?? audioFile.ProcessingFormat;
-            audioEngine.Connect(playerNode, timePitchUnit, formatToUse);
-            audioEngine.Connect(timePitchUnit, audioEngine.MainMixerNode, formatToUse);
+            // Connect nodes directly (no time pitch unit for sample rate-based speed control)
+            var formatToUse = segmentFormat ?? audioBuffer.Format;
+            audioEngine.Connect(playerNode, audioEngine.MainMixerNode, formatToUse);
 
             // Set volume
             playerNode.Volume = (float)volume;
@@ -159,8 +189,8 @@ public class AudioPlaybackService : IAudioPlaybackService
                 }
             }
 
-            // Schedule selected segment directly from file
-            playerNode.ScheduleSegment(audioFile, segmentStartFrame, segmentFrameCount, null, () =>
+            // Schedule the buffer for playback with adjusted sample rate
+            playerNode.ScheduleBuffer(audioBuffer, () =>
             {
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
@@ -277,6 +307,9 @@ public class AudioPlaybackService : IAudioPlaybackService
 
             audioFile?.Dispose();
             audioFile = null;
+
+            audioBuffer?.Dispose();
+            audioBuffer = null;
 
             segmentFormat?.Dispose();
             segmentFormat = null;

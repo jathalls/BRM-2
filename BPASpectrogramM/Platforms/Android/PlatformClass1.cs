@@ -20,17 +20,17 @@ public class AudioPlaybackService : IAudioPlaybackService
     public bool IsPlaying => isPlaying;
     public event EventHandler? PlaybackEnded;
 
-    public void LoadSegment(string filePath, TimeSpan startOffsetParam, TimeSpan endOffsetParam, WavFormatInfo format)
+    public void LoadSegment(string filePath, TimeSpan startOffsetParam, TimeSpan endOffsetParam, WavFormatInfo format, double speedFactor = 1.0)
     {
         currentFilePath = filePath;
         startOffset = startOffsetParam;
         endOffset = endOffsetParam;
-        Debug.WriteLine($"[AudioPlaybackService-Android] Segment loaded: {filePath}");
+        this.speedFactor = speedFactor;
+        Debug.WriteLine($"[AudioPlaybackService-Android] Segment loaded: {filePath}, speed: {speedFactor}");
     }
 
-    public void Play(double speedFactorParam, double volumeParam)
+    public void Play(double volumeParam)
     {
-        speedFactor = speedFactorParam;
         volume = volumeParam;
         isPlaying = true;
         Debug.WriteLine($"[AudioPlaybackService-Android] Playing with speed: {speedFactor}");

@@ -4,9 +4,9 @@ using System.Diagnostics;
 namespace BPASpectrogramM.Platforms.Windows;
 
 /// <summary>
-/// Windows fallback implementation
-/// Note: This is a fallback. For true sample rate manipulation on Windows,
-/// consider using NAudio or Windows Media Foundation APIs.
+/// Windows fallback implementation using MediaElement.
+/// Speed control is achieved by modifying the WAV file header's sample rate
+/// before playback through CreateSpeedAdjustedSegmentFile in AudioPlayer.
 /// </summary>
 public class AudioPlaybackService : IAudioPlaybackService
 {
@@ -14,28 +14,25 @@ public class AudioPlaybackService : IAudioPlaybackService
     private TimeSpan startOffset;
     private TimeSpan endOffset;
     private double speedFactor = 1.0;
-    private double volume = 1.0;
     private bool isPlaying = false;
-    
+
     public bool IsPlaying => isPlaying;
     public event EventHandler? PlaybackEnded;
 
-    public void LoadSegment(string filePath, TimeSpan startOffsetParam, TimeSpan endOffsetParam, WavFormatInfo format)
+    public void LoadSegment(string filePath, TimeSpan startOffsetParam, TimeSpan endOffsetParam, WavFormatInfo format, double speedFactorParam = 1.0)
     {
         currentFilePath = filePath;
         startOffset = startOffsetParam;
         endOffset = endOffsetParam;
-        Debug.WriteLine($"[AudioPlaybackService-Windows] Segment loaded: {filePath}");
+        speedFactor = speedFactorParam;
+        Debug.WriteLine($"[AudioPlaybackService-Windows] Segment loaded: {filePath}, speed: {speedFactor}");
     }
 
-    public void Play(double speedFactorParam, double volumeParam)
+    public void Play(double volumeParam)
     {
-        speedFactor = speedFactorParam;
-        volume = volumeParam;
         isPlaying = true;
         Debug.WriteLine($"[AudioPlaybackService-Windows] Playing with speed: {speedFactor}");
-        // Platform-specific implementation would go here
-        // For now, this is a stub that would need NAudio or similar
+        // MediaElement fallback - speed control handled via WAV header modification
     }
 
     public void Pause()
