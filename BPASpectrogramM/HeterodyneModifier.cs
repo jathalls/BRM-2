@@ -1,6 +1,8 @@
+using System.Diagnostics;
+
 namespace BPASpectrogramM
 {
-    internal class HetrodyneModifier 
+    internal class HeterodyneModifier 
     {
         private readonly float[] _previousOutput;
         private float _cutoffFrequency;
@@ -27,13 +29,18 @@ namespace BPASpectrogramM
 
         public Oscillator HeterodyneOscillator { get; set; }
 
-        public HetrodyneModifier(WavFormatInfo format, float cutoffFrequency = 5000f, float heterodyneFrequency = 50000)
+        public HeterodyneModifier(WavFormatInfo format, float cutoffFrequency = 5000f, float heterodyneFrequency = 50000)
         {
             _format = format;
             _cutoffFrequency = cutoffFrequency;
             _previousOutput = new float[format.ChannelCount];
-            
+            Debug.WriteLine($"Initializing HeterodyneModifier with cutoff frequency: {_cutoffFrequency} Hz and heterodyne frequency: {heterodyneFrequency} Hz SR={_format.SampleRate}");
             HeterodyneFrequency = heterodyneFrequency;
+            if (_format.SampleRate == 0)
+            {
+                Debug.WriteLine("Sample rate is zero, cannot initialize oscillator.");
+                
+            }
             var osc=new BPASpectrogramM.Oscillator( format,heterodyneFrequency);
             osc.Frequency = HeterodyneFrequency;
             osc.Amplitude = 1.0f;
@@ -52,11 +59,30 @@ namespace BPASpectrogramM
 
         public float ProcessSample(float sample, int channel)
         {
-            sample = sample * HeterodyneOscillator.GenerateSample();
-            var dt = 1/_format.SampleRate;
-            var rc = 1.0f / (2.0f * (float)Math.PI * _cutoffFrequency);
-            var alpha = dt / (rc + dt);
-            _previousOutput[channel] +=  alpha * (sample - _previousOutput[channel]);
+            float alpha = 0.0f;
+            if (_cutoffFrequency == 0)
+            {
+                Debug.WriteLine("Cutoff frequency is zero, skipping processing.");
+                return sample;
+            }
+            try
+            {
+                sample = sample * HeterodyneOscillator.GenerateSample();
+                var dt = 1.0f / (float)_format.SampleRate;
+                var rc = 1.0f / (2.0f * (float)Math.PI * _cutoffFrequency);
+                if (rc + dt == 0)
+                {
+                    Debug.WriteLine("RC + DT is zero, skipping processing.");
+                    return sample;
+                }
+                alpha = dt / (rc + dt);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error processing sample: {ex.Message}");
+                return sample; // Return unprocessed sample on error
+            }
+            _previousOutput[channel] += alpha * (sample - _previousOutput[channel]);
             return _previousOutput[channel];
         }
 

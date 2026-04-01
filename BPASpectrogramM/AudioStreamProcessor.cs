@@ -3,7 +3,7 @@ using BPASpectrogramM;
 public class AudioStreamProcessor
 {
     private AudioFileReaderM reader;
-    private HetrodyneModifier modifier;
+    private HeterodyneModifier modifier;
     private const int BUFFER_SIZE = 4096;
     private float[] buffer;
     private float[] processedBuffer;
@@ -11,7 +11,7 @@ public class AudioStreamProcessor
     public AudioStreamProcessor(string filePath, WavFormatInfo format, double heterodyneFrequency)
     {
         reader = new AudioFileReaderM(filePath);
-        modifier = new HetrodyneModifier(format, 5000f, (float)heterodyneFrequency * 1000f);
+        modifier = new HeterodyneModifier(format, 5000f, (float)heterodyneFrequency * 1000f);
         buffer = new float[BUFFER_SIZE];
         processedBuffer = new float[BUFFER_SIZE];
     }

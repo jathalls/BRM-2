@@ -14,6 +14,8 @@ namespace BPASpectrogramM
         public int BlockAlign { get; set; }
         public long AudioDataStartPosition { get; set; }
         public int AudioDataSize { get; set; }
+
+        public WavFileHeader Header { get; set; }=new WavFileHeader();
         
         public TimeSpan Duration => TimeSpan.FromSeconds(AudioDataSize/ByteRate);
     }
@@ -30,6 +32,10 @@ namespace BPASpectrogramM
         private int _currentPosition = 0;
         private int _selectionStartPosition = 0;
         private int _selectionEndPosition = -1; // -1 means no selection, read to end of file
+
+        public WavFileHeader? Header { get; private set; }=new WavFileHeader();
+
+        
 
         public WavFormatInfo? FormatInfo { get; private set; }
         public bool IsValid => FormatInfo != null && _fileStream != null;
@@ -89,7 +95,7 @@ namespace BPASpectrogramM
             try
             {
                 _fileStream!.Seek(0, SeekOrigin.Begin);
-
+                Header = new WavFileHeader();
                 // Read RIFF header
                 string riffHeader = new string(_reader!.ReadChars(4));
                 if (riffHeader != "RIFF")
@@ -97,15 +103,16 @@ namespace BPASpectrogramM
                     Debug.WriteLine($"[ReadWavHeader] Invalid RIFF header: {riffHeader}");
                     return null;
                 }
-
+                Header.chunkID = riffHeader.ToCharArray();
                 int fileSize = _reader.ReadInt32();
+                Header.chunkSize = fileSize;
                 string waveHeader = new string(_reader.ReadChars(4));
                 if (waveHeader != "WAVE")
                 {
                     Debug.WriteLine($"[ReadWavHeader] Invalid WAVE header: {waveHeader}");
                     return null;
                 }
-
+                Header.format = waveHeader.ToCharArray();
                 WavFormatInfo info = new WavFormatInfo();
                 bool fmtChunkFound = false;
                 bool dataChunkFound = false;
@@ -118,6 +125,8 @@ namespace BPASpectrogramM
 
                     if (chunkId == "fmt ")
                     {
+                        Header.formatchunk1ID = chunkId.ToCharArray();
+                        Header.formatchunk1Size = chunkSize;
                         // Read format subchunk
                         short audioFormat = _reader.ReadInt16();
                         if (audioFormat != 1) // PCM only
@@ -125,12 +134,17 @@ namespace BPASpectrogramM
                             Debug.WriteLine($"[ReadWavHeader] Only PCM format (1) is supported, found: {audioFormat}");
                             return null;
                         }
-
+                        Header.audioFormat = audioFormat;
                         info.ChannelCount = _reader.ReadInt16();
+                        Header.numChannels = (Int16)info.ChannelCount;
                         info.SampleRate = _reader.ReadInt32();
+                        Header.sampleRate = info.SampleRate;
                         info.ByteRate = _reader.ReadInt32();
+                        Header.byteRate = info.ByteRate;
                         info.BlockAlign = _reader.ReadInt16();
+                        Header.blockAlign = (Int16)info.BlockAlign;
                         info.BitsPerSample = _reader.ReadInt16();
+                        Header.bitsPerSample = (Int16)info.BitsPerSample;
 
                         // Skip any extra bytes in fmt chunk
                         if (chunkSize > 16)
@@ -146,6 +160,8 @@ namespace BPASpectrogramM
                         // Record data chunk position and size
                         info.AudioDataStartPosition = _fileStream.Position;
                         info.AudioDataSize = chunkSize;
+                        Header.dataChunkID = chunkId.ToCharArray();
+                        Header.dataChunkSize = chunkSize;
                         dataChunkFound = true;
                         Debug.WriteLine($"[ReadWavHeader] Data chunk found - Size: {chunkSize}, Position: {info.AudioDataStartPosition}");
                     }

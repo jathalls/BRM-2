@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFrameworks>net10.0-android;net10.0-ios;net10.0-maccatalyst</TargetFrameworks>
@@ -86,27 +86,28 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="AppoMobi.Maui.Gestures" Version="1.11.9.1" />
+        <PackageReference Include="AppoMobi.Maui.Gestures" Version="1.11.9.2" />
         <PackageReference Include="AppoMobi.Specials" Version="9.0.3" />
-        <PackageReference Include="CommunityToolkit.Maui" Version="13.0.0" />
-        <PackageReference Include="CommunityToolkit.Maui.Core" Version="13.0.0" />
-        <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="8.0.0" />
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.2" />
-        <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.40" />
-        <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.30" />
+        <PackageReference Include="CommunityToolkit.Maui" Version="14.0.1" />
+        <PackageReference Include="CommunityToolkit.Maui.Core" Version="14.0.1" />
+        <PackageReference Include="CommunityToolkit.Maui.MediaElement" Version="8.0.1" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.5" />
+        <PackageReference Include="Microsoft.Maui.Controls" Version="10.0.51" />
+        <PackageReference Include="Microsoft.Maui.Graphics.Skia" Version="10.0.51" />
+        <PackageReference Include="NAudio" Version="2.3.0" Condition="'$(TargetFramework)' != 'net10.0-maccatalyst' AND '$(TargetFramework)' != 'net10.0-ios' AND '$(TargetFramework)' != 'net10.0-android'" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-        <PackageReference Include="ScottPlot.Maui" Version="5.1.57" />
-        <PackageReference Include="ShimSkiaSharp" Version="3.4.1" />
-        <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.119.1" />
-        <PackageReference Include="Syncfusion.Licensing" Version="32.2.3" />
-        <PackageReference Include="Syncfusion.Maui.Charts" Version="32.2.3" />
-        <PackageReference Include="Syncfusion.Maui.Core" Version="32.2.3" />
-        <PackageReference Include="Syncfusion.Maui.DataGrid" Version="32.2.3" />
-        <PackageReference Include="Syncfusion.Maui.Gauges" Version="32.2.3" />
-        <PackageReference Include="Syncfusion.Maui.Sliders" Version="32.2.3" />
-        <PackageReference Include="Syncfusion.Maui.TabView" Version="32.2.3" />
-        <PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.8" />
+        <PackageReference Include="ScottPlot.Maui" Version="5.1.58" />
+        <PackageReference Include="ShimSkiaSharp" Version="3.7.0" />
+        <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.119.2" />
+        <PackageReference Include="Syncfusion.Licensing" Version="33.1.45" />
+        <PackageReference Include="Syncfusion.Maui.Charts" Version="33.1.45" />
+        <PackageReference Include="Syncfusion.Maui.Core" Version="33.1.45" />
+        <PackageReference Include="Syncfusion.Maui.DataGrid" Version="33.1.45" />
+        <PackageReference Include="Syncfusion.Maui.Gauges" Version="33.1.45" />
+        <PackageReference Include="Syncfusion.Maui.Sliders" Version="33.1.45" />
+        <PackageReference Include="Syncfusion.Maui.TabView" Version="33.1.45" />
+        <PackageReference Include="Syncfusion.Maui.Toolkit" Version="1.0.9" />
     </ItemGroup>
 
     <ItemGroup>
@@ -155,10 +156,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Text\" />
-    </ItemGroup>
-
-    <ItemGroup>
         <EmbeddedResource Include="Resources\Raw\BatRef.txt">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </EmbeddedResource>
@@ -169,6 +166,6 @@
 
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="10.0.2" />
+        <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="10.0.5" />
     </ItemGroup>
 </Project>

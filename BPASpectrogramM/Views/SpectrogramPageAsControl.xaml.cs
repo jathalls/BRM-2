@@ -54,6 +54,10 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
         Debug.WriteLine("[SpectrogramPageAsControl] Unfocused; Constructor Completed");
     }
 
+    public SpectrogramPageAsControl() : this(false)
+    {
+    }
+
     private void SpectrogramPageAsControl_Unfocused(object? sender, FocusEventArgs e)
     {
         Debug.WriteLine("SpectrogramPageAsControl Unfocused - stopping spectrogram");

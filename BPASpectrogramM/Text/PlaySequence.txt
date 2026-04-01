@@ -1,0 +1,12 @@
+﻿SpectrogramView::mfiPlaySelectionClicked()
+	audioPlayer?.LoadSegment(file,tsFrom,tsTo)
+	audioPlayer.IsVisible=true;
+
+AudioPlayer::LoadSegment(file,from,to)
+	using(reader=new AudioFileReader(file)
+		fileFormat=new WavFormatInfo(reader data)
+		currentSegmentFile=CreateSegmentFile(file,tsStart,tsEnd)
+		AudioFileReader segmentReader=new AudioFileReader(currentSegmentFile)
+		if meadiElement is not null
+			mediaElement.Source=MediaSource.fromFile(CurrentSegmentFile)
+		(if fails set source to the entire file)

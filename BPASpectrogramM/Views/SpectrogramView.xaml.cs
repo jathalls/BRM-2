@@ -313,7 +313,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
             { // start a new selection
                 selection = new Selection(e.Location, CanvasView,
                     new SKRect(StartOfSpectrogramInFFTs, (float)FrequencyRangeEnd, EndOfSpectrogramInFFTs, (float)FrequencyRangeStart));
-
+                
             }
             else if (e.ActionType == SKTouchAction.Released)
             { // if a click, cancel the selection, otherwise just update it
@@ -331,9 +331,9 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
                     //AudioPlayerVisibility = true;
                     //audioPlayer.IsVisible = true;
 
-                    audioPlayer.LoadSegment(CurrentFile,
-                        TimeSpan.FromSeconds(selection?.startFFTs??StartOfSpectrogramInFFTs / FFTsPerSec),
-                        TimeSpan.FromSeconds(selection?.endFFTs??EndOfSpectrogramInFFTs / FFTsPerSec));
+                    //audioPlayer.LoadSegment(CurrentFile,
+                    //    TimeSpan.FromSeconds(selection?.startFFTs??StartOfSpectrogramInFFTs / FFTsPerSec),
+                    //    TimeSpan.FromSeconds(selection?.endFFTs??EndOfSpectrogramInFFTs / FFTsPerSec));
                 }
                 OnSelectionChanged(new SpectrogramSelectionChangedEventArgs(
                         CurrentFile, (selection?.startFFTs ?? 0) / FFTsPerSec, (selection?.endFFTs ?? 0) / FFTsPerSec));
@@ -439,7 +439,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
             var fPos = canvas.CanvasSize.Height - (currentPosition?.Y ?? 0);
             endFFTs = localXpos + SpectrogramStart;
              lowFreq=fPos * kHzPerPixel;
-            Debug.WriteLine($"Updated Frequency={lowFreq}-{highFreq}");
+            //Debug.WriteLine($"Updated Frequency={lowFreq}-{highFreq}");
         }
     }
 
@@ -1375,7 +1375,9 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
 
     private void mfiPlaySelectionClicked(object sender, EventArgs e)
     {
-        audioPlayer?.LoadSegment(CurrentFile, TimeSpan.FromSeconds((selection?.startFFTs ?? 0) / FFTsPerSec), TimeSpan.FromSeconds((selection?.endFFTs ?? 0) / FFTsPerSec));
+        //audioPlayer.InitializeAudioServices();
+        
+        audioPlayer?.LoadSegment(CurrentFile,TimeSpan.FromSeconds((selection?.startFFTs ?? 0) / FFTsPerSec), TimeSpan.FromSeconds((selection?.endFFTs ?? 0) / FFTsPerSec));
         audioPlayer.IsVisible = true;
     }
 

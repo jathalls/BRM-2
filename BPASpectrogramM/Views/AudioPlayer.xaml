@@ -13,6 +13,7 @@
 
         <toolkit:MediaElement
             x:Name="mediaElement"
+            Source="{Binding currentSegmentFile}"
             IsVisible="False" />
         
         <Button
@@ -20,6 +21,7 @@
             Grid.Column="1"
             Grid.Row="1"
             Clicked="btnPlay_Clicked"
+            IsEnabled="{Binding CanPlay}"
             HeightRequest="40"
             Text="▶"
             WidthRequest="40" />
@@ -62,6 +64,8 @@
             Grid.Row="1"
             HeightRequest="40"
             SelectedIndex="2"
+            IsEnabled="{Binding CanPlay}"
+            SelectionChanged="cmbSpeedChanged"
             WidthRequest="180">
             <sf:SfComboBox.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
@@ -80,8 +84,9 @@
             Grid.Row="1"
             HeightRequest="40"
             Maximum="120"
+            IsEnabled="{Binding CanPlay}"
             Minimum="0"
-            Value="{Binding CurrentPosition, Mode=OneWay}"
+            Value="{Binding HeterodyneFrequencykHz, Mode=TwoWay}"
              />
         <Label
             Text="{Binding CurrentFrequency}"
