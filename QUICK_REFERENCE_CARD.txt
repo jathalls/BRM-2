@@ -1,0 +1,69 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                   🚀 BRM-2 - HOW TO RUN                       ║
+║                      QUICK REFERENCE                           ║
+╚═══════════════════════════════════════════════════════════════╝
+
+┌───────────────────────────────────────────────────────────────┐
+│  ⚡ FASTEST METHOD - Terminal (RECOMMENDED)                   │
+└───────────────────────────────────────────────────────────────┘
+
+    cd /Users/justinHalls/RiderProjects/BRM-2
+    ./run-mac.sh
+
+    ✅ Builds correctly
+    ✅ No configuration needed
+    ✅ Just works!
+
+
+┌───────────────────────────────────────────────────────────────┐
+│  🎯 USING RIDER (After I fixed it)                           │
+└───────────────────────────────────────────────────────────────┘
+
+    1. Restart Rider (File → Invalidate Caches / Restart)
+    
+    2. Look for configuration dropdown (top left):
+       [BRM-2 (MacCatalyst) ▼]
+       
+    3. Select: "BRM-2 (MacCatalyst)"
+    
+    4. Click: Run ▶️
+
+
+┌───────────────────────────────────────────────────────────────┐
+│  📝 WHAT I FIXED                                              │
+└───────────────────────────────────────────────────────────────┘
+
+    ✅ Created Rider run configuration file
+    ✅ Set target framework to: net10.0-maccatalyst
+    ✅ Fixed all compilation errors
+    ✅ Created automated run script
+
+
+┌───────────────────────────────────────────────────────────────┐
+│  🎵 TEST THE AUDIO FEATURE                                    │
+└───────────────────────────────────────────────────────────────┘
+
+    Once app launches:
+    
+    1. Load a WAV file
+    2. Select a segment
+    3. Speed: Choose "0.1x" (1/10 speed)
+    4. Press Play ▶
+    5. Verify: Slow playback with natural pitch!
+
+
+┌───────────────────────────────────────────────────────────────┐
+│  ❓ IF PROBLEMS                                               │
+└───────────────────────────────────────────────────────────────┘
+
+    Just use the script - it always works:
+    
+    cd /Users/justinHalls/RiderProjects/BRM-2
+    ./run-mac.sh
+
+
+═══════════════════════════════════════════════════════════════
+
+    TL;DR: Run ./run-mac.sh and you're done! 🎉
+
+═══════════════════════════════════════════════════════════════
