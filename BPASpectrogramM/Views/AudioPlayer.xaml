@@ -13,7 +13,7 @@
 
         <toolkit:MediaElement
             x:Name="mediaElement"
-            Source="{Binding currentSegmentFile}"
+            Source="{Binding MediaSourceFile}"
             IsVisible="False" />
         
         <Button

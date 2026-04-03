@@ -117,12 +117,15 @@
                 Grid.Column="0"
                 LabelPosition="Outside"
                 LabelFormat="F1"
-                Maximum="{Binding FrequencyRangeEnd}"
-                Minimum="{Binding FrequencyRangeStart}"
+                Maximum="{Binding FrequencyScaleEnd, FallbackValue=192}"
+                Minimum="{Binding FrequencyScaleStart, FallbackValue=0}"
                 MinorTicksPerInterval="5"
                 Orientation="Vertical"
                 ShowTicks="True"
-                TickPosition="Outside">
+                TickPosition="Outside"
+                Interval="10"
+                ShowLabels="True"
+                ShowLine="False">
                 <sfGauge:SfLinearGauge.MajorTickStyle>
                     <sfGauge:LinearTickStyle
                         Length="10"
@@ -136,7 +139,7 @@
 
             </sfGauge:SfLinearGauge>
 
-            <!--  Horizontal Time Scale  -->
+            <!-- Horizontal Time Scale  -->
             <VerticalStackLayout
                 x:Name="TimeStack"
                 Grid.Row="0"
@@ -149,14 +152,20 @@
                     Margin="0"
                     LabelFormat="F1"
                     LabelPosition="Outside"
-                    Maximum="{Binding TimeScaleEnd}"
-                    Minimum="{Binding TimeScaleStart}"
+                    Maximum="{Binding TimeScaleEnd, FallbackValue=5}"
+                    Minimum="{Binding TimeScaleStart, FallbackValue=0}"
                     Orientation="Horizontal"
                     TickPosition="Outside"
+                    Interval="1"
+                    ShowLabels="False"
+                    ShowLine="False"
+                    ShowTicks="False"
+                    MaximumWidthRequest="5000"
+                    MinimumWidthRequest="500"
                     VerticalOptions="End" />
             </VerticalStackLayout>
 
-            <!--  Time adjustment and siplay slider  -->
+            <!--  Time adjustment and display slider  -->
             <sfSlider:SfRangeSlider
                 x:Name="TimeRangeSlider"
                 Grid.Row="2"

@@ -163,6 +163,7 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
         bool isModified = false;
         if (!string.IsNullOrWhiteSpace(text) && (selectionStart != 0 || selectionEnd != 0))
         {
+            Debug.WriteLine($"[SpButtons_SpectrogramButtonClicked] AddLabels");
             spectrogram.AddLabel(selectionStart, selectionEnd, text); // add the provided text as a label fro the current selection
             isModified = spectrogram.IsModified;
         }
@@ -170,7 +171,11 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
         {
             if (SpControls.CurrentAutoAdvanceState == SpectrogramControls.AUTOADVANCEMODE.BUTTON ||
                 SpControls.CurrentAutoAdvanceState == SpectrogramControls.AUTOADVANCEMODE.BOTH)
+            {
+                Debug.WriteLine($"[SpButtons_SpectrogramButtonClicked] AddLabels, 0,0");
                 spectrogram.AddLabel(0, 0, text); // add the provided text as a label for the entire displayed spectrogram
+            }
+
             isModified = spectrogram.IsModified;
         }
         await SpControls.SetEntryFocus(); // set the default focus to the text entry box
@@ -248,7 +253,7 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
             Debug.WriteLine($"[ReadFile] About to call spectrogram.LoadFile");
             await spectrogram.LoadFile(file);
 
-            Debug.WriteLine($"[ReadFile] spectrogram.LoadFile completed");
+            Debug.WriteLine($"[ReadFile] spectrogram.LoadFile awaited");
             if (!spectrogram.Success())
             {
                 Debug.WriteLine($"[ReadFile] Spectrogram.Success() returned false");
@@ -297,7 +302,10 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
                 if (parts.Length >= 3)
                     if (double.TryParse(parts[0], out double start))
                         if (double.TryParse(parts[1], out double end))
+                        {
+                            Debug.WriteLine($"[AddExistingLabels] Add Label");
                             spectrogram.AddLabel(start, end, parts[2]);
+                        }
 
             }
         }
@@ -424,6 +432,7 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
     {
         if (selectionStart != 0 || selectionEnd != 0)
         {
+            Debug.WriteLine($"[CommentReturn] AddLabel {comment}");
             spectrogram.AddLabel(selectionStart, selectionEnd, comment);
             AutoAdvance(SpectrogramControls.AUTOADVANCEMODE.TEXT);
         }
@@ -521,6 +530,7 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
             segmentLoaded = true;
             foreach (var item in labelList ?? new List<LabelItem>())
             {
+                Debug.WriteLine($"[LoadSegment] AddLabel {item.idedBats}");
                 spectrogram.AddLabel(item.startOffset, item.endOffset, item.idedBats);
             }
             spectrogram.ZoomToSecs(startOffsetTimeSpan.TotalSeconds, endOffsetTimeSpan.TotalSeconds);

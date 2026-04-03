@@ -28,13 +28,65 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
 
     private double _frequencyScaleStart = 0;
     private double _frequencyScaleEnd = 192;
-    public double FrequencyScaleStart { get => _frequencyScaleStart; set { _frequencyScaleStart = value; OnPropertyChanged(); } }
-    public double FrequencyScaleEnd { get => _frequencyScaleEnd; set { _frequencyScaleEnd= value; OnPropertyChanged(); } } 
+    public double FrequencyScaleStart 
+    { 
+        get => _frequencyScaleStart; 
+        set { _frequencyScaleStart = Math.Max(0, value); OnPropertyChanged(); } 
+    }
+    public double FrequencyScaleEnd 
+    { 
+        get => Math.Max(_frequencyScaleEnd, _frequencyScaleStart + 10); 
+        set { _frequencyScaleEnd = Math.Max(_frequencyScaleStart + 10, value); OnPropertyChanged(); } 
+    } 
 
-    private double _timeScaleStart = 0;
+    private double _timeScaleStart = 0.0d;
     private double _timeScaleEnd = 5.0d;
-    public double TimeScaleStart { get => StartOfSpectrogramInFFTs/FFTsPerSec; set { _timeScaleStart = value; OnPropertyChanged(); } } 
-    public double TimeScaleEnd { get => EndOfSpectrogramInFFTs/FFTsPerSec; set { _timeScaleEnd= value; OnPropertyChanged(); } }
+
+    public double TimeScaleStart
+    {
+        get
+        {
+            if (FFTsPerSec > 0)
+            {
+                var result = StartOfSpectrogramInFFTs / FFTsPerSec;
+                return result;
+            }
+            else
+            {
+                return 0.0d;
+            }
+        }
+        set { _timeScaleStart = value; OnPropertyChanged(); }
+        
+    }
+
+    public double TimeScaleEnd
+    {
+        get
+        {
+            double end = 5.0;
+            
+            if (FFTsPerSec > 0 && EndOfSpectrogramInFFTs > 0)
+            {
+                end = EndOfSpectrogramInFFTs / FFTsPerSec;
+            }
+            else if (FFTsPerSec > 0)
+            {
+                // Ensure we have a minimum range to prevent infinite label generation
+                end = TimeScaleStart + 5.0;
+            }
+            
+            // Ensure End > Start to prevent infinite label generation
+            double start = TimeScaleStart;
+            return end <= start ? start + 5.0 : end;
+        }
+        set
+        {
+            _timeScaleEnd= value; OnPropertyChanged(); 
+            
+        } 
+        
+    }
 
     private bool _isBusyRunning = false;
     public bool IsBusyRunning { get=>_isBusyRunning;set { _isBusyRunning = value; OnPropertyChanged(); } }
@@ -73,6 +125,10 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
         Setup();
 		InitializeComponent();
         BindingContext = this;
+
+        // Ensure gauges are properly configured to prevent infinite label generation
+        ConfigureTimeScaleGauge();
+        ConfigureFrequencyScaleGauge();
 
          CanvasView.Touch += DoTouch;
         audioPlayer.PlayBackUpdated += AudioPlayer_PlayBackUpdated;
@@ -544,7 +600,21 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
             OnPropertyChanged();
         }
     }
-    private double FFTsPerSec;
+
+    private double _FFTsPerSec = 1.0d;
+    private double FFTsPerSec
+    {
+        get
+        {
+            return _FFTsPerSec;
+        }
+        set
+        {
+            _FFTsPerSec = value;
+            OnPropertyChanged(nameof(TimeScaleStart));
+            OnPropertyChanged(nameof(TimeScaleEnd));
+        }
+    }
     private double _fMax;
     private double zoomedfMax;
     private double fMin;
@@ -691,9 +761,10 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
 
     private void  OnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
     {
+        Debug.WriteLine($"[OnPaintSurface]");
         if(sg is null || _bitmap is null)
         {
-            
+            Debug.WriteLine($"[OnPaintSurface] sg or bitmap is null");
             return;
         }
         var canvas = e.Surface.Canvas;
@@ -711,7 +782,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
             var fStart = _bitmap.Height-(FrequencyRangeStart * frequencyChunkSize);
             var fEnd= _bitmap.Height-(FrequencyRangeEnd * frequencyChunkSize);
 
-            //Debug.WriteLine($"for {FrequencyRangeStart}-{FrequencyRangeEnd}kHz, top={fEnd} bottom={fStart} out of {_bitmap.Height}");
+            Debug.WriteLine($"for {FrequencyRangeStart}-{FrequencyRangeEnd}kHz, top={fEnd} bottom={fStart} out of {_bitmap.Height}");
             
             SKRect dst = new SKRect(0, 0, e.Info.Width, e.Info.Height);
             SKRect src = new SKRect(StartOfSpectrogramInFFTs, (float)fEnd, EndOfSpectrogramInFFTs, (float)fStart);
@@ -836,6 +907,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
     public void AddLabel(double startSecs,double endSecs,string label,int level=-1)
     {
         IsModified = true;
+        Debug.WriteLine($"[AddLabel] {label}");
         if (startSecs==0 && endSecs == 0)
         {
             startSecs = 0;
@@ -855,6 +927,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
 
         SfLinearGauge currentTrack = TimeScale;
         int NumberOfExistingTracks = TimeStack.Children.Count;
+        Debug.WriteLine(($"[AddLabel] {NumberOfExistingTracks} tracks"));
         Debug.WriteLine($"overlaps={level}, number of tracks={NumberOfExistingTracks}");
 
         var scalelevel = NumberOfExistingTracks - 1;
@@ -876,7 +949,9 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
             //TimeStack.Children.Add(currentTrack);
             Debug.WriteLine($"Insert new track [0]");
         }
+        Debug.WriteLine($"[AddLabel] adding label");
         currentLabels.Add(new LabelItem(label, startSecs,endSecs));
+        Debug.WriteLine($"[AddLabel] Label added");
             //TimeScale.MarkerPointers.Clear();
             
          
@@ -911,7 +986,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
             contentPointer.OffsetY = -3;
             currentTrack.MarkerPointers.Add(contentPointer);
         }
-        
+        Debug.WriteLine($"[AddLabel] adding label finished");
 
 
     }
@@ -990,6 +1065,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
         gauge.ShowLine = false;
         gauge.ShowLabels = false;
         gauge.ShowTicks = false;
+        gauge.Interval = 1; // Explicit interval prevents automatic calculation issues
         return gauge;
         
     }
@@ -1007,26 +1083,37 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
         {
             try
             {
-                await Task.Run(() =>
+                //await Task.Run(() =>
 
-                    {
+                    //{
                         _bitmap = GetSpectrogram(file);
+                        
                         if(_bitmap==null)
                         {
+                            Debug.WriteLine($"[LoadFile]SpectrogramBitmap is null, making a default");
                             _bitmap=new SKBitmap(1000,512);
+                        }
+                        else
+                        {
+                            Debug.WriteLine($"[LoadFile] SpectrogramBitmap is {_bitmap.Width}x{_bitmap.Height}");
                         }
                         IsModified = false;
                         _skSurface =SKSurface.Create(new SKImageInfo(_bitmap.Width, _bitmap.Height));
-                        using var canvas= _skSurface.Canvas;
+                        if(_skSurface != null) Debug.WriteLine($"[LoadFile] SkSurface created");
+                        else Debug.WriteLine($"[LoadFile] SkSurface is null");
+                        using var canvas= _skSurface?.Canvas;
                         canvas.Clear(SKColors.Transparent);
                         SKRect rect=new SKRect(0,0,_bitmap.Width,_bitmap.Height);
+                        Debug.WriteLine($"[LoadFile]Drawing Bitmap on Canvas");
                         canvas.DrawBitmap(_bitmap,rect);
-                    });
+                        Debug.WriteLine($"[LoadFile] Bitmap drawn on canvas");
+                   // });
                 CanvasView.InvalidateSurface();
+                Debug.WriteLine($"[LoadFile] Canvas Invalidated for redraw");
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex);
+                Debug.WriteLine($"[LoadFile Error]{ex}");
             }
 
         }
@@ -1421,6 +1508,56 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
         }
 
     }
+
+    private void ConfigureTimeScaleGauge()
+    {
+        try
+        {
+            // Ensure TimeScale gauge is configured with safe defaults to prevent infinite label generation
+            if (TimeScale != null)
+            {
+                // Disable labels to prevent GenerateVisibleLabels() from hanging
+                TimeScale.ShowLabels = false;
+                TimeScale.ShowLine = false;
+                TimeScale.ShowTicks = false;
+                
+                // Set explicit interval to prevent automatic calculation issues
+                TimeScale.Interval = 1;
+                
+                // Ensure we have valid minimum bounds
+                TimeScale.Minimum = Math.Max(0, TimeScale.Minimum);
+                TimeScale.Maximum = Math.Max(TimeScale.Minimum + 5, TimeScale.Maximum);
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error configuring TimeScale gauge: {ex.Message}");
+        }
+    }
+
+    private void ConfigureFrequencyScaleGauge()
+    {
+        try
+        {
+            // Ensure FrequencyScale gauge is configured with safe defaults to prevent infinite label generation
+            if (FrequencyScale != null)
+            {
+                // Set explicit interval to prevent automatic calculation issues
+                FrequencyScale.Interval = 10;
+                
+                // Ensure we have valid minimum bounds
+                FrequencyScale.Minimum = Math.Max(0, FrequencyScale.Minimum);
+                FrequencyScale.Maximum = Math.Max(FrequencyScale.Minimum + 10, FrequencyScale.Maximum);
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Error configuring FrequencyScale gauge: {ex.Message}");
+        }
+    }
+
+    // ...existing code...
+
 }
 
 public class SpectrogramSelectionChangedEventArgs : EventArgs

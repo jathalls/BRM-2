@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -42,6 +42,15 @@ namespace BPASpectrogramM
 
         internal int Write(FileStream dest)
         {
+            // Calculate the proper chunk size
+            // chunkSize should be the entire file size minus 8 bytes (4 for "RIFF" and 4 for the size field itself)
+            // chunkSize = 36 (fmt chunk + data chunk headers) + dataChunkSize
+            chunkSize = 36 + dataChunkSize;
+            
+            // Recalculate byteRate and blockAlign based on current sample rate and channels
+            byteRate = sampleRate * numChannels * bitsPerSample / 8;
+            blockAlign = (short)(numChannels * bitsPerSample / 8);
+            
             dest.Write(System.Text.Encoding.ASCII.GetBytes(new string(chunkID)), 0, chunkID.Length);
             dest.Write(BitConverter.GetBytes(chunkSize), 0, 4);
             dest.Write(System.Text.Encoding.ASCII.GetBytes(new string(format)), 0, format.Length);
