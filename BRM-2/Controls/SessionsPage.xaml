@@ -12,7 +12,7 @@
             ColumnDefinitions="70*,50*"
             HorizontalOptions="Fill"
             RowDefinitions="30,*">
-            <ActivityIndicator IsRunning="{Binding BusyRunning}" Color="CadetBlue" />
+            
             <HorizontalStackLayout
                 Grid.Row="0"
                 Grid.Column="0"
@@ -24,60 +24,70 @@
                     Text="Import" />
             </HorizontalStackLayout>
 
-            <sf:SfDataGrid
+            <sf:SfBusyIndicator
+                Grid.Row="1"
+                Grid.Column="0"
+                IndicatorColor="CadetBlue"
+                Title="LoadingSessions..."
+                TitlePlacement="Bottom"
+                IsRunning="{Binding BusyRunning}"
+                
+                >
+                <sf:SfDataGrid
                 x:Name="sfSessionDataGrid"
                 Grid.Row="1"
                 Grid.Column="0"
                 AutoGenerateColumnsMode="None"
                 HorizontalOptions="Fill"
                 ItemsSource="{Binding Sessions}"
-                
+                AllowResizingColumns="True"
                 SelectionMode="SingleDeselect"
                 VerticalOptions="Start" 
                 GridLinesVisibility="Both" 
                 SelectionUnit="Row" 
                 HorizontalScrollBarVisibility="Always"
                 VerticalScrollBarVisibility="Always">
-                <sf:SfDataGrid.Columns>
-                    <sf:DataGridTextColumn
+                    <sf:SfDataGrid.Columns>
+                        <sf:DataGridTextColumn
                         Width="200"
                         HeaderText="Tag"
                         MappingName="SessionTag" />
-                    <sf:DataGridTextColumn
+                        <sf:DataGridTextColumn
                         Width="200"
                         HeaderText="Location"
                         MappingName="Location" />
-                    <sf:DataGridDateColumn
-                        Width="180"
+                        <sf:DataGridDateColumn
+                        Width="150"
                         Format="yyyy-MM-dd hh:mm"
                         HeaderText="Start"
                         MappingName="SessionStart" />
-                    <sf:DataGridDateColumn
-                        Width="180"
+                        <sf:DataGridDateColumn
+                        Width="150"
                         Format="yyyy-MM-dd hh:mm"
                         HeaderText="End"
                         MappingName="SessionEnd" />
-                    <sf:DataGridNumericColumn
+                        <sf:DataGridNumericColumn
                         Width="80"
                         Format="###0"
                         HeaderText="# Recs"
                         MappingName="NumberOfRecordings" />
-                </sf:SfDataGrid.Columns>
+                    </sf:SfDataGrid.Columns>
 
-                
 
-                <FlyoutBase.ContextFlyout>
-                    <MenuFlyout>
-                        <MenuFlyoutItem Command="{Binding ViewRecordingsCommand}" Text="View Recordings" />
-                        <MenuFlyoutItem Command="{Binding ViewDetailsCommand}" Text="View Details" />
-                        <MenuFlyoutItem Text="------" />
-                        <MenuFlyoutItem Command="{Binding DeleteSessionCommand}" Text="Delete" />
-                        <MenuFlyoutItem Text="Edit" />
 
-                    </MenuFlyout>
-                </FlyoutBase.ContextFlyout>
+                    <FlyoutBase.ContextFlyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Command="{Binding ViewRecordingsCommand}" Text="View Recordings" />
+                            <MenuFlyoutItem Command="{Binding ViewDetailsCommand}" Text="View Details" />
+                            <MenuFlyoutItem Text="------" />
+                            <MenuFlyoutItem Command="{Binding DeleteSessionCommand}" Text="Delete" />
+                            <MenuFlyoutItem Text="Edit" />
 
-            </sf:SfDataGrid>
+                        </MenuFlyout>
+                    </FlyoutBase.ContextFlyout>
+
+                </sf:SfDataGrid>
+            </sf:SfBusyIndicator>
 
             <sf:SfDataGrid
                 x:Name="BatSummaryDataGrid"

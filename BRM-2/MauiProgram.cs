@@ -15,7 +15,7 @@ public static class MauiProgram
 		{
 			System.Diagnostics.Debug.WriteLine("[MauiProgram] Starting CreateMauiApp");
 			
-			Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1JHaF5cWWdCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdlWXxceXRcRmJeV0J0XkFWYEo=");
+			Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(APIKeys.SyncfusionKey);
 			System.Diagnostics.Debug.WriteLine("[MauiProgram] License registered");
 
 			var builder = MauiApp.CreateBuilder();

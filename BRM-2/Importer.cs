@@ -5,6 +5,7 @@ internal class Importer
 
     public async Task<RecordingSessionEx> ImportFromWav(string path) 
     {
+        Debug.WriteLine($"ImportFromWav: {path}");
         if (!Directory.Exists(path)) return new RecordingSessionEx();
         RecordingSessionEx session= new RecordingSessionEx();
         //var wavFiles=Directory.EnumerateFiles(path,"*.wav");
@@ -16,67 +17,78 @@ internal class Importer
         DirectoryInfo directoryInfo = new DirectoryInfo(path);
         FileInfo[] wavFiles = directoryInfo.GetFiles().Where(f=>f.Name.ToUpper().EndsWith(".WAV")).OrderBy(f => f.CreationTime).ToArray();
         session.SessionTag=directoryInfo.Name;
-        
-        if ((wavFiles?.Any()) ?? false)
+        try
         {
-            session.SessionStart = wavFiles[0].CreationTime;
-            session.SessionEnd = wavFiles.Last().CreationTime + TimeSpan.FromMinutes(5);
-            
-            session.OriginalFilePath = path;
-            session.SessionTag = directoryInfo.Name;
-            //Debug.WriteLine($"{session.SessionTag}");
-            /* TODO as future expansion, for now leave it to the user to fill in the form
-            if (File.Exists(Path.Combine(path, "header.xml")))
+            if ((wavFiles?.Any()) ?? false)
             {
-                session= ImportHeader(Path.Combine(path, "header.xml"),session);
-            }*/
-            
-            
+                Debug.WriteLine($"Found {wavFiles.Length} wav files in directory {path}");
+                session.SessionStart = wavFiles[0].CreationTime;
+                session.SessionEnd = wavFiles.Last().CreationTime + TimeSpan.FromMinutes(5);
 
-            if (session == null) return new RecordingSessionEx();
-
-            WavFileMetaData? metaData=null;
-            bool first = true;
-            WavFileMetaData? firstMetaData = null;
-            DateTime overallEnd = DateTime.MinValue;
-
-            foreach(FileInfo wavFile in wavFiles)
-            {
-                //Debug.WriteLine($"\n\nNext {wavFile.Name}");
-                (RecordingEx? rec,WavFileMetaData? wfmd) details = await GetRecordingDetailsFromFileAsync(wavFile);
-                var recording = details.rec;
-                var wfmd = details.wfmd;
-                if (recording == null) continue;
-                metaData = wfmd;
-                session.recordings.Add(recording??new RecordingEx());
-                if (first)
+                session.OriginalFilePath = path;
+                session.SessionTag = directoryInfo.Name;
+                //Debug.WriteLine($"{session.SessionTag}");
+                /* TODO as future expansion, for now leave it to the user to fill in the form
+                if (File.Exists(Path.Combine(path, "header.xml")))
                 {
-                    first = false;
-                    firstMetaData = wfmd;
-                }
-                if ((metaData?.m_End??DateTime.MinValue) > overallEnd) { overallEnd=metaData?.m_End??DateTime.MinValue; }
+                    session= ImportHeader(Path.Combine(path, "header.xml"),session);
+                }*/
 
-                //Debug.WriteLine($"wav file {wavFile} added to session");
-            }
-            if (metaData != null)
-            {// metadata is the metadata for the last recording in the seeion
-                session.SessionEnd = overallEnd;
-                
-                if (firstMetaData != null)
+
+
+                if (session == null) return new RecordingSessionEx();
+
+                WavFileMetaData? metaData = null;
+                bool first = true;
+                WavFileMetaData? firstMetaData = null;
+                DateTime overallEnd = DateTime.MinValue;
+
+                foreach (FileInfo wavFile in wavFiles)
                 {
-                    session.SessionStart=firstMetaData.m_Start ?? session.SessionStart;
-                    
-                    session.LocationGPSLatitude = (decimal)firstMetaData.m_Location.m_Latitude;
-                    session.LocationGPSLongitude = (decimal)firstMetaData.m_Location.m_Longitude;
-                    session.Location = firstMetaData.m_Location.m_Name;
-                    session.microphone = firstMetaData.m_Microphone;
-                    session.Equipment = firstMetaData.m_Device;
-                    session.SessionNotes = firstMetaData.FormattedText();
-                }
-            }
+                    Debug.WriteLine($"\n\nNext {wavFile.Name}");
+                    (RecordingEx? rec, WavFileMetaData? wfmd) details = await GetRecordingDetailsFromFileAsync(wavFile);
+                    var recording = details.rec;
+                    var wfmd = details.wfmd;
+                    if (recording == null) continue;
+                    metaData = wfmd;
+                    session.recordings.Add(recording ?? new RecordingEx());
+                    if (first)
+                    {
+                        first = false;
+                        firstMetaData = wfmd;
+                    }
+                    if ((metaData?.m_End ?? DateTime.MinValue) > overallEnd) { overallEnd = metaData?.m_End ?? DateTime.MinValue; }
 
-            
-            
+                    Debug.WriteLine($"wav file {wavFile} added to session");
+                }
+                if (metaData != null)
+                {// metadata is the metadata for the last recording in the seeion
+                    session.SessionEnd = overallEnd;
+
+                    if (firstMetaData != null)
+                    {
+                        session.SessionStart = firstMetaData.m_Start ?? session.SessionStart;
+
+                        session.LocationGPSLatitude = (decimal)firstMetaData.m_Location.m_Latitude;
+                        session.LocationGPSLongitude = (decimal)firstMetaData.m_Location.m_Longitude;
+                        session.Location = firstMetaData.m_Location.m_Name;
+                        session.microphone = firstMetaData.m_Microphone;
+                        session.Equipment = firstMetaData.m_Device;
+                        session.SessionNotes = firstMetaData.FormattedText();
+                    }
+                }
+
+
+
+            }
+        }        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error importing from wav: {ex.Message}");
+            // Consider logging the error or rethrowing it depending on your needs
+        }
+        finally
+        {
+
         }
         return session;
     }

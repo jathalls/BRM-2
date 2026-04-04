@@ -13,8 +13,45 @@ public partial class SessionsPageVM : ObservableObject
     private List<BatSummary> _batSummaryList=new List<BatSummary>();
 
 
-    [ObservableProperty]
+    
     private  bool _busyRunning = false;
+
+    public bool BusyRunning
+    {
+        get => _busyRunning;
+        set
+        {
+            if (value)
+            {
+                _busyCount++;
+                if (_busyRunning)
+                {
+                    Debug.WriteLine($"BusyRunning already true, incrementing busy count {_busyCount}");
+                    
+                    return;
+                }
+            }
+            else
+            {
+                _busyCount--;
+                Debug.WriteLine($"BusyRunning set to false, decrementing busy count {_busyCount}");
+                
+                if (_busyCount < 0) { _busyCount = 0; }
+                if (_busyCount > 0) { return; }
+
+            }
+            if (SetProperty(ref _busyRunning, value))
+            {
+                Debug.WriteLine($"BusyRunning set to {value}, notifying command can execute changed");
+                ImportCommand.NotifyCanExecuteChanged();
+                DeleteSessionCommand.NotifyCanExecuteChanged();
+                ViewDetailsCommand.NotifyCanExecuteChanged();
+                ViewRecordingsCommand.NotifyCanExecuteChanged();
+            }
+        }
+    }
+
+    private int _busyCount = 0;
 
     [RelayCommand]
     public async void DeleteSession()
@@ -153,18 +190,20 @@ public partial class SessionsPageVM : ObservableObject
                     toast?.Show();
                     return;
                 }
-                Import(result);
+                Debug.WriteLine($"Selected folder for Import: {result}");
+                await Import(result??"");
+                BusyRunning = false;
+                inImport = false;
 #endif
                 //var folder = await _folderPicker.PickFolder();
                 //if (folder == null) { return; }
-                
+
 
             }
         }
         finally
         {
-            BusyRunning = false;
-            inImport = false;
+            
         }
     }
 
@@ -177,10 +216,17 @@ public partial class SessionsPageVM : ObservableObject
     /// indicate that the import process is in progress. This flag is reset when the operation completes, regardless
     /// of success or failure.</remarks>
     /// <param name="file">The path to the WAV file to import. The file must exist and be accessible.</param>
-    public async void Import(string file)
+    public async Task Import(string file)
     {
+        if(string.IsNullOrWhiteSpace(file) || !(File.Exists(file) || Directory.Exists(file)))
+        {
+            var toast=Toast.Make($"Invalid file path: {file}");
+            toast?.Show();
+            return;
+        }
         try
         {
+            Debug.WriteLine($"Starting import for file: {file}");
             BusyRunning = true;
             Importer importer = new Importer();
             var session = await importer.ImportFromWav(file);
