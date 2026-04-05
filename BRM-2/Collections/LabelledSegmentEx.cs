@@ -59,6 +59,8 @@ public class LabelledSegmentEx : LabelledSegmentTable
 
     private List<BatSummary> _batSummaryList = new List<BatSummary>();
 
+   
+
     public LabelledSegmentEx() : base()
     {
         Calls = new List<Call>();

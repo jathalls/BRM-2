@@ -100,13 +100,7 @@ public partial class SessionsPageVM : ObservableObject
             await GetBatSummaryForSession(selection);
             
             
-            var recordingsVM = BRM_2.Navigation.ServiceProvider.GetService<RecordingsPageVM>();
-            if (recordingsVM != null)
-            {
-                recordingsVM.Session = selection;
-                await recordingsVM.Update();
-                
-            }
+            
 
             var detailsVM = BRM_2.Navigation.ServiceProvider.GetService<SessionDetailsDisplayVM>();
             if (detailsVM != null)
@@ -114,6 +108,23 @@ public partial class SessionsPageVM : ObservableObject
                 detailsVM.recordingSession = selection;
 
 
+            }
+        }
+    }
+
+    private async Task UpdateRecordingsPage(RecordingSessionEx selection)
+    {
+        var recordingsVM = BRM_2.Navigation.ServiceProvider.GetService<RecordingsPageVM>();
+        if (recordingsVM != null)
+        {
+            recordingsVM.Session = selection;
+
+            var errorCode = await recordingsVM.Update();
+            if (errorCode != 0)
+            {
+                var toast = Toast.Make($"Error loading recordings for session: {errorCode}");
+                toast?.Show();
+                return;
             }
         }
     }
@@ -193,13 +204,20 @@ public partial class SessionsPageVM : ObservableObject
                 Debug.WriteLine($"Selected folder for Import: {result}");
                 await Import(result??"");
                 BusyRunning = false;
-                inImport = false;
+                
 #endif
                 //var folder = await _folderPicker.PickFolder();
                 //if (folder == null) { return; }
 
 
             }
+        }catch(Exception ex)
+        {
+            BusyRunning = false;
+            inImport = false;
+            Debug.WriteLine($"Error during import: {ex}");
+            var toast=Toast.Make($"Error during import: {ex.Message}");
+            toast?.Show();
         }
         finally
         {
@@ -246,6 +264,7 @@ public partial class SessionsPageVM : ObservableObject
         }
         finally
         {
+            inImport = false;
             BusyRunning = false;
         }
     }
@@ -275,6 +294,7 @@ public partial class SessionsPageVM : ObservableObject
         }
         finally
         {
+            inImport=false;
             BusyRunning = false;
         }
     }
@@ -289,6 +309,9 @@ public partial class SessionsPageVM : ObservableObject
             RecordingSessionEx session = dlg.session;
 
             await SaveSession(session);
+            BusyRunning = false;
+            BusyRunning = false;
+            BusyRunning = false; // to force BusyRunning to clear
         }
 
 
@@ -326,5 +349,5 @@ public partial class SessionsPageVM : ObservableObject
     internal async void Update()
     {
         await RefreshAsync();
-    }
+    } 
 }

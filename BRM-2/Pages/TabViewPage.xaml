@@ -48,7 +48,7 @@
                 SelectedIndex="{Binding SelectedTabIndex}">
                 <tv:SfTabItem Header="Sessions">
                     <tv:SfTabItem.Content>
-                        <controls:SessionsPage />
+                        <controls:SessionsPage x:Name="sessionsPage"/>
                     </tv:SfTabItem.Content>
                 </tv:SfTabItem>
 
@@ -60,7 +60,7 @@
 
                 <tv:SfTabItem Header="Recordings">
                     <tv:SfTabItem.Content>
-                        <controls:RecordingsPage />
+                        <controls:RecordingsPage x:Name="recordingsPage"/>
                     </tv:SfTabItem.Content>
                 </tv:SfTabItem>
 

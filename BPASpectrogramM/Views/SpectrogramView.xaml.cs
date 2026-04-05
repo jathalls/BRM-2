@@ -26,18 +26,18 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
     public event EventHandler<EventArgs> PlaySelection;
     protected virtual void OnPlaySelection(EventArgs e) => PlaySelection?.Invoke(this, e);
 
-    private double _frequencyScaleStart = 0;
-    private double _frequencyScaleEnd = 192;
-    public double FrequencyScaleStart 
-    { 
-        get => _frequencyScaleStart; 
-        set { _frequencyScaleStart = Math.Max(0, value); OnPropertyChanged(); } 
-    }
-    public double FrequencyScaleEnd 
-    { 
-        get => Math.Max(_frequencyScaleEnd, _frequencyScaleStart + 10); 
-        set { _frequencyScaleEnd = Math.Max(_frequencyScaleStart + 10, value); OnPropertyChanged(); } 
-    } 
+    //private double _frequencyScaleStart = 0;
+    //private double _frequencyScaleEnd = 100;
+    //public double FrequencyScaleStart 
+    //{ 
+    //    get => _frequencyScaleStart; 
+    //    set { _frequencyScaleStart = Math.Max(0, value); OnPropertyChanged(); } 
+    //}
+    //public double FrequencyScaleEnd 
+    //{ 
+    //    get => Math.Max(_frequencyScaleEnd, _frequencyScaleStart + 10); 
+    //    set { _frequencyScaleEnd = Math.Max(_frequencyScaleStart + 10, value); OnPropertyChanged(); } 
+   // } 
 
     private double _timeScaleStart = 0.0d;
     private double _timeScaleEnd = 5.0d;
@@ -56,7 +56,11 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
                 return 0.0d;
             }
         }
-        set { _timeScaleStart = value; OnPropertyChanged(); }
+        set 
+        { 
+            _timeScaleStart = Math.Max(0, value);
+            OnPropertyChanged(); 
+        }
         
     }
 
@@ -82,7 +86,8 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
         }
         set
         {
-            _timeScaleEnd= value; OnPropertyChanged(); 
+            _timeScaleEnd= Math.Max(value, TimeScaleStart + 0.1);
+            OnPropertyChanged(); 
             
         } 
         
@@ -634,7 +639,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
         get => _frequencyRangeStart; 
         set 
         { 
-            _frequencyRangeStart = value; 
+            _frequencyRangeStart = Math.Max(0, value);
             OnPropertyChanged(); 
             
         } 
@@ -644,7 +649,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
         get => _frequencyRangeEnd; 
         set 
         { 
-            _frequencyRangeEnd = value; 
+            _frequencyRangeEnd = Math.Max(FrequencyRangeStart + 10, value); 
             OnPropertyChanged(); 
             
         }
@@ -857,9 +862,9 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
     private void DrawGrid(SKCanvas canvas,int width,int height)
     {
         
-        FrequencyScaleStart = FrequencyRangeStart;
-        FrequencyScaleEnd = FrequencyRangeEnd;
-        var FrequencyRange=FrequencyScaleEnd - FrequencyScaleStart;
+        //FrequencyScaleStart = FrequencyRangeStart;
+        //FrequencyScaleEnd = FrequencyRangeEnd;
+        var FrequencyRange=FrequencyRangeEnd - FrequencyRangeStart;
         var scale = height/FrequencyRange;
         var step = (float)(scale * 10.0f);
         var redPaint= new SKPaint
@@ -893,6 +898,23 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
             canvas.DrawLine(xPos, 0, xPos, height, redPaint);
             //Debug.WriteLine($"Draw playhead at {PlayHeadPositionSecs}s, xpos={xPos}/{width}");
         }
+        FrequencyScale.InvalidateMeasure();
+        string format = "##0.#";
+        var range=TimeScaleEnd - TimeScaleStart;
+        double interval = 0;
+        double intScale = 10;
+        while (interval <= 0)
+        {
+
+            interval = (intScale/10)*Math.Floor(range / intScale);
+            intScale /= 10;
+            format = format + "#";
+        }
+        TimeScale.LabelFormat = format;
+        TimeScale.Interval = interval;
+        TimeScale.ShowLabels = true;
+        TimeScale.ShowLine = true;
+        TimeScale.ShowTicks = true;
 
     }
 
@@ -1525,8 +1547,8 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
                 TimeScale.Interval = 1;
                 
                 // Ensure we have valid minimum bounds
-                TimeScale.Minimum = Math.Max(0, TimeScale.Minimum);
-                TimeScale.Maximum = Math.Max(TimeScale.Minimum + 5, TimeScale.Maximum);
+                TimeScaleStart = Math.Max(0, TimeScale.Minimum);
+                TimeScaleEnd = Math.Max(TimeScale.Minimum + 5, TimeScale.Maximum);
             }
         }
         catch (Exception ex)
@@ -1546,8 +1568,10 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
                 FrequencyScale.Interval = 10;
                 
                 // Ensure we have valid minimum bounds
-                FrequencyScale.Minimum = Math.Max(0, FrequencyScale.Minimum);
-                FrequencyScale.Maximum = Math.Max(FrequencyScale.Minimum + 10, FrequencyScale.Maximum);
+                //FrequencyScale.Minimum = Math.Max(0, FrequencyScale.Minimum);
+                FrequencyRangeStart = Math.Max(0, FrequencyRangeStart);
+                //FrequencyScale.Maximum = Math.Max(FrequencyScale.Minimum + 10, FrequencyScale.Maximum);
+                FrequencyRangeEnd = Math.Max(FrequencyRangeStart + 10, FrequencyRangeEnd);
             }
         }
         catch (Exception ex)

@@ -24,9 +24,9 @@ namespace BRM_2.Collections;
                 else
                 {
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    GetNumRecordings();
+                    numRecordings=GetNumRecordings();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-                    return 1;
+                    return numRecordings;
                 }
             }
 
@@ -81,15 +81,17 @@ namespace BRM_2.Collections;
             return rst;
         }
 
-        private async Task GetNumRecordings()
+        private int GetNumRecordings()
         {
-            await GetNumRecordingsAsync();
+            var num= Task.Run(() => GetNumRecordingsAsync()).Result;
+            return num;
         }
 
-        private async Task GetNumRecordingsAsync()
+        private async Task<int> GetNumRecordingsAsync()
         {
             var nr = await DBAccess.GetNumRecordingsForSession(ID);
-            NumberOfRecordings = nr;
+            
+            return nr;
         }
 
 

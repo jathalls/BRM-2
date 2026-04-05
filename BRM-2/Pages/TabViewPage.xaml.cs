@@ -84,8 +84,22 @@ public partial class TabViewPage : ContentPage
                 Debug.WriteLine(ex);
             }
             finally { ViewModel.BusyRunning = false; }
+        }else if (e.Index==2)
+        {
+            var sessVM=BRM_2.Navigation.ServiceProvider.GetService<SessionsPageVM>();
+            if(sessVM != null && sessVM.SelectedSession != null) 
+            {
+                
+                var recVM=BRM_2.Navigation.ServiceProvider.GetService<RecordingsPageVM>();
+                if(recVM != null)
+                {
+                        recVM.Session = sessVM.SelectedSession;
+                        await recVM.Update();
+                }
+            }
+           
         }
-        
+
     }
 
 
@@ -99,5 +113,11 @@ public partial class TabViewPage : ContentPage
         {
             DisplayAlert("Import Session Failed", $"Unable to Import from {e.folder}", "OK");
         }
+    }
+
+    internal void AddSpectrogramPage(SpectrogramPageAsControl spectrogramPage)
+    {
+        spectrogramGrid.Children.Clear();
+        spectrogramGrid.Children.Add(spectrogramPage);
     }
 }

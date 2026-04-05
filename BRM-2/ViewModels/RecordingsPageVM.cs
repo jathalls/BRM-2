@@ -70,48 +70,102 @@ namespace BRM_2.ViewModels;
             }
         }
 
-        public async Task Update()
-        {
-            Debug.WriteLine("Recordings Update");
-            if (Session == null)
-            {
-                Recordings.Clear();
-                //Debug.WriteLine("No Session, so no List");
-                return;
-            }
-            if (Session.ID < 0)
-            {
-                if (((Session.recordings?.Count) ?? 0) > 0)
-                {
-                    Recordings = new ObservableCollection<RecordingEx>(Session?.recordings ?? new List<RecordingEx>());
-                    //Debug.WriteLine($"Unsaved session so list is contents {Recordings.Count}");
-                    return;
-                }
-            }
-            var recs = await DBAccess.GetRecordingsForSessionAsync(Session.ID);
-            Debug.WriteLine($"\tRecordings: {recs.Count}");
-            foreach (RecordingEx recording in recs)
-            {
-                var segs = await DBAccess.GetSegmentsForRecordingAsync(recording.ID);
-                recording.LabelledSegments = segs;
-                Debug.WriteLine($"\t\tSegments {recording.LabelledSegments.Count}");
-                //Debug.WriteLine($"rec has {segs.Count} segments");
-                foreach (var seg in recording.LabelledSegments)
-                {
-                    var bats = await DBAccess.GetIdedBatsForSegmentAsync(seg.ID);
-                    Debug.WriteLine($"\t\t\tided bats {bats.Count}");
-                    seg.IdedBats = bats;
-                    Debug.WriteLine($"\t\t\tsummaries {seg.BatSummaryList.Count}");
-                    seg.BatSummaryList=await seg.GetSegBatSummaryAsync();
-                }
+    public bool isUpdating { get; set; } = false;
+    
+    public async Task<int> Update(bool cancelUpdate = false)
+    {
+        
 
-                var metas = await DBAccess.GetMetasForRecordingAsync(recording.ID);
-                recording.Metas = metas;
-                recording.BatSummaryString=await recording.GetRecBatSummaryAsync();
-                Debug.WriteLine($"Rec Update:- {recording.LabelledSegments.Count}segs, summary={recording.BatSummaryString}");    
+        if (!isUpdating)
+        {
+            isUpdating = true;
+            try
+            {
+                IsBusyRunning = true;
+                Debug.WriteLine("Recordings Update");
+                if (Session == null)
+                {
+                    Recordings.Clear();
+                    //Debug.WriteLine("No Session, so no List");
+                    return -1;
+                }
+                if (Session.ID < 0)
+                {
+                    if (((Session.recordings?.Count) ?? 0) > 0)
+                    {
+                        Recordings = new ObservableCollection<RecordingEx>(Session?.recordings ?? new List<RecordingEx>());
+                        //Debug.WriteLine($"Unsaved session so list is contents {Recordings.Count}");
+                        return 1;
+                    }
+                }
+                var recs = await DBAccess.GetRecordingsForSessionAsync(Session.ID);
+                if(cancelUpdate)
+                {
+                    Debug.WriteLine("Recordings Update cancelled");
+                    
+                    return-2;
+                }
+                Debug.WriteLine($"\tRecordings: {recs.Count}");
+                foreach (RecordingEx recording in recs)
+                {
+                    var segs = await DBAccess.GetSegmentsForRecordingAsync(recording.ID);
+                    if (cancelUpdate)
+                    {
+                        Debug.WriteLine("Recordings Update cancelled");
+                        
+                        return -2;
+                    }
+                    recording.LabelledSegments = segs;
+                    Debug.WriteLine($"\t\tSegments {recording.LabelledSegments.Count}");
+                    //Debug.WriteLine($"rec has {segs.Count} segments");
+                    foreach (var seg in recording.LabelledSegments)
+                    {
+                        var bats = await DBAccess.GetIdedBatsForSegmentAsync(seg.ID);
+                        if (cancelUpdate)
+                        {
+                            Debug.WriteLine("Recordings Update cancelled");
+                           
+                            return -2;
+                        }
+                        Debug.WriteLine($"\t\t\tided bats {bats.Count}");
+                        seg.IdedBats = bats;
+                        Debug.WriteLine($"\t\t\tsummaries {seg.BatSummaryList.Count}");
+                        seg.BatSummaryList = await seg.GetSegBatSummaryAsync();
+                    }
+
+                    var metas = await DBAccess.GetMetasForRecordingAsync(recording.ID);
+                    if (cancelUpdate)
+                    {
+                        Debug.WriteLine("Recordings Update cancelled");
+                        
+                        return -2;
+                    }
+                    recording.Metas = metas;
+                    recording.BatSummaryString = await recording.GetRecBatSummaryAsync();
+                    if (cancelUpdate)
+                    {
+                        Debug.WriteLine("Recordings Update cancelled");
+                        
+                        return -2;
+                    }
+                    Debug.WriteLine($"Rec Update:- {recording.LabelledSegments.Count}segs, summary={recording.BatSummaryString}");
+                }
+                Recordings = new ObservableCollection<RecordingEx>(recs);
             }
-            Recordings = new ObservableCollection<RecordingEx>(recs);
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return -3;
+            }
+            finally
+            {
+                isUpdating = false;
+                cancelUpdate = false;
+                IsBusyRunning = false;
+            }
         }
+        return 0;
+    }
 
         [RelayCommand]
         public void miAudacityClicked()

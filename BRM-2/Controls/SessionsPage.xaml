@@ -42,34 +42,40 @@
                 ItemsSource="{Binding Sessions}"
                 AllowResizingColumns="True"
                 SelectionMode="SingleDeselect"
-                VerticalOptions="Start" 
+                VerticalOptions="Fill" 
                 GridLinesVisibility="Both" 
                 SelectionUnit="Row" 
+                    HeaderGridLinesVisibility="Vertical"
                 HorizontalScrollBarVisibility="Always"
                 VerticalScrollBarVisibility="Always">
                     <sf:SfDataGrid.Columns>
                         <sf:DataGridTextColumn
                         Width="200"
                         HeaderText="Tag"
+                            HeaderTextAlignment="Center"
                         MappingName="SessionTag" />
                         <sf:DataGridTextColumn
                         Width="200"
                         HeaderText="Location"
+                        HeaderTextAlignment="Center"
                         MappingName="Location" />
                         <sf:DataGridDateColumn
-                        Width="150"
+                        Width="110"
                         Format="yyyy-MM-dd hh:mm"
                         HeaderText="Start"
+                            HeaderTextAlignment="Center"
                         MappingName="SessionStart" />
                         <sf:DataGridDateColumn
-                        Width="150"
+                        Width="110"
                         Format="yyyy-MM-dd hh:mm"
                         HeaderText="End"
-                        MappingName="SessionEnd" />
+                            HeaderTextAlignment="Center"
+                            MappingName="SessionEnd" />
                         <sf:DataGridNumericColumn
                         Width="80"
                         Format="###0"
                         HeaderText="# Recs"
+                            HeaderTextAlignment="Center"
                         MappingName="NumberOfRecordings" />
                     </sf:SfDataGrid.Columns>
 
@@ -95,7 +101,12 @@
                 Grid.Row="1"
                 AutoGenerateColumnsMode="None"
                 HorizontalOptions="Fill"
+                VerticalOptions="Fill"
                 SelectionUnit="Row"
+                HeaderGridLinesVisibility="Vertical"
+                
+                AllowDraggingColumn="True"
+                AllowResizingColumns="True"
                 ItemsSource="{Binding BatSummaryList}" 
                 VerticalScrollBarVisibility="Always"
                 HorizontalScrollBarVisibility="Always">
@@ -105,30 +116,36 @@
                     <sf:DataGridTextColumn
                         Width="150"
                         HeaderText="Bat"
+                        HeaderTextAlignment="Center"
                         MappingName="BatName" />
                     <sf:DataGridNumericColumn
                         Width="100"
                         Format="###0"
                         HeaderText="# Passes"
+                        HeaderTextAlignment="Center"
                         MappingName="Passes" />
                     <sf:DataGridNumericColumn
                         Width="100"
                         Format="###0"
                         HeaderText="# Segs"
+                        HeaderTextAlignment="Center"
                         MappingName="NumSegments" /> 
                     <sf:DataGridNumericColumn
                         Width="100"
                         Format="###0.0"
                         HeaderText="Tot. Durtn. (s)"
+                        HeaderTextAlignment="Center"
                         MappingName="TotalDuration" />
                     <sf:DataGridNumericColumn
                         Width="100"
                         Format="###0.0"
                         HeaderText="Avg. Durtn. (s)"
+                        HeaderTextAlignment="Center"
                         MappingName="AvgDuration" />
                     <sf:DataGridCheckBoxColumn
                         Width="80"
                         HeaderText="AutoID"
+                        HeaderTextAlignment="Center"
                         MappingName="ByAutoId" />
 
                 </sf:SfDataGrid.Columns>

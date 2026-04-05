@@ -22,6 +22,7 @@ public partial class TabViewPageVM:ObservableObject
 
     public TabViewPageVM(TabViewPage parent = null)
     {
+        
         parentPage = parent;
     }
     
@@ -303,17 +304,21 @@ public partial class TabViewPageVM:ObservableObject
                 var page = BRM_2.Navigation.ServiceProvider.GetService<TabViewPage>();
 
                 if (spectrogramPage == null)
-                { spectrogramPage = new BPASpectrogramM.Views.SpectrogramPageAsControl();
+                {
+                    spectrogramPage = new BPASpectrogramM.Views.SpectrogramPageAsControl();
                     SfTabItem spectrogramTabItem = new SfTabItem();
                     spectrogramTabItem.Header = "Spectrogram";
                     spectrogramTabItem.Content = spectrogramPage;
                     spectrogramPage.AnalysisCompletedEvent += SpectrogramPage_AnalysisCompletedEvent;
                     TabContentsList.Add(spectrogramTabItem);
                     OnPropertyChanged(nameof(TabContentsList));
+                    page.AddSpectrogramPage(spectrogramPage);
                 }
 
-                if (spectrogramPage != null) {
+                if (spectrogramPage != null)
+                {
                     {
+
                         var rec = await DBAccess.GetRecordingAsync(seg.RecordingID);
                         List<LabelItem> LabelList = await rec.GetLabelList();
                         List<BPASpectrogramM.LabelItem> spectroLabelList = LabelList.Select(li => new BPASpectrogramM.LabelItem(
@@ -334,43 +339,6 @@ public partial class TabViewPageVM:ObservableObject
         finally { BusyRunning = false; }
     }
 
-    public void Appearing()
-    {
-        TabContentsList.Clear();
-        sessPage = new SessionsPage();
-        SfTabItem sessTabItem= new SfTabItem();
-        sessTabItem.Header = "Sessions";
-        sessTabItem.Content = sessPage;
-        TabContentsList.Add(sessTabItem);
-
-        sessDetailsPage = new SessionDetailsPage();
-        SfTabItem detailsTabItem = new SfTabItem();
-        detailsTabItem.Header = "Session Details";
-        detailsTabItem.Content = sessDetailsPage;
-        TabContentsList.Add(detailsTabItem);
-
-        recordingsPage = new RecordingsPage();
-        SfTabItem recTabItem = new SfTabItem();
-        recTabItem.Header = "Recordings";
-        recTabItem.Content = recordingsPage;
-        TabContentsList.Add(recTabItem);
-
-        batDetailsPage = new BatDetailsPage();
-        SfTabItem batsTabItem = new SfTabItem();
-        batsTabItem.Header = "Bats";
-        batsTabItem.Content = batDetailsPage;
-        TabContentsList.Add(batsTabItem);
-
-        spectrogramPage = new BPASpectrogramM.Views.SpectrogramPageAsControl();
-        SfTabItem spectrogramTabItem = new SfTabItem();
-        spectrogramTabItem.Header = "Spectrogram";
-        spectrogramTabItem.Content = spectrogramPage;
-        spectrogramPage.AnalysisCompletedEvent += SpectrogramPage_AnalysisCompletedEvent;
-        TabContentsList.Add(spectrogramTabItem);
-
-        OnPropertyChanged(nameof(TabContentsList));
-
-    }
 
     private void SpectrogramPage_AnalysisCompletedEvent(object? sender, BPASpectrogramM.Views.FileEventArgs e)
     {
