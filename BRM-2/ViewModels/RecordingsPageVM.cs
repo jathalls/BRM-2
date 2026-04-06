@@ -291,10 +291,11 @@ namespace BRM_2.ViewModels;
             var file = rec.RecordingName;
             RecordingSessionTable session = await getSession(rec.SessionID);
             var path = session.OriginalFilePath;
-            #if MACCATALYST
-            var url=SecurityScopedBookmarks.TryRestoreFolderFromBookmark(path);
-            if(url!=null) path=url.Path;
-            #endif
+        /*#if MACCATALYST
+        var url=SecurityScopedBookmarks.TryRestoreFolderFromBookmark(path);
+        if(url!=null) path=url.Path;
+        #endif*/
+        path = MauiLib1.Bookmarks.RestorePath(path);
             var qFile = Path.Combine(path, file);
             if (File.Exists(qFile))
             {

@@ -42,19 +42,19 @@ namespace BRM_2
             ? (double)FormatInfo.AudioDataSize / (SampleRate * Channels * (BitsPerSample / 8))
             : 0;
 
-        public AudioFileReaderM(string filePath)
+        public AudioFileReaderM(string fqFileName)
         {
             try
             {
-                Debug.WriteLine($"[AudioFileReaderM] Opening file: {filePath}");
+                Debug.WriteLine($"[AudioFileReaderM] Opening file: {fqFileName}");
                 
-                if (!File.Exists(filePath))
+                if (!File.Exists(fqFileName))
                 {
-                    throw new FileNotFoundException($"Audio file not found: {filePath}");
+                    throw new FileNotFoundException($"Audio file not found: {fqFileName}");
                 }
 
                 // Open file stream
-                _fileStream = File.OpenRead(filePath);
+                _fileStream = File.OpenRead(fqFileName);
                 _reader = new BinaryReader(_fileStream);
 
                 // Parse WAV header

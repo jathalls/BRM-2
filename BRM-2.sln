@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BRM-2", "BRM-2\BRM-2.csproj", "{30D73DF8-7F6A-4201-85A0-D4F9C1FE9D1E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPASpectrogramM", "BPASpectrogramM\BPASpectrogramM.csproj", "{EC55CF1E-3616-44FC-B917-83283A5855A4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectrogram", "Spectrogram\Spectrogram.csproj", "{6B5313D3-0B6B-40D9-B281-69F570ED8BAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiLib1", "MauiLib1\MauiLib1.csproj", "{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,8 +57,23 @@ Global
 		{6B5313D3-0B6B-40D9-B281-69F570ED8BAC}.Release|x64.Build.0 = Release|Any CPU
 		{6B5313D3-0B6B-40D9-B281-69F570ED8BAC}.Release|x86.ActiveCfg = Release|Any CPU
 		{6B5313D3-0B6B-40D9-B281-69F570ED8BAC}.Release|x86.Build.0 = Release|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Debug|x64.Build.0 = Debug|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Debug|x86.Build.0 = Debug|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Release|x64.ActiveCfg = Release|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Release|x64.Build.0 = Release|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Release|x86.ActiveCfg = Release|Any CPU
+		{7DCD2D39-A7F6-445E-96B5-2C232CC304F4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B2FA75B-8E44-4511-A18E-5867D7B11E08}
 	EndGlobalSection
 EndGlobal
