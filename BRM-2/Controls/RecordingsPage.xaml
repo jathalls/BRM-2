@@ -49,7 +49,7 @@
                         <Border Stroke="Blue" StrokeThickness="2">
                             <VerticalStackLayout>
                                 <Label Text="{Binding DisplayText}" TextColor="{Binding DisplayTextColor}" />
-                                <Label Text="{Binding BatSummary}" />
+                                
                                 <sf:SfListView
                                     x:Name="segmentsCollectionView"
                                     AutoFitMode="DynamicHeight"
