@@ -112,6 +112,8 @@
 
     <ItemGroup>
 
+        <ProjectReference Include="..\MauiLib1\MauiLib1.csproj" />
+
         <ProjectReference Include="..\Spectrogram\Spectrogram.csproj" />
 
     </ItemGroup>

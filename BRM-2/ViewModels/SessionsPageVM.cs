@@ -186,12 +186,13 @@ public partial class SessionsPageVM : ObservableObject
                 inImport = true;
 #if MACCATALYST
                 var folderUrl = await MacFolderPicker.PickFolderAsync();
-                if (folderUrl == null)
+                if (folderUrl == null || folderUrl.Path==null)
                 {
                     var toast=Toast.Make($"No Folder selected");
                     toast?.Show();
                     return;
                 }
+                
                 Import(folderUrl);
 #else
                 var result = await Tools.GetWavFileFolderAsync();
@@ -268,15 +269,16 @@ public partial class SessionsPageVM : ObservableObject
             BusyRunning = false;
         }
     }
-    
-    #if MACCATALYST
+
+#if MACCATALYST
     public async void Import(NSUrl folderUrl)
     {
         try
         {
             BusyRunning = true;
             Importer importer = new Importer();
-            SecurityScopedBookmarks.SaveFolderBookmark(folderUrl.Path, folderUrl);
+            //SecurityScopedBookmarks.SaveFolderBookmark(folderUrl.Path, folderUrl);
+            MauiLib1.Bookmarks.Save(folderUrl?.Path??"",folderUrl);
             var session = await importer.ImportFromWav(folderUrl.Path);
             BusyRunning = false;
             if (session == null)
@@ -298,7 +300,7 @@ public partial class SessionsPageVM : ObservableObject
             BusyRunning = false;
         }
     }
-    #endif
+#endif
 
 
 
