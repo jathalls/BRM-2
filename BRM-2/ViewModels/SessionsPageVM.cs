@@ -165,6 +165,62 @@ public partial class SessionsPageVM : ObservableObject
 
     }
 
+    /// <summary>
+    /// Generates report for the session as a .csv file in the original folder in HertsAtlas format.
+    /// </summary>
+    [RelayCommand]
+    public async void Report()
+    {
+        List<HertsAtlasItem> reportItems = new List<HertsAtlasItem>();
+        var session= SelectedSession;
+        var recordings = await DBAccess.GetRecordingsForSessionAsync(session.ID);
+        foreach(var rec in recordings)
+        {
+            string gridRef=await rec.GetGridRef();
+            var summaries = await rec.GetRecBatSummariesAsync(force: true);
+            foreach(var summary in summaries)
+            {
+                HertsAtlasItem item = new HertsAtlasItem(
+                    file: rec.RecordingName,
+                    date: rec.RecordingDate,
+                    location: session.Location,                    
+                    latitude: rec.RecordingGPSLatitude,
+                    longitude: rec.RecordingGPSLongitude,
+                    gridRef: gridRef,
+                    species: summary.BatName,
+                    passes: summary.Passes,
+                    equipment: session.Equipment,
+                    comment: rec.RecordingNotes,
+                    observer: session.Operator
+
+                );
+                reportItems.Add(item);
+            }
+        }
+        var fileName = $"{session.SessionTag}_Report.csv";
+        var filePath=session.OriginalFilePath;
+        if(!Directory.Exists(filePath)){ Directory.CreateDirectory(filePath); }
+        var fqFileName=Path.Combine(filePath,fileName);
+        if(File.Exists(fqFileName))
+        {
+            var backupName = fqFileName + ".bak";
+            if(File.Exists(backupName))
+            {
+                File.Delete(backupName);
+            }
+            File.Move(fqFileName, backupName);
+
+        }
+        File.WriteAllText(fqFileName, HertsAtlasItem.Headers() + Environment.NewLine);
+        foreach(var item in reportItems)
+        {
+            File.AppendAllText(fqFileName, item.ToString() + Environment.NewLine);
+        }
+        await Application.Current.MainPage.DisplayAlertAsync("Report Generated", $"Report saved as {fqFileName}", "OK");
+
+
+    }
+
     private bool inImport = false;
 
     /// <summary>

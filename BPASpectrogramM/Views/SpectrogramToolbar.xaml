@@ -21,7 +21,7 @@
             BorderColor="#000000"
             BorderWidth="1"
             Command="{Binding OpenFolderCommand}"
-            Text="Folder"
+            Text="Analyse and ImportFolder"
             TextColor="#000000"
             ToolTipProperties.Text="Select a Folder of .WAV files" />
         <RadioButton

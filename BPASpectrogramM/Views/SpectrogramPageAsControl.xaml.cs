@@ -560,14 +560,16 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
         return (false);
     }
 
-    internal async Task DisplayAlertSP(string v1, string v2, string v3)
+    internal async Task DisplayAlertSP(string title, string message, string cancel)
     {
         // Use the Application.Current.MainPage to display the alert, since ContentView does not have DisplayAlert
         if (Application.Current?.MainPage != null)
         {
-            await Application.Current.MainPage.DisplayAlert(v1, v2, v3);
+            
+            await Application.Current.MainPage.DisplayAlertAsync(title, message, cancel);
         }
     }
+
 
     /// <summary>
     /// Called when the next button is clicked and there are no more files in the file list
@@ -576,7 +578,7 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
     internal async Task AnalysisCompleted()
     {
         await Save();
-        bool answer = await Application.Current.MainPage.DisplayAlert("End of files", "Import This Session?", "Yes", "No");
+        bool answer = await Application.Current.MainPage.DisplayAlertAsync("End of files", "Import This Session?", "Yes", "No");
         if (answer)
         {
             OnAnalysisCompleted(new FileEventArgs(Path.Combine(SpToolbar.viewModel.currentFolder, SpToolbar.viewModel.CurrentFile)));

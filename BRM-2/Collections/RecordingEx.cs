@@ -547,8 +547,31 @@ public partial class RecordingEx : RecordingTable, INotifyPropertyChanged
 
     }
 
-    internal object GetBatSummaries()
+
+    internal async Task<string> GetGridRef()
     {
-        throw new NotImplementedException();
+        string gridRef = "";
+        if (!GPSLocation.IsValidLocation(RecordingGPSLatitude, RecordingGPSLongitude))
+        {
+            var session = await DBAccess.GetSessionAsync(SessionID);
+            if (session != null)
+            {
+                if (!GPSLocation.IsValidLocation(session.LocationGPSLatitude, session.LocationGPSLongitude))
+                {
+                    return "No valid GPS";
+                }
+                else
+                {
+                    RecordingGPSLatitude = (double)session.LocationGPSLatitude;
+                    RecordingGPSLongitude = (double)session.LocationGPSLongitude;
+
+
+                }
+            }
+        }
+
+        gridRef = GPSLocation.ConvertGPStoGridRef(RecordingGPSLatitude, RecordingGPSLongitude);
+        return gridRef;
+
     }
 } 

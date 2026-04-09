@@ -88,11 +88,7 @@
                             x:Name="miSaveSegment"
                             Command="{Binding miSaveSegmentClickedCommand}"
                             Text="Save Segment" />
-                        <MenuFlyoutItem
-                            x:Name="miPlaySegmentFlyout"
-                            Command="{Binding PlaySegmentCommand}"
-                            IsEnabled="{Binding IsPlaySegmentAvailable}"
-                            Text="Play Segment" />
+                        
                         <MenuFlyoutItem
                             x:Name="miBatDetect2Flyout"
                             Command="{Binding miBatDetect2ClickedCommand}"

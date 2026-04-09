@@ -224,7 +224,7 @@ namespace BPASpectrogramM.ViewModels
                 {
                     // we have run out of files to analyse
                     currentFileIndex--; // restore the index
-                    spPage.AnalysisCompleted();
+                    await spPage.AnalysisCompleted();
                     return; // do nothing
                 }
                 // move on to the next file
@@ -244,6 +244,7 @@ namespace BPASpectrogramM.ViewModels
             await OpenFolderAsync();
         }
 
+        private bool isAnalysing = false;
         /// <summary>
         /// Gets a folder from the user and opens the first file in it
         /// </summary>
@@ -267,6 +268,7 @@ namespace BPASpectrogramM.ViewModels
                     await Toast.Make($"Folder is not picked").Show(cancellationToken);
                     return;
                 }
+                isAnalysing = true;
                 currentFolder = Path.GetDirectoryName(file);
                 FileNames = Directory.EnumerateFiles(currentFolder, "*.*").ToList();
                 WavFileNames = Directory.EnumerateFiles(currentFolder, "*.wav").OrderBy(f => new FileInfo(f).CreationTime).ToList();
@@ -286,6 +288,7 @@ namespace BPASpectrogramM.ViewModels
                     CurrentFile = "";
                     await spPage.DisplayAlertSP("Error", $"No .WAV files found in folder {currentFolder}", "OK");
                     //await Toast.Make($"No .WAV files found in folder {currentFolder}").Show(cancellationToken);
+                    isAnalysing = false;
                 }
             }
             catch (Exception ex)
@@ -296,6 +299,7 @@ namespace BPASpectrogramM.ViewModels
                 WavFileNames?.Clear();
                 FilesModified?.Clear();
                 await spPage.DisplayAlertSP("Error", $"Error picking folder {ex.Message}", "OK");
+                isAnalysing = false;
             }
         }
 

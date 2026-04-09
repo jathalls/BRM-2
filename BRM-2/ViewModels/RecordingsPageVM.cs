@@ -105,7 +105,7 @@ namespace BRM_2.ViewModels;
                     
                     return-2;
                 }
-                Debug.WriteLine($"\tRecordings: {recs.Count}");
+                //Debug.WriteLine($"\tRecordings: {recs.Count}");
                 foreach (RecordingEx recording in recs)
                 {
                     var segs = await DBAccess.GetSegmentsForRecordingAsync(recording.ID);
@@ -116,7 +116,7 @@ namespace BRM_2.ViewModels;
                         return -2;
                     }
                     recording.LabelledSegments = segs;
-                    Debug.WriteLine($"\t\tSegments {recording.LabelledSegments.Count}");
+                    //Debug.WriteLine($"\t\tSegments {recording.LabelledSegments.Count}");
                     //Debug.WriteLine($"rec has {segs.Count} segments");
                     foreach (var seg in recording.LabelledSegments)
                     {
@@ -127,9 +127,9 @@ namespace BRM_2.ViewModels;
                            
                             return -2;
                         }
-                        Debug.WriteLine($"\t\t\tided bats {bats.Count}");
+                        //Debug.WriteLine($"\t\t\tided bats {bats.Count}");
                         seg.IdedBats = bats;
-                        Debug.WriteLine($"\t\t\tsummaries {seg.BatSummaryList.Count}");
+                        //Debug.WriteLine($"\t\t\tsummaries {seg.BatSummaryList.Count}");
                         seg.BatSummaryList = await seg.GetSegBatSummaryAsync();
                     }
 
@@ -260,16 +260,16 @@ namespace BRM_2.ViewModels;
             string result = "";
             if (File.Exists(destination))
             {
-#if WINDOWS
+
 
                 try
                 {
                     IsBusyRunning = true;
                     var bd2 = BatDetect2.Instance;
 
-                    await bd2.InstallPython(); // does Python initialisations as well as installation if needed
+                    //await bd2.InstallPython(); // does Python initialisations as well as installation if needed
 
-                    result = BatDetect2.Instance.ProcessFile(destination);
+                    result = await BatDetect2.Instance.ProcessFile(destination);
                 }
                 catch (Exception ex)
                 {
@@ -280,7 +280,7 @@ namespace BRM_2.ViewModels;
                     IsBusyRunning = false;
                 }
 
-#endif
+
             }
             return result;
         }

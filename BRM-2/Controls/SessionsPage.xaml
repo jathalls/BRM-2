@@ -11,7 +11,7 @@
             x:Name="MainGrid"
             ColumnDefinitions="70*,50*"
             HorizontalOptions="Fill"
-            RowDefinitions="30,*">
+            RowDefinitions="35,*">
             
             <HorizontalStackLayout
                 Grid.Row="0"
@@ -22,6 +22,10 @@
                     x:Name="ImportButton"
                     Command="{Binding ImportCommand}"
                     Text="Import" />
+                <Button
+                    x:Name="ReportButton"
+                    Command="{Binding ReportCommand}"
+                    Text="Report" />
             </HorizontalStackLayout>
 
             <sf:SfBusyIndicator

@@ -9,7 +9,7 @@ public class GPSLocation : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected  void OnPropertyChanged([CallerMemberName] string propertyName = "")
+    protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
@@ -25,22 +25,22 @@ public class GPSLocation : INotifyPropertyChanged
     /// <param name="longitude"></param>
     /// <param name="name"></param>
     /// <param name="ID"></param>
-    public GPSLocation(double latitude, double longitude, string name = "", string ID = ""):base()
+    public GPSLocation(double latitude, double longitude, string name = "", string ID = "") : base()
     {
         m_Name = name;
         m_ID = ID;
         LatLong = (latitude, longitude);
         //m_GridRef = ConvertGPStoGridRef(latitude, longitude);
-       
+
     }
 
-    public GPSLocation((double latitude,double longitude) latlong,string name="",string ID = ""):base()
+    public GPSLocation((double latitude, double longitude) latlong, string name = "", string ID = "") : base()
     {
         m_Name = name;
         m_ID = ID;
         this.LatLong = latlong;
-        
-        
+
+
     }
 
     /// <summary>
@@ -52,15 +52,15 @@ public class GPSLocation : INotifyPropertyChanged
     /// </summary>
     /// <param name="start"></param>
     /// <param name="filename"></param>
-    public GPSLocation(DateTime start,string filename) : base()
+    public GPSLocation(DateTime start, string filename) : base()
     {
-        string? folder=Path.GetDirectoryName(filename);
+        string? folder = Path.GetDirectoryName(filename);
         if (!string.IsNullOrWhiteSpace(folder))
         {
             List<FileInfo> fileData = new List<FileInfo>();
-            
+
             var gpxFiles = Directory.EnumerateFiles(folder, "*.gpx");
-            if(gpxFiles!=null && gpxFiles.Count() > 0)
+            if (gpxFiles != null && gpxFiles.Count() > 0)
             {
                 foreach (var file in gpxFiles)
                 {
@@ -70,11 +70,11 @@ public class GPSLocation : INotifyPropertyChanged
                 gpxFiles = from fileInfo in fileData
                            orderby fileInfo.Length
                            select (fileInfo.FullName);
-                foreach(var file in gpxFiles)
+                foreach (var file in gpxFiles)
                 {
                     var handler = new GpxHandler(file);
                     var location = handler.GetLocation(start);
-                    if (location!=null && location.Count()>1 && GPSLocation.IsValidLocation(location[0], location[1]))
+                    if (location != null && location.Count() > 1 && GPSLocation.IsValidLocation(location[0], location[1]))
                     {
                         m_Latitude = (double)location[0];
                         m_Longitude = (double)location[1];
@@ -107,15 +107,15 @@ public class GPSLocation : INotifyPropertyChanged
     /// <param name="WGS84AsciiLocation"></param>
     /// <param name="name"></param>
     /// <param name="id"></param>
-    public GPSLocation(string WGS84AsciiLocation, string name = "", string id = ""):base()
+    public GPSLocation(string WGS84AsciiLocation, string name = "", string id = "") : base()
     {
         if (ConvertToLatLong(WGS84AsciiLocation, out var latitude, out var longitude))
         {
             m_Name = name;
             m_ID = id;
-            LatLong =(latitude,longitude);
-           
-            
+            LatLong = (latitude, longitude);
+
+
         }
     }
 
@@ -164,7 +164,7 @@ public class GPSLocation : INotifyPropertyChanged
         get { return _m_ID; }
         set
         {
-            _m_ID= value;
+            _m_ID = value;
             OnPropertyChanged(nameof(m_ID));
         }
     }
@@ -173,9 +173,11 @@ public class GPSLocation : INotifyPropertyChanged
     /// <summary>
     ///     GPS latitude as a double
     /// </summary>
-    public double m_Latitude {
+    public double m_Latitude
+    {
         get { return _m_Latitude; }
-        set {
+        set
+        {
             if (value != _m_Latitude)
             {
                 _m_Latitude = value;
@@ -192,14 +194,15 @@ public class GPSLocation : INotifyPropertyChanged
     /// <summary>
     ///     GPS longitude as a double
     /// </summary>
-    public double m_Longitude 
+    public double m_Longitude
     {
         get { return _m_Longitude; }
-        set {
+        set
+        {
             if (value != _m_Longitude)
             {
                 _m_Longitude = value;
-                
+
                 OnPropertyChanged(nameof(m_Longitude));
                 //m_GridRef = ConvertGPStoGridRef(m_Latitude, m_Longitude);
                 //GetWhat3Words();
@@ -208,7 +211,7 @@ public class GPSLocation : INotifyPropertyChanged
         }
     }
 
-    
+
     public (double latitude, double longitude) LatLong
     {
         get { return ((m_Latitude, m_Longitude)); }
@@ -216,7 +219,7 @@ public class GPSLocation : INotifyPropertyChanged
         {
             if (value.latitude != _m_Latitude || value.longitude != _m_Longitude)
             {
-                
+
                 _m_Latitude = value.latitude;
                 _m_Longitude = value.longitude;
                 OnPropertyChanged(nameof(m_Latitude));
@@ -226,7 +229,7 @@ public class GPSLocation : INotifyPropertyChanged
                     //_m_GridRef = ConvertGPStoGridRef(m_Latitude, m_Longitude);
                     //GetWhat3Words();
                     //OnPropertyChanged(nameof(m_GridRef));
-                    
+
 
                 }
             }
@@ -293,8 +296,8 @@ public class GPSLocation : INotifyPropertyChanged
 
     internal static bool IsValidLocation(double? latitude, double? longitude)
     {
-        if (double.IsNaN(latitude??double.NaN) || double.IsNaN(longitude??double.NaN)) return false;
-        return (IsValidLocation((decimal?)latitude,(decimal?)longitude));
+        if (double.IsNaN(latitude ?? double.NaN) || double.IsNaN(longitude ?? double.NaN)) return false;
+        return (IsValidLocation((decimal?)latitude, (decimal?)longitude));
     }
 
     /// <summary>
@@ -306,11 +309,11 @@ public class GPSLocation : INotifyPropertyChanged
     /// <returns></returns>
     internal static bool IsValidLocation(decimal? locationGPSLatitude, decimal? locationGPSLongitude)
     {
-        
+
         if (locationGPSLatitude == null || locationGPSLongitude == null) return false;
-        if((double)(locationGPSLatitude??0.0m)==AvMap.defaultLocation.Lat && (double)(locationGPSLongitude??0.0m)==AvMap.defaultLocation.Lng) return false;
-        
-        
+        if ((double)(locationGPSLatitude ?? 0.0m) == AvMap.defaultLocation.Lat && (double)(locationGPSLongitude ?? 0.0m) == AvMap.defaultLocation.Lng) return false;
+
+
         if (Math.Abs(locationGPSLatitude.Value) > 90.0m) return false;
         if (Math.Abs(locationGPSLongitude.Value) > 180.0m) return false;
 
@@ -321,8 +324,8 @@ public class GPSLocation : INotifyPropertyChanged
 
     internal static bool IsValidLocation(Location? location)
     {
-        if(location== null) return false;
-        return(IsValidLocation(location?.Lat??double.NaN, location?.Lng??double.NaN));
+        if (location == null) return false;
+        return (IsValidLocation(location?.Lat ?? double.NaN, location?.Lng ?? double.NaN));
     }
 
     internal static bool IsValidLocation(string strLat, string strLong)
@@ -354,7 +357,8 @@ public class GPSLocation : INotifyPropertyChanged
         Location? result = null;
         if (!string.IsNullOrWhiteSpace(latit) && !string.IsNullOrWhiteSpace(longit))
         {
-            if (double.TryParse(latit, out var dLat) && double.TryParse(longit, out var dlong)){
+            if (double.TryParse(latit, out var dLat) && double.TryParse(longit, out var dlong))
+            {
                 result = ValidCoordinates(new Location(dLat, dlong));
             }
         }
@@ -375,7 +379,7 @@ public class GPSLocation : INotifyPropertyChanged
     {
         Location? result = null;
         if (location != null && IsValidLocation(location))
-           result = location;
+            result = location;
         return result;
     }
 
@@ -552,13 +556,13 @@ public class GPSLocation : INotifyPropertyChanged
             if (!String.IsNullOrWhiteSpace(text))
             {
                 var place = GetLocationFrom3Words(text);
-                if (place?.isValidLocation??false)
+                if (place?.isValidLocation ?? false)
                 {
                     inWhat3Words = false;
                     return (place);
                 }
             }
-           
+
         }
         inWhat3Words = false;
         return (null);
@@ -575,9 +579,35 @@ public class GPSLocation : INotifyPropertyChanged
         if (latDec < lowLim || latDec > hiLim) result = false;
 
         lowLim = (decimal)gPSLocation.m_Longitude - 0.01m;
-        hiLim=(decimal)gPSLocation.m_Longitude+0.01m;
+        hiLim = (decimal)gPSLocation.m_Longitude + 0.01m;
         if (latDec < lowLim || latDec > hiLim) result = false;
 
+
+        return result;
+    }
+
+
+    // <summary>
+    ///     Converts a GPS position in the form of latitude and longitude into a UK grid reference.
+    ///     May not be precise because altitude is not take into account in the conversion, but is
+    ///     generally close enough.
+    /// </summary>
+    /// <param name="latitude"></param>
+    /// <param name="longitude"></param>
+    /// <returns></returns>
+    public static string ConvertGPStoGridRef(double latitude, double longitude)
+    {
+        var result = "";
+
+        if (!IsValidLocation(latitude, longitude)) return (result); // not valid for this location
+
+        var nmea2OSG = new NMEA2OSG();
+        if (latitude >= -48.0d && latitude <= 63.0d && longitude >= -12.0d && longitude <= 3.0d) // generous limits for UK and Ireland
+                                                                                                 // we have valid latitudes and longitudes
+                                                                                                 // for now just assume they are in the OS grid ref acceptable area
+
+            if (nmea2OSG.Transform(latitude, longitude, 0.0d))
+                result = nmea2OSG.ngr;
 
         return result;
     }

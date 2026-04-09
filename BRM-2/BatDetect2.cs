@@ -1,16 +1,10 @@
-#if WINDOWS
-using Python.Deployment;
-using System.Diagnostics;
-#endif
-
 namespace BRM_2;
 public class BatDetect2
 {
 	/*
-	Since the Python.Runtime package is not available for .NET 10 this codes is
-	conditional for Windows only, and will not compile on other platforms. 
-	We will need to find a cross platform way to do this in the future, 
-	but for now this is good enough for our needs.
+	This code calls Python via subprocess for cross-platform compatibility.
+	On Windows, it uses 'python' command; on macOS and Linux, it uses 'python3'.
+	Ensure the batdetect2 Python package is installed in the target Python environment.
 	*/
     private static BatDetect2? _instance = null;
     public static BatDetect2 Instance 
@@ -21,91 +15,63 @@ public class BatDetect2
         } 
     }
 
-    public bool isBatDetect2Installed()
-    {
-		#if WINDOWS
-        return Installer.IsModuleInstalled("batdetect2");
-		#else
-		return false;
-		#endif
-    }
-
     public BatDetect2()
     {
        
     }
 
-#if WINDOWS
-    public async Task InstallPython()
-    {
-        await InstallPythonAsync();
-    }
 
-    private async Task InstallPythonAsync()
-    {
-        string pythonZip = "python-3.10.0-embed-amd64-bd2.zip";
-        Debug.WriteLine($"PythonZip={pythonZip}");
-        var assembly = typeof(BatDetect2).Assembly;
-        Python.Deployment.Installer.Source = new Python.Deployment.Installer.EmbeddedResourceInstallationSource()
-        {
-            Assembly = assembly,
-            ResourceName = pythonZip,
-        };
-
-        Debug.WriteLine($"Assembly={assembly.FullName}");
-        Debug.WriteLine($"Resource={assembly.GetManifestResourceNames().FirstOrDefault(x => x.Contains(pythonZip))}");
-        
-        try
-        {
-            Python.Deployment.Installer.LogMessage += LogMessage;
-            Debug.WriteLine($"Install to {Python.Deployment.Installer.InstallPath}");
-            var installDirectory = Path.Combine(Python.Deployment.Installer.InstallPath, "python-3.10.0-embed-amd64-bd2");
-            var dllPath = Path.Combine(installDirectory, "python310.dll");
-            Debug.WriteLine($"dllPath={dllPath}");
-            
-            if (Directory.Exists(installDirectory))
-            {
-                if (!File.Exists(dllPath))
-                {
-                    Directory.Delete(installDirectory, true);
-                    await Python.Deployment.Installer.SetupPython();
-                }
-            }
-            else
-            {
-                await Python.Deployment.Installer.SetupPython();
-            }
-
-            if (!Installer.IsPythonInstalled())
-            {
-                Debug.WriteLine($"SetupPython Failed {Installer.EmbeddedPythonHome}");
-            }
-        }
-        catch (Exception e)
-        {
-            Debug.WriteLine($"SetupPython: {e}");
-        }
-        finally
-        {
-            Python.Deployment.Installer.LogMessage -= LogMessage;
-        }
-    }
+   
 
     private static void LogMessage(string obj)
     {
         Debug.WriteLine($"Log: {obj}");
     }
 
-    internal string ProcessFile(string destination)
+    internal async Task<string> ProcessFile(string destination)
     {
         string summary = "";
         List<BD2Classification> classifications = new List<BD2Classification>();
+        var venv=Preferences.Get("python_venv_path", "");
         
-        if (!Installer.IsModuleInstalled("batdetect2"))
+        if (string.IsNullOrWhiteSpace(venv))
         {
-            Debug.WriteLine("ProcessFile failed - no batdetect2");
-            return summary;
+            await Application.Current.MainPage.DisplayAlertAsync("Identify Python Environment",
+                "Please identify the virtual environment folder in which BatDetect2 has been installed", "OK");
+#if MACCATALYST
+            string folder = await getFolder();
+            if (Directory.Exists(folder))
+            {
+                NSUrl url = new NSUrl(folder);
+                MauiLib1.SecurityScopedBookmarks.SaveFolderBookmark(folder, url);
+                url=MauiLib1.SecurityScopedBookmarks.TryRestoreFolderFromBookmark(folder);
+                venv = url.Path;
+                Preferences.Set("python_venv_path", venv);
+            }
+#elif WINDOWS
+            var folder = await getFolder();
+            if (Directory.Exists(folder))
+            {
+                MauiLib1.SecurityScopedBookmarks.SaveFolderBookmark(folder, folder);
+                folder=MauiLib1.SecurityScopedBookmarks.TryRestoreFolderFromBookmark(folder);
+                venv = folder;
+                Preferences.Set("python_venv_path", venv);
+            }
+#endif
         }
+#if WINDOWS
+       
+        venv=MauiLib1.SecurityScopedBookmarks.TryRestoreFolderFromBookmark(venv) ;
+#elif MACCATALYST
+    venv=MauiLib1.SecurityScopedBookmarks.TryRestoreFolderFromBookmark(venv).Path ;
+#endif
+        if (!Directory.Exists(venv))
+        {
+            await Application.Current.MainPage.DisplayAlertAsync("Invalid Folder",
+                "The specified folder does not exist", "OK");
+            return "";
+        }
+        
 
         try
         {
@@ -119,10 +85,23 @@ try:
 except Exception as e:
     print(json.dumps({{'error': str(e)}}))
 ";
-            
+
+            // Use Python from .venv directory
+            string venvPath = venv;
+            string pythonPath;
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                pythonPath = Path.Combine(venvPath, "Scripts", "python.exe");
+            }
+            else // macOS and Linux
+            {
+                pythonPath = Path.Combine(venvPath, "bin", "python3");
+            }
+
             var processInfo = new ProcessStartInfo
             {
-                FileName = "python",
+                FileName = pythonPath,
                 Arguments = $"-c \"{pythonCode}\"",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -140,7 +119,7 @@ except Exception as e:
                 {
                     Debug.WriteLine($"Python error: {error}");
                     return summary;
-                }
+                } 
 
                 if (!string.IsNullOrEmpty(output))
                 {
@@ -156,6 +135,14 @@ except Exception as e:
 
         summary = GenerateSummary(classifications);
         return summary;
+    }
+
+
+    private async Task<string?> getFolder()
+
+    {
+        var folder=await FolderPicker.PickFolderAsync();
+        return folder;
     }
 
     private string GenerateSummary(List<BD2Classification> classifications)
@@ -227,7 +214,7 @@ except Exception as e:
         }
         return 0.0;
     }
-#endif
+
 }
 
 public class BD2Classification

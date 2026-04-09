@@ -18,7 +18,7 @@ namespace BRM_2
         public long AudioDataStartPosition { get; set; }
         public int AudioDataSize { get; set; }
     }
-
+    /*
     /// <summary>
     /// A .NET Maui replacement for NAudio's AudioFileReader, which is not compatible with .NET Maui. 
     /// This class reads WAV file headers directly without external audio libraries.
@@ -415,5 +415,5 @@ namespace BRM_2
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
-    }
+    }*/
 }
