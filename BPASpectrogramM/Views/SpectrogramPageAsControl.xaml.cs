@@ -578,12 +578,14 @@ public partial class SpectrogramPageAsControl : ContentView, INotifyPropertyChan
     internal async Task AnalysisCompleted()
     {
         await Save();
-        bool answer = await Application.Current.MainPage.DisplayAlertAsync("End of files", "Import This Session?", "Yes", "No");
-        if (answer)
+        
+        if (Application.Current?.MainPage != null)
         {
-            OnAnalysisCompleted(new FileEventArgs(Path.Combine(SpToolbar.viewModel.currentFolder, SpToolbar.viewModel.CurrentFile)));
-
-
+            bool answer = await Application.Current.MainPage.DisplayAlertAsync("End of files", "Import This Session?", "Yes", "No");
+            if (answer)
+            {
+                OnAnalysisCompleted(new FileEventArgs(Path.Combine(SpToolbar.viewModel.currentFolder, SpToolbar.viewModel.CurrentFile)));
+            }
         }
     }
 

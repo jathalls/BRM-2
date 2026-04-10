@@ -1,6 +1,10 @@
 using System.Xml.Serialization;
+#if MACCATALYST
+using Foundation;
+#endif
 
 namespace BRM_2.Collections;
+
 public class LabelledSegmentEx : LabelledSegmentTable
 {
 
@@ -18,12 +22,13 @@ public class LabelledSegmentEx : LabelledSegmentTable
 
     private List<IdedBatEx> _idedBats = new List<IdedBatEx>();
 
-     
+
     public string SegmentTextForDisplay
     {
         get
         {
-            string text = $"{StartOffsetTimeSpan.TotalSeconds:0.00}s - {EndOffsetTimeSpan.TotalSeconds:0.00}s = {(EndOffsetTimeSpan - StartOffsetTimeSpan).TotalSeconds:0.00}s; {Comment}";
+            string text =
+                $"{StartOffsetTimeSpan.TotalSeconds:0.00}s - {EndOffsetTimeSpan.TotalSeconds:0.00}s = {(EndOffsetTimeSpan - StartOffsetTimeSpan).TotalSeconds:0.00}s; {Comment}";
             return text;
         }
     }
@@ -42,24 +47,17 @@ public class LabelledSegmentEx : LabelledSegmentTable
         set { StartOffset = new DateTime() + value; }
     }
 
-     
+
     public List<BatSummary> BatSummaryList
     {
-        get
-        {
-            
-            return _batSummaryList;
-        }
+        get { return _batSummaryList; }
 
-        set
-        {
-            _batSummaryList = value;
-        }
+        set { _batSummaryList = value; }
     }
 
     private List<BatSummary> _batSummaryList = new List<BatSummary>();
 
-   
+
 
     public LabelledSegmentEx() : base()
     {
@@ -99,15 +97,16 @@ public class LabelledSegmentEx : LabelledSegmentTable
         BatSummaryList = await GetSegBatSummaryAsync();
     }
 
-    public async Task<List<BatSummary>> GetSegBatSummaryAsync(bool force=false)
+    public async Task<List<BatSummary>> GetSegBatSummaryAsync(bool force = false)
     {
-        if(BatSummaryList?.Any()??false)
+        if (BatSummaryList?.Any() ?? false)
         {
             if (!force)
             {
                 return BatSummaryList;
             }
         }
+
         //var result=DBAccess.GetBatSummaryForSegment(ID).Result;
         if (IdedBats == null || IdedBats.Count == 0)
         {
@@ -118,6 +117,7 @@ public class LabelledSegmentEx : LabelledSegmentTable
                 return new List<BatSummary>();
             }
         }
+
         // if we get here there are bats in the IdedBats list
         var list = new List<BatSummary>();
         foreach (var bat in IdedBats)
@@ -129,6 +129,7 @@ public class LabelledSegmentEx : LabelledSegmentTable
             batSummary.ByAutoId = bat.ByAutoId;
             list.Add(batSummary);
         }
+
         return list;
 
     }
@@ -140,15 +141,16 @@ public class LabelledSegmentEx : LabelledSegmentTable
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
 
-    internal async Task<(List<IdedBatEx> batList, string moddedDescription)> GetDescribedBatsAsync(bool force=true)
+    internal async Task<(List<IdedBatEx> batList, string moddedDescription)> GetDescribedBatsAsync(bool force = true)
     {
-        if(IdedBats?.Any()??false)
+        if (IdedBats?.Any() ?? false)
         {
             if (!force)
             {
                 return (IdedBats, Comment);
             }
         }
+
         //Debug.WriteLine("GetDescribedBatsAsync");
         var matchingBats = new List<IdedBatEx>();
         var bracketed = "";
@@ -185,6 +187,7 @@ public class LabelledSegmentEx : LabelledSegmentTable
             autoDescription = description.Substring(autoIDstart, autoLength);
             description = description.Substring(0, autoIDstart);
         } // we have separated the main description and the first AuotID (bracketed) section
+
         var manualIds = await GetIdedBatsAsync(description, AutoID: false);
         result.AddRange(manualIds.batList);
         var autoIds = await GetIdedBatsAsync(autoDescription, AutoID: true);
@@ -202,13 +205,15 @@ public class LabelledSegmentEx : LabelledSegmentTable
     /// <param name="AutoID"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    private async Task<(IEnumerable<IdedBatEx> batList, string moddedDescription)> GetIdedBatsAsync(string description, bool AutoID)
+    private async Task<(IEnumerable<IdedBatEx> batList, string moddedDescription)> GetIdedBatsAsync(string description,
+        bool AutoID)
     {
         //Debug.WriteLine("GetIdedBatsAsync");
         string moddedDescription = description;
         List<IdedBatEx> result = new List<IdedBatEx>();
         List<BatTag> containedTags = new List<BatTag>();
-        containedTags = await DBAccess.GetContainedTagsAsync(description);// returns contained tags sorted longest to shortest
+        containedTags =
+            await DBAccess.GetContainedTagsAsync(description); // returns contained tags sorted longest to shortest
         string udescription = description.ToUpper();
         foreach (var tag in containedTags)
         {
@@ -217,6 +222,7 @@ public class LabelledSegmentEx : LabelledSegmentTable
             {
                 desc = udescription;
             }
+
             var loc = desc.IndexOf(tag.Tag);
             if (loc >= 0)
             {
@@ -236,6 +242,7 @@ public class LabelledSegmentEx : LabelledSegmentTable
                 {
                     description = "";
                 }
+
                 udescription = description.ToUpper();
                 //udescription = description.Substring(0, loc) + description.Substring(loc + tag.Tag.Length-1);
                 //Debug.WriteLine($"\tfound bat {iBat.Name}");
@@ -293,11 +300,13 @@ public class LabelledSegmentEx : LabelledSegmentTable
             Debug.WriteLine($"LabelledSegment.Save: getting recording with ID {RecordingID}");
             recording = await DBAccess.GetRecordingAsync(RecordingID);
         }
+
         if (recording == null)
         {
             Debug.WriteLine($"LabelledSegment.Save: no recording with ID {RecordingID}");
             return "";
         }
+
         string folder = "";
         try
         {
@@ -311,9 +320,11 @@ public class LabelledSegmentEx : LabelledSegmentTable
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"LabelledSegment.Save: exception getting file for recording ID {RecordingID}: {ex.Message}");
+            Debug.WriteLine(
+                $"LabelledSegment.Save: exception getting file for recording ID {RecordingID}: {ex.Message}");
             return "";
         }
+
         Debug.WriteLine($"LabelledSegment.Save: copying segment {ID} from file {folder}");
         var destination = await CopyFile(folder);
         return destination ?? "";
@@ -329,6 +340,7 @@ public class LabelledSegmentEx : LabelledSegmentTable
     /// <exception cref="NotImplementedException"></exception>
     public async Task<string> CopyFile(string? folder)
     {
+        string newFQFile = "";
         string? path = Path.GetDirectoryName(folder ?? "") ?? "";
         string? fileName = Path.GetFileName(folder);
         if (string.IsNullOrWhiteSpace(fileName) || fileName.Length < 5)
@@ -337,77 +349,134 @@ public class LabelledSegmentEx : LabelledSegmentTable
             return "";
         }
 
-        string newFolder = Path.Combine(path, fileName.Substring(0, fileName.Length - 4));
-        string baseFolder = newFolder;
-
-        Debug.WriteLine($"LabelledSegment.CopyFile: creating directory {newFolder}");
-        if (!Directory.Exists(newFolder))
+        if (string.IsNullOrWhiteSpace(path)) return "";
+        
+#if MACCATALYST
+        Foundation.NSUrl? url = null;
+        // On MacCatalyst, restore the security-scoped bookmark and enable access
+        Debug.WriteLine($"[LabelledSegment.CopyFile] MacCatalyst: Restoring security-scoped bookmark for path: {path}");
+        url = MauiLib1.SecurityScopedBookmarks.TryRestoreFolderFromBookmark(path);
+        if (url == null)
         {
-            Directory.CreateDirectory(newFolder);
-        }
-        string newFileName = $"{fileName.Substring(0, fileName.Length - 4)}_{(int)StartOffsetTimeSpan.TotalSeconds}.wav";
-        string newFQFile = Path.Combine(newFolder, newFileName);
-        Debug.WriteLine($"LabelledSegment.CopyFile: creating file {newFQFile}");
-        if (File.Exists(newFQFile))
-
-        {
-            var bakFile = Path.ChangeExtension(newFQFile, ".bak");
-            if (File.Exists(bakFile)) File.Delete(bakFile);
-            File.Copy(newFQFile, bakFile);
-            File.Delete(newFQFile);
-        }
-        Debug.WriteLine($"LabelledSegment.CopyFile: extracting segment {ID} to file {newFQFile}");
-        await ExtractWavSegmentAsync(folder, newFQFile, StartOffsetTimeSpan, EndOffsetTimeSpan);
-        if (File.Exists(newFQFile))
-        {
-            Debug.WriteLine($"LabelledSegment.CopyFile: created file {newFQFile}");
-            return (newFQFile);
-        }
-        else
-        {
+            Debug.WriteLine($"[LabelledSegment.CopyFile] ERROR: Failed to restore security-scoped bookmark");
             return "";
         }
+        
+        // Enable access to the security-scoped resource
+        bool accessGranted = url.StartAccessingSecurityScopedResource();
+        Debug.WriteLine($"[LabelledSegment.CopyFile] Security-scoped access granted: {accessGranted}");
+        
+        if (!accessGranted)
+        {
+            Debug.WriteLine($"[LabelledSegment.CopyFile] ERROR: Failed to start accessing security-scoped resource");
+            url.StopAccessingSecurityScopedResource();
+            return "";
+        }
+        
+        // Use the Path property, not ToString()
+        path = url.Path;
+        Debug.WriteLine($"[LabelledSegment.CopyFile] Resolved path: {path}");
+#else
+        Foundation.NSUrl? url = null;
+#endif
+        
+        try
+        {
+            string newFolder = Path.Combine(path, fileName.Substring(0, fileName.Length - 4));
+            string baseFolder = newFolder;
+
+            Debug.WriteLine($"[LabelledSegment.CopyFile] Creating directory: {newFolder}");
+            if (!Directory.Exists(newFolder))
+            {
+                Directory.CreateDirectory(newFolder);
+            }
+
+            string newFileName =
+                $"{fileName.Substring(0, fileName.Length - 4)}_{(int)StartOffsetTimeSpan.TotalSeconds}.wav";
+            newFQFile = Path.Combine(newFolder, newFileName);
+            Debug.WriteLine($"LabelledSegment.CopyFile: creating file {newFQFile}");
+            if (File.Exists(newFQFile))
+
+            {
+                var bakFile = Path.ChangeExtension(newFQFile, ".bak");
+                if (File.Exists(bakFile)) File.Delete(bakFile);
+                File.Copy(newFQFile, bakFile);
+                File.Delete(newFQFile);
+            }
+
+            Debug.WriteLine($"LabelledSegment.CopyFile: extracting segment {ID} to file {newFQFile}");
+            await ExtractWavSegmentAsync(folder, newFQFile, StartOffsetTimeSpan, EndOffsetTimeSpan);
+            if (File.Exists(newFQFile))
+            {
+                Debug.WriteLine($"LabelledSegment.CopyFile: created file {newFQFile}");
+                return (newFQFile);
+            }
+            else
+            {
+                return "";
+            }
+
+            
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[LabelledSegment.CopyFile] Error: {ex.GetType().Name} - {ex.Message}");
+            Debug.WriteLine($"[LabelledSegment.CopyFile] StackTrace: {ex.StackTrace}");
+        }
+        finally
+        {
+#if MACCATALYST
+            // Always release the security-scoped resource access
+            if (url != null)
+            {
+                url.StopAccessingSecurityScopedResource();
+                Debug.WriteLine($"[LabelledSegment.CopyFile] Security-scoped resource access released");
+            }
+#endif
+        }
+        return newFQFile;
     }
 
-    /*
-    public static void TrimWavFile(string inPath, string outPath, TimeSpan cutFromStart, TimeSpan endFromStart)
+
+/*
+public static void TrimWavFile(string inPath, string outPath, TimeSpan cutFromStart, TimeSpan endFromStart)
+{
+    using (WaveFileReader reader = new WaveFileReader(inPath))
     {
-        using (WaveFileReader reader = new WaveFileReader(inPath))
+        using (WaveFileWriter writer = new WaveFileWriter(outPath, reader.WaveFormat))
         {
-            using (WaveFileWriter writer = new WaveFileWriter(outPath, reader.WaveFormat))
+            int bytesPerMillisecond = reader.WaveFormat.AverageBytesPerSecond / 1000;
+
+            int startPos = (int)cutFromStart.TotalMilliseconds * bytesPerMillisecond;
+            startPos = startPos - startPos % reader.WaveFormat.BlockAlign;
+
+            int endPos = (int)endFromStart.TotalMilliseconds * bytesPerMillisecond;
+            endPos = endPos - endPos % reader.WaveFormat.BlockAlign;
+
+
+            TrimWavFile(reader, writer, startPos, endPos);
+        }
+    }
+}
+
+private static void TrimWavFile(WaveFileReader reader, WaveFileWriter writer, int startPos, int endPos)
+{
+    reader.Position = startPos;
+    byte[] buffer = new byte[1024];
+    while (reader.Position < endPos)
+    {
+        int bytesRequired = (int)(endPos - reader.Position);
+        if (bytesRequired > 0)
+        {
+            int bytesToRead = Math.Min(bytesRequired, buffer.Length);
+            int bytesRead = reader.Read(buffer, 0, bytesToRead);
+            if (bytesRead > 0)
             {
-                int bytesPerMillisecond = reader.WaveFormat.AverageBytesPerSecond / 1000;
-
-                int startPos = (int)cutFromStart.TotalMilliseconds * bytesPerMillisecond;
-                startPos = startPos - startPos % reader.WaveFormat.BlockAlign;
-
-                int endPos = (int)endFromStart.TotalMilliseconds * bytesPerMillisecond;
-                endPos = endPos - endPos % reader.WaveFormat.BlockAlign;
-                
-
-                TrimWavFile(reader, writer, startPos, endPos);
+                writer.Write(buffer, 0, bytesRead);
             }
         }
     }
-
-    private static void TrimWavFile(WaveFileReader reader, WaveFileWriter writer, int startPos, int endPos)
-    {
-        reader.Position = startPos;
-        byte[] buffer = new byte[1024];
-        while (reader.Position < endPos)
-        {
-            int bytesRequired = (int)(endPos - reader.Position);
-            if (bytesRequired > 0)
-            {
-                int bytesToRead = Math.Min(bytesRequired, buffer.Length);
-                int bytesRead = reader.Read(buffer, 0, bytesToRead);
-                if (bytesRead > 0)
-                {
-                    writer.Write(buffer, 0, bytesRead);
-                }
-            }
-        }
-    }*/
+}*/
 
 
     /// <summary>

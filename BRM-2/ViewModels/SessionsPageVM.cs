@@ -216,7 +216,7 @@ public partial class SessionsPageVM : ObservableObject
         {
             File.AppendAllText(fqFileName, item.ToString() + Environment.NewLine);
         }
-        await Application.Current.MainPage.DisplayAlertAsync("Report Generated", $"Report saved as {fqFileName}", "OK");
+        await BatDetect2.SafeDisplayAlertAsync("Report Generated", $"Report saved as {fqFileName}", "OK");
 
 
     }

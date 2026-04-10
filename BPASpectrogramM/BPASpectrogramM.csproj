@@ -35,6 +35,12 @@
         <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     </PropertyGroup>
 
+    <!-- MacCatalyst RuntimeIdentifier configuration -->
+    <PropertyGroup Condition="$([System.String]::Copy('$(TargetFramework)').Contains('maccatalyst'))">
+        <RuntimeIdentifier Condition="'$(Configuration)' == 'Debug'">maccatalyst-x64</RuntimeIdentifier>
+        <RuntimeIdentifiers Condition="'$(Configuration)' == 'Release'">maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
+    </PropertyGroup>
+
     <ItemGroup>
         <Compile Remove="SpectrogramGenerator.cs" />
         <Compile Remove="Views\SpectrogramControl.xaml.cs" />

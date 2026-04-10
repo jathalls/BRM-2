@@ -1,4 +1,9 @@
 namespace BRM_2;
+
+#if MACCATALYST
+using Foundation;
+#endif
+
 internal class Importer
 {
     public Importer() {  }
@@ -8,17 +13,33 @@ internal class Importer
         Debug.WriteLine($"ImportFromWav: {path}");
         if (!Directory.Exists(path)) return new RecordingSessionEx();
         RecordingSessionEx session= new RecordingSessionEx();
-        //var wavFiles=Directory.EnumerateFiles(path,"*.wav");
-#if MACATALYST
-        url=SecurityScopedBookmarks.TryRestoreFolderFromBookmark(path);
-        path=url?.Path ?? path;
+        
+#if MACCATALYST
+        Foundation.NSUrl? url = MauiLib1.SecurityScopedBookmarks.TryRestoreFolderFromBookmark(path);
+        if (url != null)
+        {
+            bool accessGranted = url.StartAccessingSecurityScopedResource();
+            if (accessGranted)
+            {
+                path = url.Path;
+                Debug.WriteLine($"[Importer.ImportFromWav] Security-scoped access granted, using path: {path}");
+            }
+            else
+            {
+                url.StopAccessingSecurityScopedResource();
+                url = null;
+                Debug.WriteLine($"[Importer.ImportFromWav] Failed to access security-scoped resource");
+            }
+        }
+#else
+        Foundation.NSUrl? url = null;
 #endif
-
-        DirectoryInfo directoryInfo = new DirectoryInfo(path);
-        FileInfo[] wavFiles = directoryInfo.GetFiles().Where(f=>f.Name.ToUpper().EndsWith(".WAV")).OrderBy(f => f.CreationTime).ToArray();
-        session.SessionTag=directoryInfo.Name;
+        
         try
         {
+            DirectoryInfo directoryInfo = new DirectoryInfo(path);
+            FileInfo[] wavFiles = directoryInfo.GetFiles().Where(f=>f.Name.ToUpper().EndsWith(".WAV")).OrderBy(f => f.CreationTime).ToArray();
+            session.SessionTag=directoryInfo.Name;
             if ((wavFiles?.Any()) ?? false)
             {
                 Debug.WriteLine($"Found {wavFiles.Length} wav files in directory {path}");
@@ -84,11 +105,18 @@ internal class Importer
         }        catch (Exception ex)
         {
             Debug.WriteLine($"Error importing from wav: {ex.Message}");
+            Debug.WriteLine($"StackTrace: {ex.StackTrace}");
             // Consider logging the error or rethrowing it depending on your needs
         }
         finally
         {
-
+#if MACCATALYST
+            if (url != null)
+            {
+                url.StopAccessingSecurityScopedResource();
+                Debug.WriteLine($"[Importer.ImportFromWav] Security-scoped resource access released");
+            }
+#endif
         }
         return session;
     }

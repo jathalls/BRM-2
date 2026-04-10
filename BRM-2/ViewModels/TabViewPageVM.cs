@@ -274,7 +274,7 @@ public partial class TabViewPageVM:ObservableObject
             }
             else
             {
-                await Application.Current.MainPage.DisplayAlert("Help File Not Found", $"The help file {helpFile} was not found.", "OK");
+                await BatDetect2.SafeDisplayAlertAsync("Help File Not Found", $"The help file {helpFile} was not found.", "OK");
             }
         }
         catch (Exception ex)

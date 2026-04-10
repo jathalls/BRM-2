@@ -24,6 +24,10 @@
 		<AcceptAndroidSDKLicenses>true</AcceptAndroidSDKLicenses>
 		<SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
 
+		<!-- Set default target framework for running on macOS -->
+		<DefaultTargetFramework Condition="$([MSBuild]::IsOSPlatform('osx'))">net10.0-maccatalyst</DefaultTargetFramework>
+		<DefaultTargetFramework Condition="$([MSBuild]::IsOSPlatform('windows'))">net10.0-windows10.0.19041.0</DefaultTargetFramework>
+
 		<MauiVersion>10.0.30</MauiVersion>
 		<!-- Display name -->
 		<ApplicationTitle>BRM-2</ApplicationTitle>
@@ -48,11 +52,36 @@
 
 	<PropertyGroup Condition="$([System.String]::Copy('$(TargetFramework)').Contains('maccatalyst'))">
 		<CodesignEntitlements>Platforms/MacCatalyst/Entitlements.plist</CodesignEntitlements>
+		<RuntimeIdentifier Condition="'$(Configuration)' == 'Debug'">maccatalyst-x64</RuntimeIdentifier>
+		<RuntimeIdentifiers Condition="'$(Configuration)' == 'Release'">maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)' == 'Debug|net10.0-maccatalyst'">
 		<MtouchDebug>true</MtouchDebug>
 		<MtouchLink>None</MtouchLink>
+	</PropertyGroup>
+
+	<!-- Android-specific manifest merger fixes -->
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">
+		<!-- Ensure proper manifest merging -->
+		<AndroidUseAapt2>true</AndroidUseAapt2>
+		<!-- Fix potential Java version issues -->
+		<AndroidLinkToolVersion>latest</AndroidLinkToolVersion>
+		<!-- Set proper build tools version -->
+		<AndroidBuildToolsVersion>34.0.0</AndroidBuildToolsVersion>
+		<!-- Ensure Android manifest is processed correctly -->
+		<AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
+		<!-- Force clean builds to avoid cache issues -->
+		<AndroidUseIncremental>false</AndroidUseIncremental>
+		<!-- Additional LinkageError fixes -->
+		<AndroidEnableMultiDex>true</AndroidEnableMultiDex>
+		<AndroidPackageFormat>aab</AndroidPackageFormat>
+		<AndroidKeyStore>false</AndroidKeyStore>
+		<AndroidSigningKeyStore>false</AndroidSigningKeyStore>
+		<!-- Force Java 11 compatibility -->
+		<JavaSdkVersion>11</JavaSdkVersion>
+		<!-- Disable incremental compiler to prevent cache issues -->
+		<UseSharedCompilation>false</UseSharedCompilation>
 	</PropertyGroup>
 
 	<ItemGroup>

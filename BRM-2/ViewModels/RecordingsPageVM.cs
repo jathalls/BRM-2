@@ -3,7 +3,7 @@ namespace BRM_2.ViewModels;
     {
         public RecordingsPageVM() 
         {
-#if WINDOWS
+#if WINDOWS || MACCATALYST
             IsBatDetect2Available = true;
 #endif
         }
@@ -148,7 +148,7 @@ namespace BRM_2.ViewModels;
                         
                         return -2;
                     }
-                    Debug.WriteLine($"Rec Update:- {recording.LabelledSegments.Count}segs, summary={recording.BatSummaryString}");
+                    //Debug.WriteLine($"Rec Update:- {recording.LabelledSegments.Count}segs, summary={recording.BatSummaryString}");
                 }
                 Recordings = new ObservableCollection<RecordingEx>(recs);
             }
@@ -264,15 +264,23 @@ namespace BRM_2.ViewModels;
 
                 try
                 {
+                    Debug.WriteLine($"[RecordingsPageVM] ===== PROCESS FILE STARTING =====");
                     IsBusyRunning = true;
                     var bd2 = BatDetect2.Instance;
+                    Debug.WriteLine($"[RecordingsPageVM] BatDetect2.Instance obtained: {bd2 != null}");
 
                     //await bd2.InstallPython(); // does Python initialisations as well as installation if needed
 
+                    Debug.WriteLine($"[RecordingsPageVM] Calling ProcessFile with destination: {destination}");
                     result = await BatDetect2.Instance.ProcessFile(destination);
+                    Debug.WriteLine($"[RecordingsPageVM] ProcessFile returned: {result}");
                 }
                 catch (Exception ex)
                 {
+                    Debug.WriteLine($"[RecordingsPageVM] EXCEPTION in ProcessFile:");
+                    Debug.WriteLine($"[RecordingsPageVM] Exception Type: {ex.GetType().Name}");
+                    Debug.WriteLine($"[RecordingsPageVM] Message: {ex.Message}");
+                    Debug.WriteLine($"[RecordingsPageVM] StackTrace: {ex.StackTrace}");
                     Debug.WriteLine(ex.Message);
                 }
                 finally
