@@ -350,7 +350,7 @@ public class LabelledSegmentEx : LabelledSegmentTable
         }
 
         if (string.IsNullOrWhiteSpace(path)) return "";
-        
+
 #if MACCATALYST
         Foundation.NSUrl? url = null;
         // On MacCatalyst, restore the security-scoped bookmark and enable access
@@ -376,8 +376,6 @@ public class LabelledSegmentEx : LabelledSegmentTable
         // Use the Path property, not ToString()
         path = url.Path;
         Debug.WriteLine($"[LabelledSegment.CopyFile] Resolved path: {path}");
-#else
-        Foundation.NSUrl? url = null;
 #endif
         
         try

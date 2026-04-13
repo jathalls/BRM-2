@@ -30,9 +30,15 @@ public static class MauiProgram
 					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 				})
-				
+
 				.ConfigureSyncfusionCore()
 				.UseScottPlot()
+#if MACCATALYST
+				.ConfigureMauiHandlers(handlers =>
+				{
+					handlers.AddHandler(typeof(SkiaSharp.Views.Maui.Controls.SKCanvasView), typeof(Platforms.MacCatalyst.SKCanvasViewHandler));
+				})
+#endif
 				.ConfigureLifecycleEvents(events =>
 				{
 #if WINDOWS

@@ -7,6 +7,9 @@ using Syncfusion.Maui.Gauges;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+#if MACCATALYST
+using Foundation;
+#endif
 
 
 namespace BPASpectrogramM.Views;
@@ -130,7 +133,13 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
         Setup();
 		InitializeComponent();
         BindingContext = this;
-
+#if MACCATALYST
+        NSNotificationCenter.DefaultCenter.AddObserver(
+            new NSString("ScrollWheelEventReceived"),
+            ScrollWheelEventReceived,
+            null
+        );
+#endif
         // Ensure gauges are properly configured to prevent infinite label generation
         ConfigureTimeScaleGauge();
         ConfigureFrequencyScaleGauge();
@@ -336,9 +345,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
         if (e.WheelDelta > 0)
         {
             float midpoint = StartOfSpectrogramInFFTs + (SpectrogramLengthInFFTs / 2.0f);
-            /*SpectrogramLengthInFFTs = SpectrogramLengthInFFTs / 1.2f;
-            EndOfSpectrogramInFFTs = midpoint + (SpectrogramLengthInFFTs / 2.0f);
-            StartOfSpectrogramInFFTs = EndOfSpectrogramInFFTs - SpectrogramLengthInFFTs;*/
+            
             Debug.WriteLine($"start > {StartOfSpectrogramInFFTs}-{EndOfSpectrogramInFFTs}={SpectrogramLengthInFFTs}");
             var delta = SpectrogramLengthInFFTs * 0.2f;
             EndOfSpectrogramInFFTs-= delta / 2;
@@ -359,6 +366,58 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
             return;
         }
     }
+
+
+    #if MACCATALYST
+        private void ScrollWheelEventReceived(NSNotification notification)
+        {
+            try
+            {
+                var userInfo = notification.UserInfo;
+                var deltaX = ((NSNumber)userInfo["deltaX"]).DoubleValue;
+                var deltaY = ((NSNumber)userInfo["deltaY"]).DoubleValue;
+
+                System.Diagnostics.Debug.WriteLine($"ScrollWheel: DeltaX={deltaX}, DeltaY={deltaY}");
+
+                // Use deltaY for vertical scrolling (zoom)
+                // Negative deltaY = scroll down = zoom out
+                // Positive deltaY = scroll up = zoom in
+                if (deltaY != 0)
+                {
+                    const double scrollSensitivity = 0.2;
+                    var zoomFactor = 1.0 + (deltaY * scrollSensitivity);
+
+                    var midpoint = StartOfSpectrogramInFFTs + (SpectrogramLengthInFFTs / 2.0f);
+                    var newLength = SpectrogramLengthInFFTs / (float)zoomFactor;
+
+                    StartOfSpectrogramInFFTs = midpoint - (newLength / 2.0f);
+                    EndOfSpectrogramInFFTs = StartOfSpectrogramInFFTs + newLength;
+                    SpectrogramLengthInFFTs = newLength;
+
+                    NormalizeSpectrogram();
+                    CanvasView.InvalidateSurface();
+                }
+
+                // Use deltaX for horizontal scrolling (pan)
+                if (deltaX != 0)
+                {
+                    const double panSensitivity = 0.1;
+                    var distance = (SpectrogramLengthInFFTs * (float)deltaX * (float)panSensitivity) / CanvasWidth;
+
+                    StartOfSpectrogramInFFTs += distance;
+                    EndOfSpectrogramInFFTs += distance;
+
+                    NormalizeSpectrogram();
+                    CanvasView.InvalidateSurface();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"ScrollWheelEventReceived error: {ex.Message}");
+            }
+        }
+    #endif
+
 
     /// <summary>
     /// Deals with the left mouse button, dragging for a selection,
@@ -1435,7 +1494,7 @@ public partial class SpectrogramView : ContentView, INotifyPropertyChanged,IDisp
 
     private async void mfiColorChoice_Clicked(object sender, EventArgs e)
     {
-        var action = await Application.Current.MainPage.DisplayActionSheet("Select Color Map", "Cancel", null, Spectrogram.Colormap.GetColormapNames().ToArray());
+        var action = await Microsoft.Maui.Controls.Application.Current.MainPage.DisplayActionSheet("Select Color Map", "Cancel", null, Spectrogram.Colormap.GetColormapNames().ToArray());
         Debug.WriteLine($"Color map choice {action}");
         if ((action?.ToLower()??"") != "cancel" && !string.IsNullOrWhiteSpace(action))
         {

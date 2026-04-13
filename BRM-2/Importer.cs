@@ -1,3 +1,5 @@
+using AppoMobi.Specials;
+
 namespace BRM_2;
 
 #if MACCATALYST
@@ -31,8 +33,7 @@ internal class Importer
                 Debug.WriteLine($"[Importer.ImportFromWav] Failed to access security-scoped resource");
             }
         }
-#else
-        Foundation.NSUrl? url = null;
+
 #endif
         
         try
@@ -63,7 +64,8 @@ internal class Importer
                 bool first = true;
                 WavFileMetaData? firstMetaData = null;
                 DateTime overallEnd = DateTime.MinValue;
-
+                int totalFiles=wavFiles.Count();
+                int filesProcessed = 0;
                 foreach (FileInfo wavFile in wavFiles)
                 {
                     Debug.WriteLine($"\n\nNext {wavFile.Name}");
@@ -72,15 +74,17 @@ internal class Importer
                     var wfmd = details.wfmd;
                     if (recording == null) continue;
                     metaData = wfmd;
-                    session.recordings.Add(recording ?? new RecordingEx());
+                    session.recordings.Add(recording ?? new RecordingEx()); // but have just checked for not null
                     if (first)
                     {
                         first = false;
                         firstMetaData = wfmd;
                     }
                     if ((metaData?.m_End ?? DateTime.MinValue) > overallEnd) { overallEnd = metaData?.m_End ?? DateTime.MinValue; }
+                    filesProcessed++;
+                    Debug.WriteLine($"wav file {wavFile} {filesProcessed} of {totalFiles} added to session");
+                    
 
-                    Debug.WriteLine($"wav file {wavFile} added to session");
                 }
                 if (metaData != null)
                 {// metadata is the metadata for the last recording in the seeion
@@ -142,7 +146,28 @@ internal class Importer
         rec.GetMetaDataFromFile(wavFile, out WavFileMetaData wfmd);
         string note = wfmd.m_Note;
         (RecordingEx?, WavFileMetaData) result = new(rec, wfmd);
-        //TODO extract IDs from metadata
+        note = $"start, end, {(fileEnd - fileStart).TotalSeconds}\t";
+        if (!string.IsNullOrWhiteSpace(wfmd.m_ManualID))
+        {
+            note+=$"{wfmd.m_ManualID}, ";
+        }
+        if(!string.IsNullOrWhiteSpace(wfmd.m_AutoID))
+        {
+            if (wfmd.m_AutoID.Contains(":"))
+            {
+                var pos = wfmd.m_AutoID.FindIndex(":");
+                var autoID= wfmd.m_AutoID.Substring(0, pos);
+                if (!autoID.Contains("no bat", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    note += $"(AutoID: {autoID} ";
+                }
+            }
+            else
+            {
+                note += $"(AutoID: {wfmd.m_AutoID} ";
+            }
+            
+        }
         await rec.UpdateLabelledSegmentsAsync(wavFile, fileStart, fileEnd,note);
         
         

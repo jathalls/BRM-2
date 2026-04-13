@@ -1,13 +1,13 @@
 {
   "profiles": {
     "macCatalyst": {
-      "commandName": "Project",
+      "commandName": "MsixPackage",
       "nativeDebugging": false,
       "targetFramework": "net10.0-maccatalyst",
       "runtimeIdentifier": "maccatalyst-x64"
     },
     "Windows Machine": {
-      "commandName": "Project",
+      "commandName": "MsixPackage",
       "nativeDebugging": false
     }
   }
