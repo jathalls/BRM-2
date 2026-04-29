@@ -13,10 +13,6 @@
 //         WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //         See the License for the specific language governing permissions and
 //         limitations under the License.
-using GeoUK;
-using GeoUK.Coordinates;
-using GeoUK.Ellipsoids;
-using GeoUK.Projections;
 using Convert = System.Convert;
 
 
@@ -26,6 +22,11 @@ public class NMEA2OSG
 {
     private static readonly double deg2rad = Math.PI / 180;
     private static readonly double rad2deg = 180.0 / Math.PI;
+    private const double ArcSecondsToRadians = Math.PI / (180.0 * 3600.0);
+    private const double Airy1830SemiMajorAxis = 6377563.396;
+    private const double Airy1830SemiMinorAxis = 6356256.909;
+    private const double Wgs84SemiMajorAxis = 6378137.0;
+    private const double Wgs84SemiMinorAxis = 6356752.3141;
     public double deciLat;
     public double deciLon;
     public string ngr { get; set; }
@@ -69,9 +70,9 @@ public class NMEA2OSG
         var m = Math.Pow(10, 5 - i);
 
         int easting;
-        if(!int.TryParse(mapRef.Substring(2, 1), out easting)) easting = -1;
+        if(!int.TryParse(mapRef.Substring(2, i), out easting)) easting = -1;
         int northing;
-        if (!int.TryParse(mapRef.Substring(i + 2, 1), out northing)) northing = -1;
+        if (!int.TryParse(mapRef.Substring(i + 2, i), out northing)) northing = -1;
         if(easting<0 || northing<0) return null;
 
         var e = majorEasting + minorEasting + (easting * m);
@@ -86,28 +87,33 @@ public class NMEA2OSG
      */
     private bool _validateGridRef(string gridref)
     {
-        var regex = @" ^[THJONS][VWXYZQRSTULMNOPFGHJKABCDE]?[0 - 9]{ 1,5} ?[0 - 9]{ 1,5}$";
         if (string.IsNullOrEmpty(gridref)) return false;
-        var match=Regex.Match(gridref.ToUpper(), regex);
-        if (!match.Success) return false;
+        if (gridref.Length < 4) return false;
 
-        //var match = Array.isArray(gridref.toUpperCase().match(regex)) ? true : false;
+        const string validFirstLetters = "THJONS";
+        const string validSecondLetters = "VWXYZQRSTULMNOPFGHJKABCDE";
 
-        return (true);
+        if (!validFirstLetters.Contains(gridref[0])) return false;
+        if (!validSecondLetters.Contains(gridref[1])) return false;
+
+        var digits = gridref.Substring(2);
+        if (digits.Length < 2 || digits.Length > 10 || digits.Length % 2 != 0) return false;
+
+        return digits.All(char.IsDigit);
     }
 
 
     // Processes WGS84 lat and lon in NMEA form 
-    // 52°09.1461"N         002°33.3717"W
+    // 52ï¿½09.1461"N         002ï¿½33.3717"W
     public bool ParseNMEA(string nlat, string nlon, double height)
     {
-        //grab the bit up to the °
-        deciLat = Convert.ToDouble(nlat.Substring(0, nlat.IndexOf("°")));
-        deciLon = Convert.ToDouble(nlon.Substring(0, nlon.IndexOf("°")));
+        //grab the bit up to the ï¿½
+        deciLat = Convert.ToDouble(nlat.Substring(0, nlat.IndexOf("ï¿½")));
+        deciLon = Convert.ToDouble(nlon.Substring(0, nlon.IndexOf("ï¿½")));
 
-        //remove that bit from the string now we've used it and the ° symbol
-        nlat = nlat.Substring(nlat.IndexOf("°") + 1);
-        nlon = nlon.Substring(nlon.IndexOf("°") + 1);
+        //remove that bit from the string now we've used it and the ï¿½ symbol
+        nlat = nlat.Substring(nlat.IndexOf("ï¿½") + 1);
+        nlon = nlon.Substring(nlon.IndexOf("ï¿½") + 1);
 
         //grab the bit up to the " - divide by 60 to convert to degrees and add it to our double value
         deciLat += Convert.ToDouble(nlat.Substring(0, nlat.IndexOf("\""))) / 60;
@@ -262,7 +268,7 @@ public class NMEA2OSG
     }
 
     // a function used in LLtoNE  - that's all I know about it
-    private double Marc(double bf0, double n, double phi0, double phi)
+    private static double Marc(double bf0, double n, double phi0, double phi)
     {
         return bf0 * ((1 + n + 5 / 4 * (n * n) + 5 / 4 * (n * n * n)) * (phi - phi0)
                       - (3 * n + 3 * (n * n) + 21 / 8 * (n * n * n)) * Math.Sin(phi - phi0) * Math.Cos(phi + phi0)
@@ -310,11 +316,131 @@ public class NMEA2OSG
         NMEA2OSG nMEA2OSG = new NMEA2OSG();
         Tuple<double, double>? eastNorth = nMEA2OSG.MapRef2EN(mapref);
         if(eastNorth==null) return null;
-        Cartesian cartesian = GeoUK.Convert.ToCartesian(new Airy1830(), new BritishNationalGrid(),
-            new EastingNorthing(eastNorth.Item1, eastNorth.Item2));
-        Cartesian wgsCartesian = GeoUK.Transform.Osgb36ToEtrs89(cartesian);
-        LatitudeLongitude wgsLatLong = GeoUK.Convert.ToLatitudeLongitude(new Wgs84(), wgsCartesian);
-        return ((latitude: wgsLatLong.Latitude, longitude: wgsLatLong.Longitude));
+        return EastingNorthingToWgs84(eastNorth.Item1, eastNorth.Item2);
+    }
+
+    private static (double latitude, double longitude) EastingNorthingToWgs84(double easting, double northing)
+    {
+        var (osgbLatitude, osgbLongitude) = EastingNorthingToOsgb36(easting, northing);
+        var airyCartesian = LatLonToCartesian(osgbLatitude, osgbLongitude, 0.0d, Airy1830SemiMajorAxis, Airy1830SemiMinorAxis);
+        var wgs84Cartesian = HelmertTransform(
+            airyCartesian,
+            tx: 446.448,
+            ty: -125.157,
+            tz: 542.060,
+            rxArcSeconds: 0.1502,
+            ryArcSeconds: 0.2470,
+            rzArcSeconds: 0.8421,
+            scalePpm: -20.4894);
+
+        return CartesianToLatLon(wgs84Cartesian, Wgs84SemiMajorAxis, Wgs84SemiMinorAxis);
+    }
+
+    private static (double latitude, double longitude) EastingNorthingToOsgb36(double easting, double northing)
+    {
+        const double scaleFactor = 0.9996012717;
+        var falseOriginLatitude = 49.0 * deg2rad;
+        var falseOriginLongitude = -2.0 * deg2rad;
+        const double falseOriginNorthing = -100000.0;
+        const double falseOriginEasting = 400000.0;
+
+        var eccentricitySquared = 1 - (Airy1830SemiMinorAxis * Airy1830SemiMinorAxis) / (Airy1830SemiMajorAxis * Airy1830SemiMajorAxis);
+        var n = (Airy1830SemiMajorAxis - Airy1830SemiMinorAxis) / (Airy1830SemiMajorAxis + Airy1830SemiMinorAxis);
+        var lat = falseOriginLatitude;
+        var meridionalArc = 0.0d;
+
+        while (northing - falseOriginNorthing - meridionalArc >= 0.00001)
+        {
+            lat = (northing - falseOriginNorthing - meridionalArc) / (Airy1830SemiMajorAxis * scaleFactor) + lat;
+            meridionalArc = Marc(Airy1830SemiMinorAxis * scaleFactor, n, falseOriginLatitude, lat);
+        }
+
+        var sinLat = Math.Sin(lat);
+        var cosLat = Math.Cos(lat);
+        var tanLat = Math.Tan(lat);
+        var nu = Airy1830SemiMajorAxis * scaleFactor / Math.Sqrt(1 - eccentricitySquared * sinLat * sinLat);
+        var rho = Airy1830SemiMajorAxis * scaleFactor * (1 - eccentricitySquared) /
+                  Math.Pow(1 - eccentricitySquared * sinLat * sinLat, 1.5);
+        var etaSquared = nu / rho - 1;
+        var tan2Lat = tanLat * tanLat;
+        var tan4Lat = tan2Lat * tan2Lat;
+        var tan6Lat = tan4Lat * tan2Lat;
+        var secLat = 1.0d / cosLat;
+        var deltaEast = easting - falseOriginEasting;
+
+        var vii = tanLat / (2 * rho * nu);
+        var viii = tanLat / (24 * rho * Math.Pow(nu, 3)) * (5 + 3 * tan2Lat + etaSquared - 9 * tan2Lat * etaSquared);
+        var ix = tanLat / (720 * rho * Math.Pow(nu, 5)) * (61 + 90 * tan2Lat + 45 * tan4Lat);
+        var x = secLat / nu;
+        var xi = secLat / (6 * Math.Pow(nu, 3)) * (nu / rho + 2 * tan2Lat);
+        var xii = secLat / (120 * Math.Pow(nu, 5)) * (5 + 28 * tan2Lat + 24 * tan4Lat);
+        var xiia = secLat / (5040 * Math.Pow(nu, 7)) * (61 + 662 * tan2Lat + 1320 * tan4Lat + 720 * tan6Lat);
+
+        var latitude = lat - vii * deltaEast * deltaEast
+                           + viii * Math.Pow(deltaEast, 4)
+                           - ix * Math.Pow(deltaEast, 6);
+        var longitude = falseOriginLongitude + x * deltaEast
+                                              - xi * Math.Pow(deltaEast, 3)
+                                              + xii * Math.Pow(deltaEast, 5)
+                                              - xiia * Math.Pow(deltaEast, 7);
+
+        return (latitude * rad2deg, longitude * rad2deg);
+    }
+
+    private static (double x, double y, double z) LatLonToCartesian(double latitude, double longitude, double height, double semiMajorAxis, double semiMinorAxis)
+    {
+        var latitudeRadians = latitude * deg2rad;
+        var longitudeRadians = longitude * deg2rad;
+        var eccentricitySquared = 1 - (semiMinorAxis * semiMinorAxis) / (semiMajorAxis * semiMajorAxis);
+        var sinLatitude = Math.Sin(latitudeRadians);
+        var nu = semiMajorAxis / Math.Sqrt(1 - eccentricitySquared * sinLatitude * sinLatitude);
+
+        var x = (nu + height) * Math.Cos(latitudeRadians) * Math.Cos(longitudeRadians);
+        var y = (nu + height) * Math.Cos(latitudeRadians) * Math.Sin(longitudeRadians);
+        var z = ((1 - eccentricitySquared) * nu + height) * sinLatitude;
+
+        return (x, y, z);
+    }
+
+    private static (double x, double y, double z) HelmertTransform(
+        (double x, double y, double z) point,
+        double tx,
+        double ty,
+        double tz,
+        double rxArcSeconds,
+        double ryArcSeconds,
+        double rzArcSeconds,
+        double scalePpm)
+    {
+        var scale = 1 + (scalePpm * 1e-6);
+        var rx = rxArcSeconds * ArcSecondsToRadians;
+        var ry = ryArcSeconds * ArcSecondsToRadians;
+        var rz = rzArcSeconds * ArcSecondsToRadians;
+
+        var x = tx + point.x * scale - point.y * rz + point.z * ry;
+        var y = ty + point.x * rz + point.y * scale - point.z * rx;
+        var z = tz - point.x * ry + point.y * rx + point.z * scale;
+
+        return (x, y, z);
+    }
+
+    private static (double latitude, double longitude) CartesianToLatLon((double x, double y, double z) point, double semiMajorAxis, double semiMinorAxis)
+    {
+        var eccentricitySquared = 1 - (semiMinorAxis * semiMinorAxis) / (semiMajorAxis * semiMajorAxis);
+        var p = Math.Sqrt(point.x * point.x + point.y * point.y);
+        var latitude = Math.Atan2(point.z, p * (1 - eccentricitySquared));
+        double previousLatitude;
+
+        do
+        {
+            previousLatitude = latitude;
+            var sinLatitude = Math.Sin(latitude);
+            var nu = semiMajorAxis / Math.Sqrt(1 - eccentricitySquared * sinLatitude * sinLatitude);
+            latitude = Math.Atan2(point.z + eccentricitySquared * nu * sinLatitude, p);
+        } while (Math.Abs(latitude - previousLatitude) > 1e-12);
+
+        var longitude = Math.Atan2(point.y, point.x);
+        return (latitude * rad2deg, longitude * rad2deg);
     }
 
     #region Delegates

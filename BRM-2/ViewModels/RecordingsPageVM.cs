@@ -184,11 +184,7 @@ namespace BRM_2.ViewModels;
 
         }
 
-        [RelayCommand]
-        public async Task PlaySegment()
-        {
-            
-        }
+        
 
         [RelayCommand]
         public void SegmentSelectionChanged(LabelledSegmentTable segment)

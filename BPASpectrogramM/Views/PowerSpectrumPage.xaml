@@ -13,8 +13,7 @@
     <Grid
         Margin="10"
         ColumnDefinitions="*"
-        RowDefinitions="20,*,40"
-        Shadow="true">
+        RowDefinitions="20,*,40">
 
         <local:PowerSpectrumChart
             x:DataType="vm:PowerSpectrumVM" 

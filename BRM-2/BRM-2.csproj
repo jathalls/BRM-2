@@ -23,6 +23,7 @@
 		<NoWarn>NU1605</NoWarn>
 		<AcceptAndroidSDKLicenses>true</AcceptAndroidSDKLicenses>
 		<SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
+		<ValidateXcodeVersion>false</ValidateXcodeVersion>
 
 		<!-- Set default target framework for running on macOS -->
 		<DefaultTargetFramework Condition="$([MSBuild]::IsOSPlatform('osx'))">net10.0-maccatalyst</DefaultTargetFramework>
@@ -61,7 +62,7 @@
 
 	<PropertyGroup Condition="$([System.String]::Copy('$(TargetFramework)').Contains('maccatalyst'))">
 		<CodesignEntitlements>Platforms/MacCatalyst/Entitlements.plist</CodesignEntitlements>
-		<RuntimeIdentifier Condition="'$(Configuration)' == 'Debug'">maccatalyst-x64</RuntimeIdentifier>
+		<RuntimeIdentifier Condition="'$(Configuration)' == 'Debug'">maccatalyst-arm64</RuntimeIdentifier>
 		<RuntimeIdentifiers Condition="'$(Configuration)' == 'Release'">maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
 	</PropertyGroup>
 
@@ -112,8 +113,7 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="GeoUK" Version="1.1.0" />
+ 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.30" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="14.0.1" />
 		<PackageReference Include="CommunityToolkit.Maui.Maps" Version="4.0.0" />
